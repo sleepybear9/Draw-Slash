@@ -1,9 +1,10 @@
-[gd_scene load_steps=37 format=3 uid="uid://cam0r4pj5wn2b"]
+[gd_scene load_steps=42 format=3 uid="uid://cam0r4pj5wn2b"]
 
 [ext_resource type="Script" uid="uid://6yddb0kbakl2" path="res://Scripts/player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://cohxl50d8j7oi" path="res://Sprites/male_hero_free/individual_sheets/male_hero-idle.png" id="2_gntrk"]
 [ext_resource type="Texture2D" uid="uid://ubsvlb70gjk7" path="res://Sprites/male_hero_free/individual_sheets/male_hero-run.png" id="3_dewec"]
 [ext_resource type="Texture2D" uid="uid://bwyr77xl0qpnd" path="res://Sprites/male_hero_free/individual_sheets/male_hero-walk.png" id="4_dewec"]
+[ext_resource type="Texture2D" uid="uid://cp3bjtx8qutyr" path="res://Sprites/male_hero_free/individual_sheets/male_hero-walk_turn.png" id="5_5ixxa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ixxa"]
 atlas = ExtResource("2_gntrk")
@@ -125,6 +126,22 @@ region = Rect2(1024, 0, 128, 128)
 atlas = ExtResource("4_dewec")
 region = Rect2(1152, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfbt0"]
+atlas = ExtResource("5_5ixxa")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wosd6"]
+atlas = ExtResource("5_5ixxa")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkrn1"]
+atlas = ExtResource("5_5ixxa")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpo1r"]
+atlas = ExtResource("5_5ixxa")
+region = Rect2(384, 0, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_bhhdu"]
 animations = [{
 "frames": [{
@@ -231,6 +248,23 @@ animations = [{
 "loop": true,
 "name": &"Walk",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfbt0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wosd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkrn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpo1r")
+}],
+"loop": false,
+"name": &"Walk_turn",
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
@@ -243,8 +277,9 @@ script = ExtResource("1_rpqav")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bhhdu")
-animation = &"Idle"
-frame_progress = 0.33023605
+animation = &"Walk_turn"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.75, -1.25)
