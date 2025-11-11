@@ -1,24 +1,22 @@
 extends CharacterBody2D
 
-@export var speed = 300.0
+@export var speed = 175.0
 @onready var animation = $AnimatedSprite2D
+var isLeft
 
 func _physics_process(delta: float) -> void:
 		
 	var direction = Input.get_vector("Left","Right","Up","Down")
 	velocity = direction * speed
 	
-	if (direction.length() <= 0.1): animation.play("Idle_front")
+	if (direction.length() <= 0.1): animation.play("Idle")
 	else:
-		if (abs(direction.x) >= abs(direction.y)): 
-			if (direction.x >= 0): 
-				animation.play("Run_right")
-			else:
-				animation.play("Run_left")
-		else:
-			if (direction.y >= 0): 
-				animation.play("Run_front")
-			else:
-				animation.play("Run_back")
+		if (direction.x >= 0): 
+			isLeft = false
+			animation.flip_h = false
+		else:				
+			isLeft = true
+			animation.flip_h = true
+		animation.play("Walk")
 				
 	move_and_slide()
