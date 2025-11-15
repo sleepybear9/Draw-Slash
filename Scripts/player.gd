@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 @export var speed = 165.0
+@export var hp = 100
+
 @onready var anim = $AnimatedSprite2D
-@onready var hp = 100
 @onready var dmg_delayer = $Timer
 
 var is_left = false
