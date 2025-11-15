@@ -2,8 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://cam0r4pj5wn2b" path="res://Scenes/Player.tscn" id="1_jjgbg"]
 
-[node name="Main" type="Node2D"]
+[node name="Main(tmp)" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(20, 57)
+position = Vector2(122, 75)
 scale = Vector2(2, 2)
+
+[node name="temp_dmg" type="Button" parent="."]
+offset_left = 388.0
+offset_top = 74.0
+offset_right = 481.0
+offset_bottom = 126.0
+
+[connection signal="pressed" from="temp_dmg" to="Player" method="take_damage" binds= [50]]
