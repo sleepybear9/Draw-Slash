@@ -14,6 +14,11 @@ config/name="Draw&Slash"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
 [input]
 
 Up={
@@ -40,10 +45,12 @@ Right={
 [layer_names]
 
 2d_physics/layer_1="player"
-2d_physics/layer_2="enemy"
-2d_physics/layer_3="item"
-2d_physics/layer_4="environment"
-2d_physics/layer_5="trap"
+2d_physics/layer_2="player_foot"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="item"
+2d_physics/layer_5="environment"
+2d_physics/layer_6="trap"
+2d_physics/layer_7="map_check"
 
 [rendering]
 

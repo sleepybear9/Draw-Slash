@@ -10,13 +10,14 @@ var is_left = false
 var is_turning = false
 var is_attacked = false
 var is_alive = true
+var direction
 
 func _physics_process(delta: float) -> void:
-	var dir = Input.get_vector("Left","Right","Up","Down")
-	velocity = dir * speed
+	direction = Input.get_vector("Left","Right","Up","Down")
+	velocity = direction * speed
 
 	if hp > 0:
-		update_animation(dir)
+		update_animation(direction)
 		if !is_attacked: move_and_slide()
 	elif is_alive:
 		anim.play("Death")

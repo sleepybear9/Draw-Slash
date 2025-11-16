@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=4 uid="uid://ogq3ay3a8xtl"]
+
+[ext_resource type="TileSet" uid="uid://bnhxq2malrj4o" path="res://Tiles/Level_1.tres" id="1_cvgc8"]
+[ext_resource type="Script" uid="uid://c0dslciyckrwv" path="res://Scripts/map.gd" id="1_i63mn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i63mn"]
+size = Vector2(640, 640)
+
+[node name="Level_1" type="Node2D"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+
+[node name="Chunk_1" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("1_i63mn")
+
+[node name="Water" type="TileMapLayer" parent="Chunk_1"]
+tile_set = ExtResource("1_cvgc8")
+
+[node name="Water_detail" type="TileMapLayer" parent="Chunk_1"]
+tile_set = ExtResource("1_cvgc8")
+
+[node name="Ground" type="TileMapLayer" parent="Chunk_1"]
+y_sort_enabled = true
+rotation = -0.0005923448
+tile_set = ExtResource("1_cvgc8")
+
+[node name="Upstair" type="TileMapLayer" parent="Chunk_1"]
+y_sort_enabled = true
+rotation = -0.0005923448
+tile_set = ExtResource("1_cvgc8")
+
+[node name="Road" type="TileMapLayer" parent="Chunk_1"]
+y_sort_enabled = true
+rotation = -0.0005923448
+tile_set = ExtResource("1_cvgc8")
+
+[node name="Object" type="TileMapLayer" parent="Chunk_1"]
+y_sort_enabled = true
+rotation = -0.0005923448
+tile_map_data = PackedByteArray("AAALABEABAABAAEAAAAVABEABAABAAkAAAAeABEABAABAA8AAAAeABkAAwAkABEAAABFABwAAwAvABEAAAAMAAcAAwAmACEAAAAYAAUAAwApACcAAAAiAAYAAwArABQAAAAeAAkAAwAtABoAAAAaAAoAAwAaABUAAAAcAAYAAwAoAA4AAAAaAAgAAwArAA4AAAAWAAgAAwAvAA4AAAASAAYAAwAtAA4AAAARAAgAAwAeAA0AAAAVAAoAAwAqAA8AAAASAAwAAwArAA4AAAANAAsAAwAaAAEAAAAeAAsAAwAoAAgAAAAjAAwAAwAmABwAAAAYAA0AAwAeACsAAAAQAA8AAwAaACsAAAASAA8AAwAcAC0AAAAWAA8AAwAqACsAAAAVAAwAAwAlABgAAAAaAA4AAwApABQAAAAYABIAAwAqACEAAAAcABQAAwAtACEAAAAQABQAAwAaAB8AAAAgABMAAwAiACIAAAAXABYAAwAaABsAAAAGAAoAAwAgAAMAAAAFABAAAwAmAAMAAAACAA0AAwArAAQAAAAIAA4AAwAvAAUAAAAEABcAAwAaABEAAAAEABQAAwAhABEAAAAPABsABAABABMAAAAkABEABAABABoAAAAYAB0ABAABACEAAAALACIAAwAmABEAAAAVACEAAwApABEAAAAfACMAAwAsABEAAAAFAB4AAwAaAAcAAAAhAB0AAwAaABgAAAAJABkAAwAaAAwAAAAMABcAAwAkAA4AAAAIABYAAwAmAA8AAAADAAYAAwAaABUAAAANAAMAAwAaABsAAAAIAAUAAwAaABgAAAAkAAoAAwAuABcAAAAVABoAAwAaACUAAAATABYAAwAoABgAAAA=")
+tile_set = ExtResource("1_cvgc8")
+
+[node name="MapChecker" type="Area2D" parent="Chunk_1"]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chunk_1/MapChecker"]
+position = Vector2(320, 320)
+shape = SubResource("RectangleShape2D_i63mn")
+
+[connection signal="area_exited" from="Chunk_1/MapChecker" to="Chunk_1" method="_on_map_checker_area_exited"]
