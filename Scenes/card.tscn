@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://oad05dmmxo6s"]
+
+[ext_resource type="Texture2D" uid="uid://qdvwd561mydu" path="res://img/card/card1.jpg" id="1_0qqmn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0qqmn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wf8id"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_brehn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eumee"]
+
+[node name="Card" type="Button"]
+offset_right = 747.0
+offset_bottom = 1024.0
+scale = Vector2(0.2, 0.2)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0qqmn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wf8id")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_brehn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eumee")
+icon = ExtResource("1_0qqmn")
+flat = true
