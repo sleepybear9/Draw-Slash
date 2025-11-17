@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jh1kb3hgi62b"
-path="res://.godot/imported/male_hero-dash.png-dac30a705efece99f8193ca25dbd7e2c.ctex"
+path="res://.godot/imported/male_hero-dash.png-4af50e3c4ca6e3b2d1f415d004a92b06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/player/individual_sheets/male_hero-dash.png"
-dest_files=["res://.godot/imported/male_hero-dash.png-dac30a705efece99f8193ca25dbd7e2c.ctex"]
+source_file="res://Sprites/Player/individual_sheets/male_hero-dash.png"
+dest_files=["res://.godot/imported/male_hero-dash.png-4af50e3c4ca6e3b2d1f415d004a92b06.ctex"]
 
 [params]
 
