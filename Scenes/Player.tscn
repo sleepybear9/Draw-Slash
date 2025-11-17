@@ -503,15 +503,17 @@ script = ExtResource("1_rpqav")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bhhdu")
-animation = &"Death"
+animation = &"Run"
+frame_progress = 0.40603584
 
 [node name="FootCollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
 position = Vector2(1, 14)
 shape = SubResource("RectangleShape2D_kyqiw")
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
+[node name="dmgTimer" type="Timer" parent="."]
+
+[node name="dotTimer" type="Timer" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -529,4 +531,16 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapChecker"]
 shape = SubResource("RectangleShape2D_bhhdu")
 
-[connection signal="timeout" from="Timer" to="." method="_on_dmg_timeout"]
+[node name="TrapChecker" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 32
+
+[node name="FootCollisionShape2D" type="CollisionShape2D" parent="TrapChecker"]
+y_sort_enabled = true
+position = Vector2(1, 14)
+shape = SubResource("RectangleShape2D_kyqiw")
+
+[connection signal="timeout" from="dmgTimer" to="." method="_on_dmg_timeout"]
+[connection signal="timeout" from="dotTimer" to="." method="_on_dot_timeout"]
+[connection signal="body_entered" from="TrapChecker" to="." method="_on_trap_checker_body_entered"]
+[connection signal="body_exited" from="TrapChecker" to="." method="_on_trap_checker_body_exited"]

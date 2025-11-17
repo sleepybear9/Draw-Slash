@@ -1,18 +1,21 @@
 extends CharacterBody2D
 
-@export var speed = 165.0
+@export var speed = 170.0
 @export var hp = 100
 
 @onready var anim = $AnimatedSprite2D
-@onready var dmg_delayer = $Timer
+@onready var dmg_delayer = $dmgTimer
+@onready var dot_delayer = $dotTimer
 
 var is_left = false
 var is_turning = false
 var is_attacked = false
 var is_alive = true
 var direction
+var is_swamped = false
 
 func _physics_process(delta: float) -> void:
+	#print(hp)
 	direction = Input.get_vector("Left","Right","Up","Down")
 	velocity = direction * speed
 
@@ -75,11 +78,42 @@ func take_damage(dmg: int) -> void:
 		else:
 			anim.play("Hurt")
 			anim.animation_finished.connect(_on_hurt_finished, CONNECT_ONE_SHOT)
-
+			
 
 func _on_hurt_finished() -> void:
 	is_attacked = false
 
-
 func _on_dmg_timeout() -> void:
 	is_attacked = false
+	
+func _on_dot_timeout() -> void:
+	if is_swamped:
+		hp -= 1
+		if hp <= 0:
+			hp = 0
+		print(hp)
+		if hp == 0: return
+		
+		anim.modulate = Color(0.3, 1.0, 0.3) 
+		await get_tree().create_timer(0.35).timeout
+		anim.modulate = Color(1,1,1)
+	
+
+func _on_trap_checker_body_entered(body: Node2D) -> void:
+	if body.name == "Swamp":
+		is_swamped = true
+		if dot_delayer.is_stopped():
+			dot_delayer.start()
+		hp -= 1
+		if hp <= 0:
+			hp = 0
+		print(hp)
+		anim.modulate = Color(0.3, 1.0, 0.3)
+		await get_tree().create_timer(0.35).timeout
+		anim.modulate = Color(1,1,1)
+
+
+func _on_trap_checker_body_exited(body: Node2D) -> void:
+	if body.name == "Swamp":
+		is_swamped = false
+		dot_delayer.stop()
