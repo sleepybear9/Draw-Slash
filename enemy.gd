@@ -42,6 +42,7 @@ func _update_direction(vec: Vector2):
 	if abs(vec.x) > abs(vec.y):
 		current_dir = "right" if vec.x > 0 else "left"
 	else:
+		
 		current_dir = "down" if vec.y > 0 else "up"
 
 
