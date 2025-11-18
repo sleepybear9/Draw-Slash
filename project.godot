@@ -10,11 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Draw&Slash"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/name="cmp godot project"
+run/main_scene="uid://ct4sl8psepaad"
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
