@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://720mjajtlh5b"
-path="res://.godot/imported/male_hero-ledge_climb.png-43c473f3d6d2a248c878491fd202e639.ctex"
+path="res://.godot/imported/male_hero-ledge_climb.png-d0173b1d59470b4c0c43db91158647bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/player/individual_sheets/male_hero-ledge_climb.png"
-dest_files=["res://.godot/imported/male_hero-ledge_climb.png-43c473f3d6d2a248c878491fd202e639.ctex"]
+source_file="res://Sprites/Player/individual_sheets/male_hero-ledge_climb.png"
+dest_files=["res://.godot/imported/male_hero-ledge_climb.png-d0173b1d59470b4c0c43db91158647bf.ctex"]
 
 [params]
 
