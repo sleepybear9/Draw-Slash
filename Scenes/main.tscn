@@ -16,10 +16,23 @@ scale = Vector2(1, 1)
 
 [node name="Player" parent="Y_Sort" instance=ExtResource("1_jjgbg")]
 
-[node name="temp_dmg" type="Button" parent="."]
-offset_left = 388.0
-offset_top = 74.0
-offset_right = 481.0
-offset_bottom = 126.0
+[node name="temp_dmg" type="Button" parent="Y_Sort/Player"]
+z_index = 30
+offset_left = 194.0
+offset_top = 34.5
+offset_right = 287.0
+offset_bottom = 86.5
+text = "damage
+"
 
-[connection signal="pressed" from="temp_dmg" to="Y_Sort/Player" method="take_damage" binds= [20]]
+[node name="Button" type="Button" parent="Y_Sort/Player"]
+process_mode = 3
+z_index = 30
+offset_left = 74.0
+offset_top = 70.5
+offset_right = 140.0
+offset_bottom = 121.0
+text = "pause"
+
+[connection signal="pressed" from="Y_Sort/Player/temp_dmg" to="Y_Sort/Player" method="take_damage" binds= [20]]
+[connection signal="pressed" from="Y_Sort/Player/Button" to="Y_Sort/Player" method="_on_button_pressed"]

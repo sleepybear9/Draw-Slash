@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwyr77xl0qpnd"
-path="res://.godot/imported/male_hero-walk.png-fcaac50e422bc41dfb135e1b412e3d75.ctex"
+path="res://.godot/imported/male_hero-walk.png-c88e748ed461a7252c33c89d897b5ac3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/individual_sheets/male_hero-walk.png"
-dest_files=["res://.godot/imported/male_hero-walk.png-fcaac50e422bc41dfb135e1b412e3d75.ctex"]
+source_file="res://Sprites/player/individual_sheets/male_hero-walk.png"
+dest_files=["res://.godot/imported/male_hero-walk.png-c88e748ed461a7252c33c89d897b5ac3.ctex"]
 
 [params]
 
