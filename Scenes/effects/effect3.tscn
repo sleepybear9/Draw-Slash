@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b77qk7karqlff"]
+
+[ext_resource type="Script" uid="uid://cj13glnrobgmx" path="res://scripts/effects/effect3.gd" id="1_7xwx0"]
+[ext_resource type="Texture2D" uid="uid://dlwa1tmn806du" path="res://img/effect/effect3.png" id="1_mfllq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xwx0"]
+size = Vector2(677, 86)
+
+[node name="card3_effect" type="Area2D"]
+script = ExtResource("1_7xwx0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mfllq")
+offset = Vector2(300, 0)
+region_enabled = true
+region_rect = Rect2(261, 469, 763, 89)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(343.5, -1)
+shape = SubResource("RectangleShape2D_7xwx0")
+
+[node name="Timer" type="Timer" parent="."]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cabd7puhds3cc"]
+
+[ext_resource type="Script" uid="uid://b1hgrtl6fugeh" path="res://scripts/effects/effect2.gd" id="1_1kqiy"]
+[ext_resource type="Texture2D" uid="uid://dd3svw6idgjqe" path="res://img/effect/effect2.png" id="1_c7guy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kqiy"]
+radius = 5.0
+height = 46.0
+
+[node name="card2_effect" type="Area2D"]
+script = ExtResource("1_1kqiy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5707964
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_c7guy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_1kqiy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
