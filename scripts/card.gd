@@ -9,6 +9,8 @@ var type : int
 signal effect1()
 signal effect2()
 signal effect3()
+signal effect4()
+signal effect5()
 
 func _on_pressed() -> void:
 	emit_signal("effect" + str(type))

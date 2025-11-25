@@ -21,6 +21,7 @@ func _physics_process(delta: float):
 func _on_body_entered(body: PhysicsBody2D):
 	print("총알이 ", body.name, "과 충돌했습니다!")
 	
+	#몬스터 충돌시 사라짐
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
 		

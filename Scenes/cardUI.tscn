@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://8odpj3hedov4"]
+[gd_scene load_steps=7 format=3 uid="uid://8odpj3hedov4"]
 
-[ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://scripts/card_ui.gd" id="1_60hnl"]
+[ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://Scripts/card_ui.gd" id="1_60hnl"]
 [ext_resource type="PackedScene" uid="uid://dl0kluomnqbb6" path="res://Scenes/effects/effect1.tscn" id="1_trvhi"]
-[ext_resource type="Script" uid="uid://ccq6jbmmjj0yn" path="res://scripts/effects/effect2_node.gd" id="2_tfcdi"]
+[ext_resource type="Script" uid="uid://ccq6jbmmjj0yn" path="res://Scripts/effects/effect2_node.gd" id="2_tfcdi"]
 [ext_resource type="PackedScene" uid="uid://b77qk7karqlff" path="res://Scenes/effects/effect3.tscn" id="4_tfcdi"]
+[ext_resource type="PackedScene" uid="uid://cupndvkytjerr" path="res://Scenes/effects/effect4.tscn" id="5_h62sg"]
+[ext_resource type="PackedScene" uid="uid://b1q1sr8bh43g7" path="res://Scenes/effects/effect5.tscn" id="6_utv40"]
 
 [node name="cardUI" type="Node2D"]
 
@@ -14,8 +16,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = 3.0
 offset_top = 480.0
-offset_right = 1280.0
+offset_right = 1283.0
 offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -31,6 +34,10 @@ position = Vector2(708, 298)
 script = ExtResource("2_tfcdi")
 
 [node name="card3_effect" parent="player" instance=ExtResource("4_tfcdi")]
+
+[node name="card4_effect" parent="player" instance=ExtResource("5_h62sg")]
+
+[node name="card5_effect" parent="player" instance=ExtResource("6_utv40")]
 
 [node name="Button" type="Button" parent="."]
 offset_left = 74.0
@@ -56,6 +63,24 @@ offset_bottom = 194.0
 text = "add card3
 "
 
+[node name="Button4" type="Button" parent="."]
+offset_left = 74.0
+offset_top = 224.0
+offset_right = 159.0
+offset_bottom = 255.0
+text = "add card4
+"
+
+[node name="Button5" type="Button" parent="."]
+offset_left = 75.0
+offset_top = 286.0
+offset_right = 160.0
+offset_bottom = 317.0
+text = "add card5
+"
+
 [connection signal="pressed" from="Button" to="UI" method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="UI" method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="UI" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button4" to="UI" method="_on_button_4_pressed"]
+[connection signal="pressed" from="Button5" to="UI" method="_on_button_5_pressed"]
