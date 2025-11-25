@@ -1,0 +1,30 @@
+extends Control
+
+var is_boss = false
+@onready var player = $".."
+@onready var time = $Time
+@onready var timer = $Timer
+@onready var hp_bar = $HpProgressBar
+
+func _ready() -> void:
+	await get_tree().process_frame
+	player = $".."
+	player.hp_changed.connect(hp_change)
+	hp_change(player.hp)
+
+func _process(delta: float) -> void:
+	if (!is_boss):
+		var remaining = timer.time_left
+		var minutes = int(remaining / 60)
+		var seconds = int(remaining) % 60
+
+		time.text = "%02d:%02d" % [minutes, seconds]
+	else:
+		time.text("Boss appeared!")
+
+func _on_timer_timeout() -> void:
+	is_boss = true
+
+func hp_change(hp: int):
+	hp_bar.value = hp
+	

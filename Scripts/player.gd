@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 200.0
-@export var hp = 100
+@export var hp = 1000
 @export var mp = 100
 
 @onready var anim = $AnimatedSprite2D
@@ -15,6 +15,8 @@ var is_alive = true
 var direction
 var is_swamped = false
 
+signal hp_changed (hp)
+	
 func _physics_process(delta: float) -> void:
 	if GameManager.is_paused: return
 	
@@ -78,14 +80,15 @@ func take_damage(dmg: int) -> void:
 	if !is_attacked:
 		is_attacked = true
 		dmg_delayer.start()
-
-		hp -= dmg
+		
+		hp -= dmg*10
 		if hp <= 0:
 			hp = 0
 		else:
 			anim.play("Hurt")
 			anim.animation_finished.connect(_on_hurt_finished, CONNECT_ONE_SHOT)
 		print(hp)
+		hp_changed.emit(hp)
 			
 
 func _on_hurt_finished() -> void:
@@ -96,7 +99,7 @@ func _on_dmg_timeout() -> void:
 	
 func _on_dot_timeout() -> void:
 	if is_swamped:
-		hp -= 1
+		hp -= 10
 		if hp <= 0:
 			hp = 0
 		print(hp)
@@ -105,6 +108,7 @@ func _on_dot_timeout() -> void:
 		anim.modulate = Color(0.3, 1.0, 0.3) 
 		await get_tree().create_timer(0.35).timeout
 		anim.modulate = Color(1,1,1)
+	hp_changed.emit(hp)
 	
 
 func _on_trap_checker_body_entered(body: Node2D) -> void:
@@ -112,13 +116,15 @@ func _on_trap_checker_body_entered(body: Node2D) -> void:
 		is_swamped = true
 		if dot_delayer.is_stopped():
 			dot_delayer.start()
-		hp -= 1
+		hp -= 10
 		if hp <= 0:
 			hp = 0
 		print(hp)
+	
 		anim.modulate = Color(0.3, 1.0, 0.3)
 		await get_tree().create_timer(0.35).timeout
 		anim.modulate = Color(1,1,1)
+	hp_changed.emit(hp)
 
 
 func _on_trap_checker_body_exited(body: Node2D) -> void:

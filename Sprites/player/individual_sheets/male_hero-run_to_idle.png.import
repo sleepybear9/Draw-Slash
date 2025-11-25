@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djocauj7fwsrx"
-path="res://.godot/imported/male_hero-run_to_idle.png-329858b1615bcc16e595ff9cf1522a0c.ctex"
+path="res://.godot/imported/male_hero-run_to_idle.png-738da14f979dce8956a78a8f26c48813.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/player/individual_sheets/male_hero-run_to_idle.png"
-dest_files=["res://.godot/imported/male_hero-run_to_idle.png-329858b1615bcc16e595ff9cf1522a0c.ctex"]
+source_file="res://Sprites/Player/individual_sheets/male_hero-run_to_idle.png"
+dest_files=["res://.godot/imported/male_hero-run_to_idle.png-738da14f979dce8956a78a8f26c48813.ctex"]
 
 [params]
 
