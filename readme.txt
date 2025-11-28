@@ -3,7 +3,8 @@
 card.gd : dice 경로
 card_ui.gd : 초반 effect nodes
 
-전반적으로(모든 gd파일에서) 파일 경로가 바뀌면 template쪽 경로 모두 수정해야 함(preload부)
+전반적으로(모든 gd파일에서) 파일 경로가 바뀌면 template쪽 경로 모두 수정해야 함(preload부분)
+모든 effect*.gd 파일의 dice 경로 수정 또한 마찬가지로 필요할 듯
 
 
 -오브젝트 상호작용 수정
