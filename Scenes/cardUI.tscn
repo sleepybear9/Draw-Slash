@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://8odpj3hedov4"]
+[gd_scene load_steps=8 format=3 uid="uid://8odpj3hedov4"]
 
 [ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://Scripts/card_ui.gd" id="1_60hnl"]
 [ext_resource type="PackedScene" uid="uid://dl0kluomnqbb6" path="res://Scenes/effects/effect1.tscn" id="1_trvhi"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b77qk7karqlff" path="res://Scenes/effects/effect3.tscn" id="4_tfcdi"]
 [ext_resource type="PackedScene" uid="uid://cupndvkytjerr" path="res://Scenes/effects/effect4.tscn" id="5_h62sg"]
 [ext_resource type="PackedScene" uid="uid://b1q1sr8bh43g7" path="res://Scenes/effects/effect5.tscn" id="6_utv40"]
+[ext_resource type="Script" uid="uid://dix13i1i8x421" path="res://Scripts/effects/effect6_node.gd" id="7_jvqw8"]
 
 [node name="cardUI" type="Node2D"]
 
@@ -39,48 +40,62 @@ script = ExtResource("2_tfcdi")
 
 [node name="card5_effect" parent="player" instance=ExtResource("6_utv40")]
 
-[node name="Button" type="Button" parent="."]
-offset_left = 74.0
-offset_top = 33.0
-offset_right = 159.0
-offset_bottom = 64.0
+[node name="card6_effect" type="Node2D" parent="player"]
+script = ExtResource("7_jvqw8")
+
+[node name="buttons" type="Node2D" parent="."]
+
+[node name="Button" type="Button" parent="buttons"]
+offset_left = 80.0
+offset_top = 35.0
+offset_right = 165.0
+offset_bottom = 66.0
 text = "add card1
 "
 
-[node name="Button2" type="Button" parent="."]
-offset_left = 73.0
-offset_top = 97.0
-offset_right = 158.0
-offset_bottom = 128.0
+[node name="Button2" type="Button" parent="buttons"]
+offset_left = 79.0
+offset_top = 99.0
+offset_right = 164.0
+offset_bottom = 130.0
 text = "add card2
 "
 
-[node name="Button3" type="Button" parent="."]
-offset_left = 75.0
-offset_top = 163.0
-offset_right = 160.0
-offset_bottom = 194.0
+[node name="Button3" type="Button" parent="buttons"]
+offset_left = 81.0
+offset_top = 165.0
+offset_right = 166.0
+offset_bottom = 196.0
 text = "add card3
 "
 
-[node name="Button4" type="Button" parent="."]
-offset_left = 74.0
-offset_top = 224.0
-offset_right = 159.0
-offset_bottom = 255.0
+[node name="Button4" type="Button" parent="buttons"]
+offset_left = 194.0
+offset_top = 36.0
+offset_right = 279.0
+offset_bottom = 67.0
 text = "add card4
 "
 
-[node name="Button5" type="Button" parent="."]
-offset_left = 75.0
-offset_top = 286.0
-offset_right = 160.0
-offset_bottom = 317.0
+[node name="Button5" type="Button" parent="buttons"]
+offset_left = 194.0
+offset_top = 100.0
+offset_right = 279.0
+offset_bottom = 131.0
 text = "add card5
 "
 
-[connection signal="pressed" from="Button" to="UI" method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="UI" method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button3" to="UI" method="_on_button_3_pressed"]
-[connection signal="pressed" from="Button4" to="UI" method="_on_button_4_pressed"]
-[connection signal="pressed" from="Button5" to="UI" method="_on_button_5_pressed"]
+[node name="Button6" type="Button" parent="buttons"]
+offset_left = 193.0
+offset_top = 164.0
+offset_right = 278.0
+offset_bottom = 195.0
+text = "add card6
+"
+
+[connection signal="pressed" from="buttons/Button" to="UI" method="_on_button_pressed"]
+[connection signal="pressed" from="buttons/Button2" to="UI" method="_on_button_2_pressed"]
+[connection signal="pressed" from="buttons/Button3" to="UI" method="_on_button_3_pressed"]
+[connection signal="pressed" from="buttons/Button4" to="UI" method="_on_button_4_pressed"]
+[connection signal="pressed" from="buttons/Button5" to="UI" method="_on_button_5_pressed"]
+[connection signal="pressed" from="buttons/Button6" to="UI" method="_on_button_6_pressed"]

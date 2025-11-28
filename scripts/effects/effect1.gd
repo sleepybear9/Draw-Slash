@@ -1,14 +1,14 @@
 extends Node2D
-
-var on : bool = false
-
 @onready var effect1 = $"."
 @onready var child1 = $sword1
 @onready var child2 = $sword2
 @onready var timer = $Timer
 
+@onready var deck_manager = $"/root/DeckManager"
+
+var enabled : bool = false
+
 func _ready() -> void:
-	timer.wait_time = 2.0
 	effect1.visible = false
 	child1.monitorable = false
 	child1.monitoring = false
@@ -17,23 +17,26 @@ func _ready() -> void:
 	timer.connect("timeout", Callable(self, "_timeout"))
 
 func _physics_process(delta):
-	if on :
+	if enabled == true :
 		effect1.rotation_degrees += 1
 	
+#card effect off
 func _timeout() :
 	effect1.visible = false
 	child1.monitorable = false
 	child1.monitoring = false
 	child2.monitorable = false
 	child2.monitoring = false
-	on = false
+	enabled = false
 
-
+#card effect on
 func _on_card_effect_1() -> void:
-	effect1.visible = true
-	child1.monitorable = true
-	child1.monitoring = true
-	child2.monitorable = true
-	child2.monitoring = true
-	on = true
-	timer.start()
+	if enabled == false :
+		effect1.visible = true
+		child1.monitorable = true
+		child1.monitoring = true
+		child2.monitorable = true
+		child2.monitoring = true
+		deck_manager.add_card("card1", -1)
+		timer.start()
+		enabled = true

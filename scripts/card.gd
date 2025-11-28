@@ -11,13 +11,13 @@ signal effect2()
 signal effect3()
 signal effect4()
 signal effect5()
+signal effect6()
 
+#send signal to each effect nodes
 func _on_pressed() -> void:
 	emit_signal("effect" + str(type))
-	deck_manager.card_inventory["card" + str(type)] -= 1
 		
 	deck_manager.cleanup_inventory()
-		
 	card_ui._update_ui()
 	
 func edit_count_label() :

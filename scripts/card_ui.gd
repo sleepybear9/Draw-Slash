@@ -9,6 +9,7 @@ extends Control
 @onready var card3_effect_node = $"../player/card3_effect"
 @onready var card4_effect_node = $"../player/card4_effect"
 @onready var card5_effect_node = $"../player/card5_effect"
+@onready var card6_effect_node = $"../player/card6_effect"
 
 const CARD_TEMPLATE = preload("res://Scenes/card.tscn")
 
@@ -17,6 +18,7 @@ const CARD2_TEXTURE = preload("res://img/card/card2.png")
 const CARD3_TEXTURE = preload("res://img/card/card3.png")
 const CARD4_TEXTURE = preload("res://img/card/card4.png")
 const CARD5_TEXTURE = preload("res://img/card/card5.png")
+const CARD6_TEXTURE = preload("res://img/card/card6.png")
 
 var degree
 var length
@@ -83,7 +85,15 @@ func _update_ui():
 			init_card(5, newCard, card_position_x, card_position_y, deg_to_rad(card_rotation))
 			
 			change_degree()
+			
+		elif card_id == "card6" :
+			newCard.icon = CARD6_TEXTURE
+			newCard.connect("effect6", Callable(card6_effect_node, "_on_card_effect_6"))
+			init_card(6, newCard, card_position_x, card_position_y, deg_to_rad(card_rotation))
+			
+			change_degree()
 		
+#make card in UI
 func init_card(id, newCard, x, y, r) :
 	newCard.position.x += x
 	newCard.position.y -= y
@@ -92,6 +102,7 @@ func init_card(id, newCard, x, y, r) :
 	card_grid.add_child(newCard)
 	newCard.edit_count_label()
 	
+#adjust card position
 func change_degree() :
 	card_rotation += degree
 	card_position_x = cos(deg_to_rad(90 - card_rotation)) * length
@@ -113,7 +124,10 @@ func _on_button_4_pressed() -> void:
 	deck_manager.add_card("card4", 1)
 	_update_ui()
 
-
 func _on_button_5_pressed() -> void:
 	deck_manager.add_card("card5", 1)
+	_update_ui()
+
+func _on_button_6_pressed() -> void:
+	deck_manager.add_card("card6", 1)
 	_update_ui()
