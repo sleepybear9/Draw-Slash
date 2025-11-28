@@ -6,6 +6,7 @@ extends Area2D
 
 var direction : Vector2 = Vector2(0, 0)
 var start_position : Vector2
+var dmg : int
 
 func _ready():
 	start_position = global_position

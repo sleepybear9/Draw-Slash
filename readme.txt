@@ -1,5 +1,6 @@
 -경로 수정 필요한 부분
 
+card.gd : dice 경로
 card_ui.gd : 초반 effect nodes
 
 전반적으로(모든 gd파일에서) 파일 경로가 바뀌면 template쪽 경로 모두 수정해야 함(preload부)

@@ -4,8 +4,11 @@ extends Area2D
 @onready var anim_player = $AnimationPlayer
 
 @onready var deck_manager = $"/root/DeckManager"
+@onready var dice = $"../dice"
 
 var enabled : bool = false
+
+var dmg : int
 
 func _ready() :
 	self.visible = false
@@ -16,6 +19,7 @@ func _ready() :
 #card effect on
 func _on_card_effect_3() -> void: 
 	if enabled == false :
+		dmg = dice.roulette()
 		self.visible = true
 		self.monitorable = true
 		self.monitoring = true

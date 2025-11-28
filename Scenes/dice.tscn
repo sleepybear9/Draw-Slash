@@ -1,0 +1,585 @@
+[gd_scene load_steps=11 format=3 uid="uid://1khr76k2gkl5"]
+
+[ext_resource type="Script" uid="uid://mq52suxn4xjw" path="res://Scripts/dice.gd" id="1_7cx2c"]
+[ext_resource type="Texture2D" uid="uid://cxt2reano3khe" path="res://img/dice.png" id="2_3jar1"]
+
+[sub_resource type="Animation" id="Animation_eecgv"]
+resource_name = "result1"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dice1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dice2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dice3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("dice4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dice5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dice6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_dcnxy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dice1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dice2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dice3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("dice4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dice5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dice6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_w36ak"]
+resource_name = "result2"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dice6:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dice1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dice2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("dice3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dice4:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dice5:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35000002, 0.4, 0.45000002, 0.5, 0.55, 0.6, 0.65000004, 0.70000005, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_qc30s"]
+resource_name = "result2"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dice1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4.8428774e-08, 0.05000005, 0.10000005, 0.15000005, 0.20000005, 0.25000006, 0.30000007, 0.35000008, 0.40000007, 0.45000005, 0.50000006, 0.5500001, 0.6000001, 0.6500001, 0.70000005, 0.75000006, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dice2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.8428774e-08, 0.05000005, 0.10000005, 0.15000005, 0.20000005, 0.25000006, 0.30000007, 0.35000008, 0.40000007, 0.45000005, 0.50000006, 0.5500001, 0.6000001, 0.6500001, 0.70000005, 0.75000006, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dice3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4.8428774e-08, 0.05000005, 0.10000005, 0.15000005, 0.20000005, 0.25000006, 0.30000007, 0.35000008, 0.40000007, 0.45000005, 0.50000006, 0.5500001, 0.6000001, 0.6500001, 0.70000005, 0.75000006, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("dice4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(4.8428774e-08, 0.05000005, 0.10000005, 0.15000005, 0.20000005, 0.25000006, 0.30000007, 0.35000008, 0.40000007, 0.45000005, 0.50000006, 0.5500001, 0.6000001, 0.6500001, 0.70000005, 0.75000006, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dice5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4.8428774e-08, 0.05000005, 0.10000005, 0.15000005, 0.20000005, 0.25000006, 0.30000007, 0.35000008, 0.40000007, 0.45000005, 0.50000006, 0.5500001, 0.6000001, 0.6500001, 0.70000005, 0.75000006, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dice6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(4.8428774e-08, 0.05000005, 0.10000005, 0.15000005, 0.20000005, 0.25000006, 0.30000007, 0.35000008, 0.40000007, 0.45000005, 0.50000006, 0.5500001, 0.6000001, 0.6500001, 0.70000005, 0.75000006, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false]
+}
+
+[sub_resource type="Animation" id="Animation_05aec"]
+resource_name = "result3"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dice1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.049999904, 9.685755e-08, 0.0500001, 0.1000001, 0.1500001, 0.2000001, 0.25000012, 0.30000013, 0.3500001, 0.4000001, 0.4500001, 0.5000001, 0.55000013, 0.60000014, 0.6500001, 0.7000001, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dice2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.049999904, 9.685755e-08, 0.0500001, 0.1000001, 0.1500001, 0.2000001, 0.25000012, 0.30000013, 0.3500001, 0.4000001, 0.4500001, 0.5000001, 0.55000013, 0.60000014, 0.6500001, 0.7000001, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dice3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.049999904, 9.685755e-08, 0.0500001, 0.1000001, 0.1500001, 0.2000001, 0.25000012, 0.30000013, 0.3500001, 0.4000001, 0.4500001, 0.5000001, 0.55000013, 0.60000014, 0.6500001, 0.7000001, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("dice4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.049999904, 9.685755e-08, 0.0500001, 0.1000001, 0.1500001, 0.2000001, 0.25000012, 0.30000013, 0.3500001, 0.4000001, 0.4500001, 0.5000001, 0.55000013, 0.60000014, 0.6500001, 0.7000001, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dice5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(-0.049999904, 9.685755e-08, 0.0500001, 0.1000001, 0.1500001, 0.2000001, 0.25000012, 0.30000013, 0.3500001, 0.4000001, 0.4500001, 0.5000001, 0.55000013, 0.60000014, 0.6500001, 0.7000001, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dice6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(-0.049999904, 9.685755e-08, 0.0500001, 0.1000001, 0.1500001, 0.2000001, 0.25000012, 0.30000013, 0.3500001, 0.4000001, 0.4500001, 0.5000001, 0.55000013, 0.60000014, 0.6500001, 0.7000001, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false]
+}
+
+[sub_resource type="Animation" id="Animation_vmus7"]
+resource_name = "result4"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dice1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.05, 1.4901161e-07, 0.050000146, 0.10000014, 0.15000015, 0.20000017, 0.25000018, 0.30000016, 0.35000014, 0.40000015, 0.45000017, 0.5000002, 0.5500002, 0.60000014, 0.65000015, 0.70000017, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dice2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.049999855, 1.4901161e-07, 0.050000146, 0.10000014, 0.15000015, 0.20000017, 0.25000018, 0.30000016, 0.35000014, 0.40000015, 0.45000017, 0.5000002, 0.5500002, 0.60000014, 0.65000015, 0.70000017, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dice3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.049999855, 1.4901161e-07, 0.050000146, 0.10000014, 0.15000015, 0.20000017, 0.25000018, 0.30000016, 0.35000014, 0.40000015, 0.45000017, 0.5000002, 0.5500002, 0.60000014, 0.65000015, 0.70000017, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("dice4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.049999855, 1.4901161e-07, 0.050000146, 0.10000014, 0.15000015, 0.20000017, 0.25000018, 0.30000016, 0.35000014, 0.40000015, 0.45000017, 0.5000002, 0.5500002, 0.60000014, 0.65000015, 0.70000017, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dice5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(-0.049999855, 1.4901161e-07, 0.050000146, 0.10000014, 0.15000015, 0.20000017, 0.25000018, 0.30000016, 0.35000014, 0.40000015, 0.45000017, 0.5000002, 0.5500002, 0.60000014, 0.65000015, 0.70000017, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dice6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(-0.049999855, 1.4901161e-07, 0.050000146, 0.10000014, 0.15000015, 0.20000017, 0.25000018, 0.30000016, 0.35000014, 0.40000015, 0.45000017, 0.5000002, 0.5500002, 0.60000014, 0.65000015, 0.70000017, 0.7500001, 0.8000001, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false]
+}
+
+[sub_resource type="Animation" id="Animation_xe5ou"]
+resource_name = "result5"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dice1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.049999997, 0, 0.049999997, 0.10000001, 0.15000002, 0.20000003, 0.25, 0.3, 0.35000002, 0.40000004, 0.45000005, 0.50000006, 0.55, 0.6, 0.65000004, 0.7, 0.74999994, 0.7999999, 0.84999985, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dice2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.049999997, 0, 0.049999997, 0.10000001, 0.15000002, 0.20000003, 0.25, 0.3, 0.35000002, 0.40000004, 0.45000005, 0.50000006, 0.55, 0.6, 0.65000004, 0.7, 0.74999994, 0.7999999, 0.84999985, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dice3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.049999997, 0, 0.049999997, 0.10000001, 0.15000002, 0.20000003, 0.25, 0.3, 0.35000002, 0.40000004, 0.45000005, 0.50000006, 0.55, 0.6, 0.65000004, 0.7, 0.74999994, 0.7999999, 0.84999985, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("dice4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.049999997, 0, 0.049999997, 0.10000001, 0.15000002, 0.20000003, 0.25, 0.3, 0.35000002, 0.40000004, 0.45000005, 0.50000006, 0.55, 0.6, 0.65000004, 0.7, 0.74999994, 0.7999999, 0.84999985, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dice5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(-0.049999997, 0, 0.049999997, 0.10000001, 0.15000002, 0.20000003, 0.25, 0.3, 0.35000002, 0.40000004, 0.45000005, 0.50000006, 0.55, 0.6, 0.65000004, 0.7, 0.74999994, 0.7999999, 0.84999985, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dice6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(-0.049999997, 0, 0.049999997, 0.10000001, 0.15000002, 0.20000003, 0.25, 0.3, 0.35000002, 0.40000004, 0.45000005, 0.50000006, 0.55, 0.6, 0.65000004, 0.7, 0.74999994, 0.7999999, 0.84999985, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_05aec"]
+_data = {
+&"RESET": SubResource("Animation_dcnxy"),
+&"result1": SubResource("Animation_eecgv"),
+&"result2": SubResource("Animation_qc30s"),
+&"result3": SubResource("Animation_05aec"),
+&"result4": SubResource("Animation_vmus7"),
+&"result5": SubResource("Animation_xe5ou"),
+&"result6": SubResource("Animation_w36ak")
+}
+
+[node name="dice" type="Node2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_7cx2c")
+
+[node name="dice1" type="Sprite2D" parent="."]
+texture = ExtResource("2_3jar1")
+region_enabled = true
+region_rect = Rect2(76, 322, 164, 169)
+
+[node name="dice2" type="Sprite2D" parent="."]
+texture = ExtResource("2_3jar1")
+region_enabled = true
+region_rect = Rect2(257, 320, 161, 170)
+
+[node name="dice3" type="Sprite2D" parent="."]
+texture = ExtResource("2_3jar1")
+region_enabled = true
+region_rect = Rect2(438, 321, 165, 169)
+
+[node name="dice4" type="Sprite2D" parent="."]
+texture = ExtResource("2_3jar1")
+region_enabled = true
+region_rect = Rect2(619, 321, 165, 169)
+
+[node name="dice5" type="Sprite2D" parent="."]
+texture = ExtResource("2_3jar1")
+region_enabled = true
+region_rect = Rect2(802, 320, 165, 170)
+
+[node name="dice6" type="Sprite2D" parent="."]
+texture = ExtResource("2_3jar1")
+region_enabled = true
+region_rect = Rect2(983, 321, 171, 169)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_05aec")
+}

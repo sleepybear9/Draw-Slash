@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8odpj3hedov4"]
+[gd_scene load_steps=9 format=3 uid="uid://8odpj3hedov4"]
 
 [ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://Scripts/card_ui.gd" id="1_60hnl"]
 [ext_resource type="PackedScene" uid="uid://dl0kluomnqbb6" path="res://Scenes/effects/effect1.tscn" id="1_trvhi"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cupndvkytjerr" path="res://Scenes/effects/effect4.tscn" id="5_h62sg"]
 [ext_resource type="PackedScene" uid="uid://b1q1sr8bh43g7" path="res://Scenes/effects/effect5.tscn" id="6_utv40"]
 [ext_resource type="Script" uid="uid://dix13i1i8x421" path="res://Scripts/effects/effect6_node.gd" id="7_jvqw8"]
+[ext_resource type="PackedScene" uid="uid://1khr76k2gkl5" path="res://Scenes/dice.tscn" id="8_0hwq1"]
 
 [node name="cardUI" type="Node2D"]
 
@@ -42,6 +43,9 @@ script = ExtResource("2_tfcdi")
 
 [node name="card6_effect" type="Node2D" parent="player"]
 script = ExtResource("7_jvqw8")
+
+[node name="dice" parent="player" instance=ExtResource("8_0hwq1")]
+position = Vector2(0.99999994, -83.99999)
 
 [node name="buttons" type="Node2D" parent="."]
 

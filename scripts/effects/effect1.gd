@@ -5,8 +5,11 @@ extends Node2D
 @onready var timer = $Timer
 
 @onready var deck_manager = $"/root/DeckManager"
+@onready var dice = $"../dice"
 
 var enabled : bool = false
+
+var dmg : int
 
 func _ready() -> void:
 	effect1.visible = false
@@ -32,6 +35,7 @@ func _timeout() :
 #card effect on
 func _on_card_effect_1() -> void:
 	if enabled == false :
+		dmg = dice.roulette()
 		effect1.visible = true
 		child1.monitorable = true
 		child1.monitoring = true
