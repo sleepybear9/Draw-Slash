@@ -27,24 +27,24 @@ grow_vertical = 2
 pivot_offset = Vector2(640, 240)
 script = ExtResource("1_60hnl")
 
-[node name="player" type="Node2D" parent="."]
+[node name="Player" type="Node2D" parent="."]
 position = Vector2(708, 298)
 
-[node name="card1_effect" parent="player" instance=ExtResource("1_trvhi")]
+[node name="card1_effect" parent="Player" instance=ExtResource("1_trvhi")]
 
-[node name="card2_effect" type="Node2D" parent="player"]
+[node name="card2_effect" type="Node2D" parent="Player"]
 script = ExtResource("2_tfcdi")
 
-[node name="card3_effect" parent="player" instance=ExtResource("4_tfcdi")]
+[node name="card3_effect" parent="Player" instance=ExtResource("4_tfcdi")]
 
-[node name="card4_effect" parent="player" instance=ExtResource("5_h62sg")]
+[node name="card4_effect" parent="Player" instance=ExtResource("5_h62sg")]
 
-[node name="card5_effect" parent="player" instance=ExtResource("6_utv40")]
+[node name="card5_effect" parent="Player" instance=ExtResource("6_utv40")]
 
-[node name="card6_effect" type="Node2D" parent="player"]
+[node name="card6_effect" type="Node2D" parent="Player"]
 script = ExtResource("7_jvqw8")
 
-[node name="dice" parent="player" instance=ExtResource("8_0hwq1")]
+[node name="dice" parent="Player" instance=ExtResource("8_0hwq1")]
 position = Vector2(0.99999994, -83.99999)
 
 [node name="buttons" type="Node2D" parent="."]

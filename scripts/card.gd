@@ -3,7 +3,7 @@ extends Button
 @onready var deck_manager = $"/root/DeckManager"
 @onready var card_ui = $".."
 @onready var count_label = $Sprite2D/Label
-@onready var dice = $player/dice
+@onready var dice = $Player/dice
 
 var type : int
 
