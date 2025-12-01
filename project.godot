@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://Scripts/gameManager.gd"
+DeckManager="*res://Scripts/deckManager.gd"
 
 [display]
 
