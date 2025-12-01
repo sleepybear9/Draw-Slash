@@ -16,6 +16,9 @@ var direction
 var is_swamped = false
 
 signal hp_changed (hp)
+
+func _ready() -> void:
+	hp_changed.emit(hp)
 	
 func _physics_process(delta: float) -> void:
 	if GameManager.is_paused: return
@@ -87,7 +90,7 @@ func take_damage(dmg: int) -> void:
 		else:
 			anim.play("Hurt")
 			anim.animation_finished.connect(_on_hurt_finished, CONNECT_ONE_SHOT)
-		print(hp)
+		#print(hp)
 		hp_changed.emit(hp)
 			
 
@@ -102,7 +105,7 @@ func _on_dot_timeout() -> void:
 		hp -= 10
 		if hp <= 0:
 			hp = 0
-		print(hp)
+		#print(hp)
 		if hp == 0: return
 		
 		anim.modulate = Color(0.3, 1.0, 0.3) 

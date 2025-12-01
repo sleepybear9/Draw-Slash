@@ -10,15 +10,15 @@ oversampling = 128.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t385i"]
 atlas = ExtResource("2_s3jbq")
-region = Rect2(88, 16, 64, 16)
+region = Rect2(96, 16, 48, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nfm57"]
 atlas = ExtResource("3_c3eba")
-region = Rect2(88, 16, 64, 16)
+region = Rect2(96, 16, 48, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b5b84"]
 atlas = ExtResource("4_g8s2e")
-region = Rect2(88, 16, 64, 16)
+region = Rect2(96, 16, 48, 16)
 
 [node name="Hud" type="Control"]
 layout_mode = 3

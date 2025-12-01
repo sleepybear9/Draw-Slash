@@ -9,8 +9,6 @@ var is_boss = false
 func _ready() -> void:
 	await get_tree().process_frame
 	player = $".."
-	player.hp_changed.connect(hp_change)
-	hp_change(player.hp)
 
 func _process(delta: float) -> void:
 	if (!is_boss):
@@ -26,5 +24,6 @@ func _on_timer_timeout() -> void:
 	is_boss = true
 
 func hp_change(hp: int):
+	print(hp)
 	hp_bar.value = hp
 	

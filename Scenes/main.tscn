@@ -40,5 +40,6 @@ z_index = 30
 offset_top = -182.5
 offset_bottom = -182.5
 
+[connection signal="hp_changed" from="Y_Sort/Player" to="Y_Sort/Player/Hud" method="hp_change"]
 [connection signal="pressed" from="Y_Sort/Player/temp_dmg" to="Y_Sort/Player" method="take_damage" binds= [20]]
 [connection signal="pressed" from="Y_Sort/Player/Button" to="Y_Sort/Player" method="_on_button_pressed"]
