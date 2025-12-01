@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://nlfe2iemhcm6"]
+
+[ext_resource type="Script" uid="uid://c7nn67dayjnb5" path="res://Scripts/effects/effect6.gd" id="1_7wirw"]
+[ext_resource type="Texture2D" uid="uid://dmctk3w071x3c" path="res://img/effect/effect6.png" id="1_jlt0d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7wirw"]
+radius = 178.28067
+
+[node name="card6_effect" type="Area2D"]
+script = ExtResource("1_7wirw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5529412)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_jlt0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7wirw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0

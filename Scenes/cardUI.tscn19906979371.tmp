@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://8odpj3hedov4"]
+
+[ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://scripts/card_ui.gd" id="1_60hnl"]
+[ext_resource type="PackedScene" uid="uid://dl0kluomnqbb6" path="res://Scenes/effects/effect1.tscn" id="1_trvhi"]
+[ext_resource type="Script" uid="uid://ccq6jbmmjj0yn" path="res://scripts/effect2_node.gd" id="2_tfcdi"]
+
+[node name="cardUI" type="Node2D"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 480.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 240)
+script = ExtResource("1_60hnl")
+
+[node name="card1_effect" parent="." instance=ExtResource("1_trvhi")]
+position = Vector2(648, 298)
+
+[node name="card2_effect" type="Node2D" parent="."]
+position = Vector2(646, 299)
+script = ExtResource("2_tfcdi")
+
+[node name="card3_effect" type="Node2D" parent="."]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 74.0
+offset_top = 33.0
+offset_right = 159.0
+offset_bottom = 64.0
+text = "add card1
+"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 73.0
+offset_top = 97.0
+offset_right = 158.0
+offset_bottom = 128.0
+text = "add card2
+"
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 75.0
+offset_top = 163.0
+offset_right = 160.0
+offset_bottom = 194.0
+text = "add card3
+"
+
+[connection signal="pressed" from="Button" to="UI" method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="UI" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="UI" method="_on_button_3_pressed"]
