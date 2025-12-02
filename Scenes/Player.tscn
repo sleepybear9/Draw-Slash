@@ -582,6 +582,7 @@ position = Vector2(1, 14)
 shape = SubResource("RectangleShape2D_kyqiw")
 
 [node name="Effects" type="Node2D" parent="."]
+scale = Vector2(0.6, 0.6)
 
 [node name="card1_effect" parent="Effects" instance=ExtResource("9_1e7my")]
 

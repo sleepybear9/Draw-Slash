@@ -24,9 +24,11 @@ grow_vertical = 2
 pivot_offset = Vector2(640, 240)
 script = ExtResource("1_60hnl")
 
-[node name="buttons" type="Node2D" parent="."]
+[node name="buttons" type="Control" parent="."]
+anchors_preset = 0
 
 [node name="Button" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 35.0
 offset_right = 165.0
@@ -35,6 +37,7 @@ text = "add card1
 "
 
 [node name="Button2" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = 79.0
 offset_top = 99.0
 offset_right = 164.0
@@ -43,6 +46,7 @@ text = "add card2
 "
 
 [node name="Button3" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = 81.0
 offset_top = 165.0
 offset_right = 166.0
@@ -51,6 +55,7 @@ text = "add card3
 "
 
 [node name="Button4" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = 194.0
 offset_top = 36.0
 offset_right = 279.0
@@ -59,6 +64,7 @@ text = "add card4
 "
 
 [node name="Button5" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = 194.0
 offset_top = 100.0
 offset_right = 279.0
@@ -67,6 +73,7 @@ text = "add card5
 "
 
 [node name="Button6" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = 193.0
 offset_top = 164.0
 offset_right = 278.0

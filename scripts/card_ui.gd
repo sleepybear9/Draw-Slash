@@ -3,12 +3,12 @@ extends Control
 @onready var card_grid = $"."
 
 #이부분은 나중에 경로 수정 필수
-@onready var card1_effect_node = $"../../../../Y_Sort/Player/Effects/card1_effect"
-@onready var card2_effect_node = $"../../../../Y_Sort/Player/Effects/card2_effect"
-@onready var card3_effect_node = $"../../../../Y_Sort/Player/Effects/card3_effect"
-@onready var card4_effect_node = $"../../../../Y_Sort/Player/Effects/card4_effect"
-@onready var card5_effect_node = $"../../../../Y_Sort/Player/Effects/card5_effect"
-@onready var card6_effect_node = $"../../../../Y_Sort/Player/Effects/card6_effect"
+@onready var card1_effect_node = $"../../../Y_Sort/Player/Effects/card1_effect"
+@onready var card2_effect_node = $"../../../Y_Sort/Player/Effects/card2_effect"
+@onready var card3_effect_node = $"../../../Y_Sort/Player/Effects/card3_effect"
+@onready var card4_effect_node = $"../../../Y_Sort/Player/Effects/card4_effect"
+@onready var card5_effect_node = $"../../../Y_Sort/Player/Effects/card5_effect"
+@onready var card6_effect_node = $"../../../Y_Sort/Player/Effects/card6_effect"
 
 const CARD_TEMPLATE = preload("res://Scenes/card.tscn")
 

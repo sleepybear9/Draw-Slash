@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://4ejlh0qdaqm3"]
+[gd_scene load_steps=10 format=3 uid="uid://4ejlh0qdaqm3"]
 
 [ext_resource type="Script" uid="uid://1lth67ytfr38" path="res://Scripts/hud.gd" id="1_sd512"]
 [ext_resource type="Texture2D" uid="uid://cc55sk1urbfpm" path="res://Sprites/Health&Stamina/Red/BorderBG.png" id="2_s3jbq"]
 [ext_resource type="Texture2D" uid="uid://by5i53d8hfj2e" path="res://Sprites/Health&Stamina/Red/Border.png" id="3_c3eba"]
 [ext_resource type="Texture2D" uid="uid://desqtv6rqfwoc" path="res://Sprites/Health&Stamina/Red/Colors.png" id="4_g8s2e"]
+[ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://Scripts/card_ui.gd" id="5_c3eba"]
 
 [sub_resource type="SystemFont" id="SystemFont_sd512"]
 subpixel_positioning = 0
@@ -19,7 +20,7 @@ region = Rect2(95, 16, 50, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b5b84"]
 atlas = ExtResource("4_g8s2e")
-region = Rect2(95, 16, 48, 16)
+region = Rect2(96, 16, 47, 16)
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -80,4 +81,83 @@ wait_time = 120.0
 one_shot = true
 autostart = true
 
+[node name="buttons" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="Button" type="Button" parent="buttons"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 35.0
+offset_right = 165.0
+offset_bottom = 66.0
+text = "add card1
+"
+
+[node name="Button2" type="Button" parent="buttons"]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 99.0
+offset_right = 164.0
+offset_bottom = 130.0
+text = "add card2
+"
+
+[node name="Button3" type="Button" parent="buttons"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 165.0
+offset_right = 166.0
+offset_bottom = 196.0
+text = "add card3
+"
+
+[node name="Button4" type="Button" parent="buttons"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 36.0
+offset_right = 279.0
+offset_bottom = 67.0
+text = "add card4
+"
+
+[node name="Button5" type="Button" parent="buttons"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 100.0
+offset_right = 279.0
+offset_bottom = 131.0
+text = "add card5
+"
+
+[node name="Button6" type="Button" parent="buttons"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 164.0
+offset_right = 278.0
+offset_bottom = 195.0
+text = "add card6
+"
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = 192.0
+offset_right = 640.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 240)
+script = ExtResource("5_c3eba")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="buttons/Button" to="UI" method="_on_button_pressed"]
+[connection signal="pressed" from="buttons/Button2" to="UI" method="_on_button_2_pressed"]
+[connection signal="pressed" from="buttons/Button3" to="UI" method="_on_button_3_pressed"]
+[connection signal="pressed" from="buttons/Button4" to="UI" method="_on_button_4_pressed"]
+[connection signal="pressed" from="buttons/Button5" to="UI" method="_on_button_5_pressed"]
+[connection signal="pressed" from="buttons/Button6" to="UI" method="_on_button_6_pressed"]
