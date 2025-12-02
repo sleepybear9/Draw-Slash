@@ -14,6 +14,8 @@ script = ExtResource("1_sg5ol")
 position = Vector2(0, 100)
 rotation = 3.1415927
 scale = Vector2(0.1, 0.1)
+collision_layer = 8
+collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="sword1"]
 texture = ExtResource("1_g3yps")
@@ -24,6 +26,8 @@ shape = SubResource("CapsuleShape2D_sg5ol")
 [node name="sword2" type="Area2D" parent="."]
 position = Vector2(0, -100)
 scale = Vector2(0.1, 0.1)
+collision_layer = 8
+collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="sword2"]
 texture = ExtResource("1_g3yps")
