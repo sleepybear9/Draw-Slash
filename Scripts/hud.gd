@@ -1,16 +1,18 @@
 extends Control
 
 var is_boss = false
-@onready var player = $".."
 @onready var time = $Time
 @onready var timer = $Timer
-@onready var hp_bar = $HpProgressBar
+@onready var hp_bar 
 
-func _ready() -> void:
-	await get_tree().process_frame
-	player = $".."
+func _enter_tree() -> void:
+	hp_bar = $HpProgressBar
+
+	
 
 func _process(delta: float) -> void:
+	if GameManager.is_end:
+		end()
 	if (!is_boss):
 		var remaining = timer.time_left
 		var minutes = int(remaining / 60)
@@ -26,4 +28,8 @@ func _on_timer_timeout() -> void:
 func hp_change(hp: int):
 	print(hp)
 	hp_bar.value = hp
+
+func end():
+	timer.paused = true
+	hp_bar.visible = false
 	

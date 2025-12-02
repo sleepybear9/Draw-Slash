@@ -3,7 +3,6 @@ extends Area2D
 @onready var timer = $Timer
 @onready var anim_player = $AnimationPlayer
 
-@onready var deck_manager = $"/root/DeckManager"
 @onready var dice = $"../dice"
 
 var enabled : bool = false
@@ -28,7 +27,7 @@ func _on_card_effect_3() -> void:
 		timer.start()
 		anim_player.play("lazer")
 		enabled = true
-		deck_manager.add_card("card3", -1)
+		DeckManager.add_card("card3", -1)
 
 #card effect off
 func _timeout() :

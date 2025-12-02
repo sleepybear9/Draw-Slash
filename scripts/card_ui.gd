@@ -1,15 +1,14 @@
 extends Control
 
 @onready var card_grid = $"."
-@onready var deck_manager = $"/root/DeckManager"
 
 #이부분은 나중에 경로 수정 필수
-@onready var card1_effect_node = $"../player/card1_effect"
-@onready var card2_effect_node = $"../player/card2_effect"
-@onready var card3_effect_node = $"../player/card3_effect"
-@onready var card4_effect_node = $"../player/card4_effect"
-@onready var card5_effect_node = $"../player/card5_effect"
-@onready var card6_effect_node = $"../player/card6_effect"
+@onready var card1_effect_node = $"../../../../Y_Sort/Player/Effects/card1_effect"
+@onready var card2_effect_node = $"../../../../Y_Sort/Player/Effects/card2_effect"
+@onready var card3_effect_node = $"../../../../Y_Sort/Player/Effects/card3_effect"
+@onready var card4_effect_node = $"../../../../Y_Sort/Player/Effects/card4_effect"
+@onready var card5_effect_node = $"../../../../Y_Sort/Player/Effects/card5_effect"
+@onready var card6_effect_node = $"../../../../Y_Sort/Player/Effects/card6_effect"
 
 const CARD_TEMPLATE = preload("res://Scenes/card.tscn")
 
@@ -30,7 +29,7 @@ var card_position_y
 func _update_ui():
 	
 	#--------------card ui init-----------------
-	var count_id = deck_manager.count_id()
+	var count_id = DeckManager.count_id()
 	degree = 180 / (count_id + 1)
 	
 	length = 50
@@ -46,8 +45,8 @@ func _update_ui():
 	#--------------/ui reset----------------
 	
 	
-	for card_id in deck_manager.card_inventory.keys():
-		var count = deck_manager.card_inventory[card_id]
+	for card_id in DeckManager.card_inventory.keys():
+		var count = DeckManager.card_inventory[card_id]
 		
 		var newCard = CARD_TEMPLATE.instantiate()
 		
@@ -109,25 +108,25 @@ func change_degree() :
 	card_position_y = sin(deg_to_rad(90 - card_rotation)) * length
 
 func _on_button_pressed() -> void:
-	deck_manager.add_card("card1", 1)
+	DeckManager.add_card("card1", 1)
 	_update_ui()
 
 func _on_button_2_pressed() -> void:
-	deck_manager.add_card("card2", 1)
+	DeckManager.add_card("card2", 1)
 	_update_ui()
 
 func _on_button_3_pressed() -> void:
-	deck_manager.add_card("card3", 1)
+	DeckManager.add_card("card3", 1)
 	_update_ui()
 
 func _on_button_4_pressed() -> void:
-	deck_manager.add_card("card4", 1)
+	DeckManager.add_card("card4", 1)
 	_update_ui()
 
 func _on_button_5_pressed() -> void:
-	deck_manager.add_card("card5", 1)
+	DeckManager.add_card("card5", 1)
 	_update_ui()
 
 func _on_button_6_pressed() -> void:
-	deck_manager.add_card("card6", 1)
+	DeckManager.add_card("card6", 1)
 	_update_ui()

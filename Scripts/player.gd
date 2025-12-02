@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 200.0
-@export var hp = 1000
+@export var hp: int = 1000
 @export var mp = 100
 
 @onready var anim = $AnimatedSprite2D
@@ -14,13 +14,18 @@ var is_attacked = false
 var is_alive = true
 var direction
 var is_swamped = false
+var is_bar = false
 
 signal hp_changed (hp)
 
 func _ready() -> void:
-	hp_changed.emit(hp)
+	hp_changed.emit(hp)	
 	
+
 func _physics_process(delta: float) -> void:
+	if !is_bar:
+		
+		is_bar = true
 	if GameManager.is_paused: return
 	
 	direction = Input.get_vector("Left","Right","Up","Down")
@@ -32,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	elif is_alive:
 		anim.play("Death")
 		is_alive = false
+		GameManager.is_end = true
 		if !anim.is_playing():
 			queue_free()
 

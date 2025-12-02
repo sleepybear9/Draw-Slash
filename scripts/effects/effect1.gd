@@ -4,7 +4,6 @@ extends Node2D
 @onready var child2 = $sword2
 @onready var timer = $Timer
 
-@onready var deck_manager = $"/root/DeckManager"
 @onready var dice = $"../dice"
 
 var enabled : bool = false
@@ -41,6 +40,6 @@ func _on_card_effect_1() -> void:
 		child1.monitoring = true
 		child2.monitorable = true
 		child2.monitoring = true
-		deck_manager.add_card("card1", -1)
+		DeckManager.add_card("card1", -1)
 		timer.start()
 		enabled = true

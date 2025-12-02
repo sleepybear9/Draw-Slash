@@ -6,19 +6,20 @@
 [ext_resource type="Texture2D" uid="uid://desqtv6rqfwoc" path="res://Sprites/Health&Stamina/Red/Colors.png" id="4_g8s2e"]
 
 [sub_resource type="SystemFont" id="SystemFont_sd512"]
+subpixel_positioning = 0
 oversampling = 128.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t385i"]
 atlas = ExtResource("2_s3jbq")
-region = Rect2(96, 16, 48, 16)
+region = Rect2(95, 16, 48, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nfm57"]
 atlas = ExtResource("3_c3eba")
-region = Rect2(96, 16, 48, 16)
+region = Rect2(95, 16, 50, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b5b84"]
 atlas = ExtResource("4_g8s2e")
-region = Rect2(96, 16, 48, 16)
+region = Rect2(95, 16, 48, 16)
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -41,7 +42,7 @@ offset_bottom = 112.0
 grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = SubResource("SystemFont_sd512")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 60
 text = "Timer"
 horizontal_alignment = 1
 
@@ -60,15 +61,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = 200.0
-offset_right = 32.0
-offset_bottom = 240.0
+offset_left = -80.0
+offset_top = 64.0
+offset_right = 80.0
+offset_bottom = 104.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 0.8)
 max_value = 1000.0
-value = 50.0
+value = 500.0
+nine_patch_stretch = true
 texture_under = SubResource("AtlasTexture_t385i")
 texture_over = SubResource("AtlasTexture_nfm57")
 texture_progress = SubResource("AtlasTexture_b5b84")

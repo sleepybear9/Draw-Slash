@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://8odpj3hedov4"]
+[gd_scene load_steps=9 format=3 uid="uid://87vd3qfnsef6"]
 
-[ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://Scripts/card_ui.gd" id="1_60hnl"]
+[ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://Scripts/card_ui.gd" id="1_l5nh8"]
+[ext_resource type="PackedScene" uid="uid://dl0kluomnqbb6" path="res://Scenes/effects/effect1.tscn" id="2_np8w7"]
+[ext_resource type="Script" uid="uid://ccq6jbmmjj0yn" path="res://Scripts/effects/effect2_node.gd" id="3_c04jv"]
+[ext_resource type="PackedScene" uid="uid://b77qk7karqlff" path="res://Scenes/effects/effect3.tscn" id="4_uii4h"]
+[ext_resource type="PackedScene" uid="uid://cupndvkytjerr" path="res://Scenes/effects/effect4.tscn" id="5_aadno"]
+[ext_resource type="PackedScene" uid="uid://b1q1sr8bh43g7" path="res://Scenes/effects/effect5.tscn" id="6_xu26a"]
+[ext_resource type="Script" uid="uid://dix13i1i8x421" path="res://Scripts/effects/effect6_node.gd" id="7_hsrn2"]
+[ext_resource type="PackedScene" uid="uid://1khr76k2gkl5" path="res://Scenes/dice.tscn" id="8_ysnyj"]
 
 [node name="cardUI" type="Node2D"]
 
@@ -18,7 +25,27 @@ offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(640, 240)
-script = ExtResource("1_60hnl")
+script = ExtResource("1_l5nh8")
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(708, 298)
+
+[node name="card1_effect" parent="Player" instance=ExtResource("2_np8w7")]
+
+[node name="card2_effect" type="Node2D" parent="Player"]
+script = ExtResource("3_c04jv")
+
+[node name="card3_effect" parent="Player" instance=ExtResource("4_uii4h")]
+
+[node name="card4_effect" parent="Player" instance=ExtResource("5_aadno")]
+
+[node name="card5_effect" parent="Player" instance=ExtResource("6_xu26a")]
+
+[node name="card6_effect" type="Node2D" parent="Player"]
+script = ExtResource("7_hsrn2")
+
+[node name="dice" parent="Player" instance=ExtResource("8_ysnyj")]
+position = Vector2(0.99999994, -83.99999)
 
 [node name="buttons" type="Node2D" parent="."]
 
