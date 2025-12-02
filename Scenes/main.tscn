@@ -41,5 +41,6 @@ offset_bottom = 196.5
 text = "pause"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="hp_changed" from="Y_Sort/Player" to="CanvasLayer/Hud" method="hp_change"]
 [connection signal="pressed" from="CanvasLayer/temp_dmg" to="Y_Sort/Player" method="take_damage" binds= [20]]
 [connection signal="pressed" from="CanvasLayer/Button" to="Y_Sort/Player" method="_on_button_pressed"]

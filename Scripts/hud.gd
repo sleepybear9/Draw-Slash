@@ -8,8 +8,6 @@ var is_boss = false
 func _enter_tree() -> void:
 	hp_bar = $HpProgressBar
 
-	
-
 func _process(delta: float) -> void:
 	if GameManager.is_end:
 		end()
