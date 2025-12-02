@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bj2lcnq4qmr0a" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Big/Zombie_Big_Side_Second-Death-Sheet8.png" id="10_6ngr1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0p5uv"]
+radius = 13.416408
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3bl0"]
 
@@ -1074,19 +1075,27 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(151, 191)
+position = Vector2(153, 200)
 script = ExtResource("1_asqwu")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0p5uv")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="attackrange" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackrange"]
+position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_e3bl0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_3wadg")
-animation = &"death_left"
-frame_progress = 0.45734507
+animation = &"attack1_right"
+frame = 7
+frame_progress = 0.85327274
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true

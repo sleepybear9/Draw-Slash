@@ -397,6 +397,10 @@ height = 74.0
 
 [node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_o1i15")
+max_hp = null
+attack_damage = null
+contact_damage = null
+attack_interval = null
 
 [node name="playercollision" type="CollisionShape2D" parent="."]
 
@@ -408,7 +412,7 @@ position = Vector2(622.5, 346.5)
 scale = Vector2(2.03, 2.03)
 sprite_frames = SubResource("SpriteFrames_xcyd7")
 animation = &"skill"
-frame_progress = 0.15268826
+frame_progress = 0.9008375
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -417,3 +421,5 @@ position = Vector2(612, 375)
 shape = SubResource("CapsuleShape2D_x36vw")
 
 [node name="bullets(notyet)" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
