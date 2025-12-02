@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	if enabled == true :
-		effect1.rotation_degrees += 1
+		effect1.rotation_degrees += deg_to_rad(180)
 	
 #card effect off
 func _timeout() :

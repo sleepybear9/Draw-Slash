@@ -3,7 +3,8 @@ extends CharacterBody2D
 class_name Player 
 
 @export var speed = 200.0
-@export var hp: int = 1000
+@export var max_hp: int = 1000
+var hp: int = max_hp
 @export var mp = 100
 
 @onready var anim = $AnimatedSprite2D
@@ -16,7 +17,6 @@ var is_attacked = false
 var is_alive = true
 var direction
 var is_swamped = false
-var is_bar = false
 
 signal hp_changed (hp)
 
@@ -25,12 +25,16 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	if !is_bar:
-		
-		is_bar = true
 	if GameManager.is_paused: return
 	
 	direction = Input.get_vector("Left","Right","Up","Down")
+	GameManager.player_dir = direction
+	if direction.length() == 0:
+		if is_left:
+			GameManager.player_dir = Vector2(-1, 0)
+		else :
+			GameManager.player_dir = Vector2(1, 0)
+	
 	velocity = direction * speed
 
 	if hp > 0:
@@ -42,7 +46,6 @@ func _physics_process(delta: float) -> void:
 		GameManager.is_end = true
 		if !anim.is_playing():
 			queue_free()
-
 
 func update_animation(dir: Vector2) -> void:
 	if is_attacked:
@@ -86,6 +89,10 @@ func _on_turn_finished() -> void:
 	#anim.play("Walk")
 	anim.play("Run")
 
+func cure(heal: int) -> void:
+	hp = min(hp+ heal, max_hp)
+	hp_changed.emit(hp)
+	
 
 func take_damage(dmg: int) -> void:
 	if !is_attacked:

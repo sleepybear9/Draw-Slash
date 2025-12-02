@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://8odpj3hedov4"]
+
+[ext_resource type="PackedScene" uid="uid://ogq3ay3a8xtl" path="res://Scenes/Level_1.tscn" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cam0r4pj5wn2b" path="res://Scenes/Player.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://4ejlh0qdaqm3" path="res://Scenes/HUD.tscn" id="3_jjvhh"]
+
+[node name="Main(tmp)" type="Node2D"]
+
+[node name="Y_Sort" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 5)
+scale = Vector2(2, 2)
+
+[node name="Map_1" parent="Y_Sort" instance=ExtResource("1_bo1nx")]
+position = Vector2(0, -2.5)
+scale = Vector2(1, 1)
+
+[node name="Player" parent="Y_Sort" instance=ExtResource("3_8gbba")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("3_jjvhh")]
+
+[node name="temp_dmg" type="Button" parent="CanvasLayer"]
+z_index = 30
+offset_left = 388.0
+offset_top = 74.0
+offset_right = 481.0
+offset_bottom = 126.0
+text = "damage
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+process_mode = 3
+z_index = 30
+offset_left = 148.0
+offset_top = 146.0
+offset_right = 214.0
+offset_bottom = 196.5
+text = "pause"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="hp_changed" from="Y_Sort/Player" to="CanvasLayer/Hud" method="hp_change"]
+[connection signal="pressed" from="CanvasLayer/temp_dmg" to="Y_Sort/Player" method="take_damage" binds= [20]]
+[connection signal="pressed" from="CanvasLayer/Button" to="Y_Sort/Player" method="_on_button_pressed"]

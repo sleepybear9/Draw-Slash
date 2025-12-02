@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlwa1tmn806du" path="res://img/effect/effect3.png" id="1_mfllq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xwx0"]
-size = Vector2(677, 86)
+size = Vector2(698, 86)
 
 [sub_resource type="Animation" id="Animation_awpdc"]
 length = 0.001
@@ -34,7 +34,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 2.5, 3),
 "transitions": PackedFloat32Array(1, 0.2, 0.2, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.7058824), Color(1, 1, 1, 0.7058824), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_afd7m"]
@@ -49,13 +49,14 @@ collision_mask = 4
 script = ExtResource("1_7xwx0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(25.5, 0)
 texture = ExtResource("1_mfllq")
 offset = Vector2(300, 0)
 region_enabled = true
 region_rect = Rect2(261, 469, 763, 89)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(343.5, -1)
+position = Vector2(358.5, -1)
 shape = SubResource("RectangleShape2D_7xwx0")
 
 [node name="Timer" type="Timer" parent="."]
