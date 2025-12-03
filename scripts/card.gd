@@ -2,8 +2,7 @@ extends Button
 
 @onready var card_ui = $".."
 @onready var count_label = $Sprite2D/Label
-@onready var dice = $Player/dice
-
+@onready var dice = $"../../../../Y_Sort/Player/Effects/dice"
 var type : int
 
 signal effect1()
