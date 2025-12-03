@@ -9,8 +9,7 @@ func add_card(card_id: String, amount: int = 1):
 	else:
 		card_inventory[card_id] = amount
 		
-	print("카드 획득! ", card_id, ": ", card_inventory[card_id], "개")
-	emit_signal("inventory_changed")
+	print(card_id, ": ", card_inventory[card_id], "개")
 
 #amount of ids
 func count_id() -> int :
@@ -30,5 +29,3 @@ func cleanup_inventory():
 	
 	for card_id in keys_to_remove:
 		card_inventory.erase(card_id)
-	
-	emit_signal("inventory_changed")

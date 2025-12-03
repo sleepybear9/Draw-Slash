@@ -26,7 +26,6 @@ func _on_timer_timeout() -> void:
 	new_effect2.position = global_position
 	new_effect2.direction = GameManager.player_dir
 	get_tree().root.add_child(new_effect2)
-	print("shoot")
 	
 	if count > max_count: 
 		timer.stop()

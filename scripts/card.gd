@@ -1,6 +1,5 @@
 extends Button
 
-@onready var deck_manager = $"/root/DeckManager"
 @onready var card_ui = $".."
 @onready var count_label = $Sprite2D/Label
 @onready var dice = $Player/dice
@@ -18,9 +17,9 @@ signal effect6()
 func _on_pressed() -> void:
 	emit_signal("effect" + str(type))
 		
-	deck_manager.cleanup_inventory()
+	DeckManager.cleanup_inventory()
 	card_ui._update_ui()
 	
 func edit_count_label() :
 	var card_id : String = "card" + str(type)
-	count_label.text = str(deck_manager.card_inventory[card_id])
+	count_label.text = str(DeckManager.card_inventory[card_id])

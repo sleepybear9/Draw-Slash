@@ -3,7 +3,9 @@ extends Control
 var is_boss = false
 @onready var time = $Time
 @onready var timer = $Timer
-@onready var hp_bar 
+@onready var hp_bar
+@onready var giveCard = $GiveCard
+@onready var cardUI = $UI
 
 func _enter_tree() -> void:
 	hp_bar = $HpProgressBar
@@ -31,3 +33,6 @@ func end():
 	timer.paused = true
 	hp_bar.visible = false
 	
+func _on_give_card_timeout() -> void:
+	DeckManager.add_card("card1", 1)
+	cardUI._update_ui()

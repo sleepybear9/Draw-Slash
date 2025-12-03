@@ -81,6 +81,10 @@ wait_time = 90.0
 one_shot = true
 autostart = true
 
+[node name="GiveCard" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [node name="buttons" type="Control" parent="."]
 anchors_preset = 0
 
@@ -155,6 +159,7 @@ pivot_offset = Vector2(640, 240)
 script = ExtResource("5_c3eba")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GiveCard" to="." method="_on_give_card_timeout"]
 [connection signal="pressed" from="buttons/Button" to="UI" method="_on_button_pressed"]
 [connection signal="pressed" from="buttons/Button2" to="UI" method="_on_button_2_pressed"]
 [connection signal="pressed" from="buttons/Button3" to="UI" method="_on_button_3_pressed"]
