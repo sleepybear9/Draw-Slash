@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 
 		time.text = "%02d:%02d" % [minutes, seconds]
 	else:
-		time.text("Boss appeared!")
+		time.text = "Boss appeared!"
 
 func _on_timer_timeout() -> void:
 	is_boss = true
