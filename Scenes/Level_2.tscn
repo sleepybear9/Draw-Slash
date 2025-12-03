@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://baoiqi6x1mwww"]
+[gd_scene load_steps=5 format=4 uid="uid://baoiqi6x1mwww"]
 
 [ext_resource type="Script" uid="uid://c0dslciyckrwv" path="res://Scripts/map.gd" id="1_vgr4u"]
 [ext_resource type="TileSet" uid="uid://bl5ng2p3uuu2y" path="res://Tiles/Level_2.tres" id="2_apq5t"]
-[ext_resource type="TileSet" uid="uid://bnhxq2malrj4o" path="res://Tiles/Level_1.tres" id="2_ostk4"]
+[ext_resource type="PackedScene" uid="uid://cam0r4pj5wn2b" path="res://Scenes/Player.tscn" id="3_ostk4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i63mn"]
 size = Vector2(640, 640)
@@ -23,39 +23,42 @@ tile_set = ExtResource("2_apq5t")
 
 [node name="Swamp_detail" type="TileMapLayer" parent="Chunk_1"]
 z_index = -1
-tile_set = ExtResource("2_ostk4")
+tile_set = ExtResource("2_apq5t")
 
 [node name="Ground" type="TileMapLayer" parent="Chunk_1"]
 z_index = -1
 rotation = -0.0005923448
-tile_set = ExtResource("2_ostk4")
+tile_set = ExtResource("2_apq5t")
 
 [node name="GroundDark" type="TileMapLayer" parent="Chunk_1"]
 z_index = -1
 rotation = -0.0005923448
-tile_set = ExtResource("2_ostk4")
+tile_set = ExtResource("2_apq5t")
 
 [node name="Upstair" type="TileMapLayer" parent="Chunk_1"]
 z_index = -1
 rotation = -0.0005923448
-tile_set = ExtResource("2_ostk4")
+tile_set = ExtResource("2_apq5t")
 
 [node name="Road" type="TileMapLayer" parent="Chunk_1"]
 rotation = -0.0005923448
-tile_set = ExtResource("2_ostk4")
+tile_set = ExtResource("2_apq5t")
 
 [node name="Object" type="TileMapLayer" parent="Chunk_1"]
 y_sort_enabled = true
 rotation = -0.0005923448
-tile_set = ExtResource("2_ostk4")
+tile_map_data = PackedByteArray("AAAGAAcAAQABAAEAAAAGAA4AAQABAAgAAAAGABMAAQABAA0AAAAGABcAAQABABEAAAAGABwAAQABABYAAAAGAB8AAQABABkAAAAJABwAAQAEABYAAAALAA4AAQAGAAgAAAALABMAAQAGAA0AAAALABgAAQAGABIAAAAMABwAAQAHABYAAAAOAAgAAQAJAAIAAAAPAA8AAQAKAAkAAAAPABMAAQAKAA0AAAAPABgAAQAKABIAAAAPABwAAQAKABYAAAAQAB8AAQALABkAAAASABAAAQANAAoAAAASABQAAQANAA4AAAASABgAAQANABIAAAASABwAAQANABYAAAASACAAAQANABoAAAATAB8AAQAOABkAAAAUAAkAAQAPAAMAAAAUABAAAQAPAAoAAAAUABQAAQAPAA4AAAAVABgAAQAQABIAAAAVAB0AAQAQABcAAAAWAA4AAQARAAgAAAAWABEAAQARAAsAAAAWACIAAQARABwAAAAXAB0AAQASABcAAAAYAAkAAQATAAMAAAAZAA4AAQAUAAgAAAAaABkAAQAVABMAAAAbABEAAQAWAAsAAAAbABQAAQAWAA4AAAAcAAoAAQAXAAQAAAAcAA4AAQAXAAgAAAA=")
+tile_set = ExtResource("2_apq5t")
 
 [node name="MapChecker" type="Area2D" parent="Chunk_1"]
-visible = false
 collision_layer = 64
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chunk_1/MapChecker"]
 position = Vector2(320, 320)
 shape = SubResource("RectangleShape2D_i63mn")
+
+[node name="Player" parent="." instance=ExtResource("3_ostk4")]
+position = Vector2(0, -586)
 
 [connection signal="area_exited" from="Chunk_1/MapChecker" to="Chunk_1" method="_on_map_checker_area_exited"]
