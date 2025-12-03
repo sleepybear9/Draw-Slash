@@ -7,6 +7,7 @@ extends Node2D
 var max_count = 3
 var count = 1
 
+
 #card effect(make bullet)
 func _on_card_effect_2() :
 	var new_effect2 = effect2_TEMPLATE.instantiate()
@@ -14,7 +15,6 @@ func _on_card_effect_2() :
 	print(max_count)
 	
 	timer.start()
-	new_effect2.dmg = dice.roulette()
 	new_effect2.position = global_position
 	new_effect2.direction = GameManager.player_dir
 	get_tree().root.add_child(new_effect2)
@@ -28,7 +28,6 @@ func _on_timer_timeout() -> void:
 	else:	
 		count += 1
 		var new_effect2 = effect2_TEMPLATE.instantiate()
-		new_effect2.dmg = dice.roulette()
 		
 		new_effect2.position = global_position
 		new_effect2.direction = GameManager.player_dir
