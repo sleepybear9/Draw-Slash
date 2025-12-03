@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://l1iaibs7xhb4"
-path="res://.godot/imported/male_hero-design.png-c59ec8f5c34e2c3cba8376ecfe1bb89e.ctex"
+path="res://.godot/imported/male_hero-design.png-e28fb11a07f3eaf122417f776d559375.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/individual_sheets/male_hero-design.png"
-dest_files=["res://.godot/imported/male_hero-design.png-c59ec8f5c34e2c3cba8376ecfe1bb89e.ctex"]
+source_file="res://Sprites/player/individual_sheets/male_hero-design.png"
+dest_files=["res://.godot/imported/male_hero-design.png-e28fb11a07f3eaf122417f776d559375.ctex"]
 
 [params]
 

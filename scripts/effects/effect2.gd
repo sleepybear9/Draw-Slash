@@ -11,8 +11,7 @@ var dmg : int
 func _ready():
 	start_position = global_position
 	look_at(global_position + direction)
-	
-	connect("body_entered", Callable(self, "_on_body_entered"))
+
 
 #bullet movement
 func _physics_process(delta: float):
