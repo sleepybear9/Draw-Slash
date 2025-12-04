@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://ct4sl8psepaad"]
+[gd_scene load_steps=129 format=3 uid="uid://ct4sl8psepaad"]
 
 [ext_resource type="Script" uid="uid://wky6govcrvym" path="res://enemy.gd" id="1_7k104"]
 [ext_resource type="Texture2D" uid="uid://87en040s0c2r" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Axe/Zombie_Axe_Down_First-Attack-Sheet7.png" id="2_5hcft"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bgrgmuk5l0p1v" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Axe/Zombie_Axe_Side-left_Walk-Sheet8.png" id="13_qku5p"]
 [ext_resource type="Texture2D" uid="uid://bseu7b0t3qx4" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Axe/Zombie_Axe_Side_Walk-Sheet8.png" id="14_l1fjw"]
 [ext_resource type="Texture2D" uid="uid://cb2oyxrlath6i" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Axe/Zombie_Axe_Up_Walk-Sheet8.png" id="15_b5wqg"]
+[ext_resource type="AudioStream" uid="uid://brf1ck1t5awwv" path="res://assets/sounds/足首がグキッ(melee attacking).mp3" id="16_jmwgi"]
+[ext_resource type="AudioStream" uid="uid://bauxpjk3v8eum" path="res://assets/sounds/555425__tonsil5__zombie-pain-6.wav" id="17_g2u8i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
 
@@ -860,9 +862,13 @@ animations = [{
 }]
 
 [node name="enemy" type="CharacterBody2D"]
+position = Vector2(460, 261)
 script = ExtResource("1_7k104")
 speed = 71.0
+attack_distance = null
 attack_cooldown = 0.9
+damage = null
+max_hp = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4gyqm")
@@ -881,8 +887,8 @@ frame = 2
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="sfxAttack" type="AudioStreamPlayer2D" parent="."]
+[node name="monster_attack_melee" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_jmwgi")
 
-[node name="sfxHit" type="AudioStreamPlayer2D" parent="."]
-
-[node name="sfxDie" type="AudioStreamPlayer2D" parent="."]
+[node name="monster_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_g2u8i")
