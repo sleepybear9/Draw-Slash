@@ -16,12 +16,12 @@ y_sort_enabled = true
 position = Vector2(0, -640)
 script = ExtResource("1_vgr4u")
 
-[node name="Swamp" type="TileMapLayer" parent="Chunk_1"]
+[node name="pollution" type="TileMapLayer" parent="Chunk_1"]
 z_index = -1
 position = Vector2(-27.5, 0)
 tile_set = ExtResource("2_apq5t")
 
-[node name="Swamp_detail" type="TileMapLayer" parent="Chunk_1"]
+[node name="pollution_detail" type="TileMapLayer" parent="Chunk_1"]
 z_index = -1
 tile_set = ExtResource("2_apq5t")
 
@@ -30,7 +30,7 @@ z_index = -1
 rotation = -0.0005923448
 tile_set = ExtResource("2_apq5t")
 
-[node name="GroundDark" type="TileMapLayer" parent="Chunk_1"]
+[node name="GroundElse" type="TileMapLayer" parent="Chunk_1"]
 z_index = -1
 rotation = -0.0005923448
 tile_set = ExtResource("2_apq5t")
@@ -40,7 +40,7 @@ z_index = -1
 rotation = -0.0005923448
 tile_set = ExtResource("2_apq5t")
 
-[node name="Road" type="TileMapLayer" parent="Chunk_1"]
+[node name="Detail" type="TileMapLayer" parent="Chunk_1"]
 rotation = -0.0005923448
 tile_set = ExtResource("2_apq5t")
 
