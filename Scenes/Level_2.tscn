@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://baoiqi6x1mwww"]
+[gd_scene load_steps=5 format=3 uid="uid://baoiqi6x1mwww"]
 
 [ext_resource type="Script" uid="uid://c0dslciyckrwv" path="res://Scripts/map.gd" id="1_vgr4u"]
 [ext_resource type="TileSet" uid="uid://bl5ng2p3uuu2y" path="res://Tiles/Level_2.tres" id="2_apq5t"]
@@ -47,7 +47,6 @@ tile_set = ExtResource("2_apq5t")
 [node name="Object" type="TileMapLayer" parent="Chunk_1"]
 y_sort_enabled = true
 rotation = -0.0005923448
-tile_map_data = PackedByteArray("AAASABgAAQAXACEAAAADABkAAQARABwAAAAIABoAAQAWAB0AAAAKABcAAQAPACAAAAAOABcAAQATACAAAAAVABcAAQARABwAAAAYABQAAQAJACMAAAAeABUAAQAPACQAAAAjABYAAQAUACUAAAAEAB4AAQABACkAAAALAB4AAQAIACkAAAAQACAAAQANACsAAAATABwAAQANADIAAAAYABwAAQASADIAAAAbAB0AAQAVADMAAAAdAB4AAQAXADQAAAAVACEAAQABAC8AAAA=")
 tile_set = ExtResource("2_apq5t")
 
 [node name="MapChecker" type="Area2D" parent="Chunk_1"]

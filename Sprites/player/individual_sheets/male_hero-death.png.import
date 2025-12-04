@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ji71f3fndi1k"
-path="res://.godot/imported/male_hero-death.png-868008a03e1191050a9daa9f26a833ae.ctex"
+path="res://.godot/imported/male_hero-death.png-27faefac0cba86fb087f8eff1c5aaba2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/individual_sheets/male_hero-death.png"
-dest_files=["res://.godot/imported/male_hero-death.png-868008a03e1191050a9daa9f26a833ae.ctex"]
+source_file="res://Sprites/player/individual_sheets/male_hero-death.png"
+dest_files=["res://.godot/imported/male_hero-death.png-27faefac0cba86fb087f8eff1c5aaba2.ctex"]
 
 [params]
 
