@@ -865,10 +865,7 @@ animations = [{
 position = Vector2(460, 261)
 script = ExtResource("1_7k104")
 speed = 71.0
-attack_distance = null
 attack_cooldown = 0.9
-damage = null
-max_hp = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4gyqm")
@@ -887,8 +884,9 @@ frame = 2
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="monster_attack_melee" type="AudioStreamPlayer" parent="."]
+[node name="sfx_monster_attack_melee" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_jmwgi")
+volume_db = -21.468
 
-[node name="monster_death" type="AudioStreamPlayer" parent="."]
+[node name="sfx_monster_death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_g2u8i")
