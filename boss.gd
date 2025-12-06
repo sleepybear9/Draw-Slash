@@ -8,11 +8,11 @@ extends CharacterBody2D
 @export var projectile_scene: PackedScene # 낫 투사체 씬(.tscn), 찾는중
 @export var minion_scene: PackedScene     # 소환할 몬스터 씬(.tscn), 기존 몬스터 소환
 @export_group("Summon Pattern")
-@export var minion_melee_scene: PackedScene 
-@export var minion_range_scene: PackedScene
+@export var enemy: PackedScene 
+@export var monster_range: PackedScene
 # [노드 연결]
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-@onready var ultimate_area: Area2D = $UltimateArea # 필살기 전체 범위
+@onready var dangerzone: Area2D = $dangerzone # 필살기 전체 범위
 @onready var safe_zone_indicator: Node2D = $SafeZonePos # 안전지대 위치 표시용 노드
 
 var hp: int
@@ -24,7 +24,7 @@ var is_doing_pattern: bool = false # 현재 패턴 사용 중인지
 func _ready():
 	hp = max_hp
 	player = get_tree().get_root().find_child("Player", true, false)
-	ultimate_area.monitoring = false # 필살기 범위 꺼두기
+	dangerzone.monitoring = false # 필살기 범위 꺼두기
 	
 	# 게임 시작 후 3초 뒤 첫 패턴 시작
 	await get_tree().create_timer(3.0).timeout
@@ -55,7 +55,7 @@ func choose_random_pattern():
 
 # --- [패턴 1: 몬스터 소환] ---, 소환물들은 모듈레이터값 따로
 func _pattern_summon():
-	print("패턴 1: 쫄병 5마리 무작위 소환")
+	#print("패턴 1: 쫄병 5마리 무작위 소환")
 	anim.play("summon") # 소환 모션 재생
 	
 	# 보스 무적 설정
@@ -69,9 +69,9 @@ func _pattern_summon():
 		# 1. 근거리 vs 원거리 랜덤 선택 (50% 확률)
 		var spawn_scene: PackedScene
 		if randi() % 2 == 0:
-			spawn_scene = minion_melee_scene # 근거리
+			spawn_scene = enemy # 근거리
 		else:
-			spawn_scene = minion_range_scene # 원거리
+			spawn_scene = monster_range # 원거리
 			
 		# 2. 몬스터 생성
 		if spawn_scene:
@@ -106,9 +106,7 @@ func _on_minion_died():
 func _break_invincibility():
 	is_invincible = false
 	modulate = Color(1, 1, 1, 1) # 원래 색으로 복구
-	#print("모든 쫄병 사망! 보스에게 1000 데미지!")
-	
-	# 데미지 함수 호출 (무적이 풀린 상태에서 호출해야 함)
+
 	take_damage(1000)
 
 
@@ -116,9 +114,6 @@ func _break_invincibility():
 func _pattern_scythe():
 	#print("패턴 2: 낫 던지기")
 	anim.play("normalattack_2")
-	
-	# 애니메이션의 특정 프레임(던지는 순간)에 맞추고 싶다면 await 사용
-	# await anim.frame_changed # 혹은 타이머 사용
 	
 	if player:
 		var scythe = projectile_scene.instantiate()
@@ -144,11 +139,6 @@ func _pattern_ultimate():
 	
 	#child1.monitorable = false
 	#child1.monitoring = false 이거쓰는거 권장
-	
-	# 2. 경고 표시 (5초간)
-	# 쉐이더나 빨간 장판(Sprite)을 맵 전체에 깔고, 안전지대만 비워두는 연출 필요
-	# 여기서는 간단하게 콘솔 출력으로 대체
-	#print("5초 뒤 맵 전체 폭발!! 안전지대로 피하세요!")
 	
 	await get_tree().create_timer(5.0).timeout
 	

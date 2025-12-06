@@ -1,12 +1,16 @@
-[gd_scene load_steps=66 format=3 uid="uid://bmx1a0ds3uvvr"]
+[gd_scene load_steps=69 format=3 uid="uid://bmx1a0ds3uvvr"]
 
 [ext_resource type="Script" uid="uid://cuqmbv75ss1ei" path="res://boss.gd" id="1_o1i15"]
+[ext_resource type="PackedScene" uid="uid://buoc1w15rplms" path="res://projectile.tscn" id="2_ef0k6"]
 [ext_resource type="Texture2D" uid="uid://d17wfhxjyt7km" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/death.png" id="2_we8h1"]
 [ext_resource type="Texture2D" uid="uid://cnkceem4o2smh" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/idle2.png" id="3_kvofc"]
+[ext_resource type="PackedScene" uid="uid://ct4sl8psepaad" path="res://enemy.tscn" id="3_ry61v"]
 [ext_resource type="Texture2D" uid="uid://bsn11uq5hox3t" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/attacking.png" id="4_ef0k6"]
 [ext_resource type="Texture2D" uid="uid://bspbeflcwuobb" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/skill1.png" id="5_ry61v"]
 [ext_resource type="Texture2D" uid="uid://p43xrg0fqbvc" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/summon.png" id="6_kvofc"]
-[ext_resource type="Script" uid="uid://cy7vjxui6f2dk" path="res://bullets.gd" id="6_we8h1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvofc"]
+size = Vector2(56.5, 103)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kles1"]
 atlas = ExtResource("2_we8h1")
@@ -164,6 +168,26 @@ region = Rect2(500, 100, 100, 100)
 atlas = ExtResource("4_ef0k6")
 region = Rect2(0, 200, 100, 100)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvofc"]
+atlas = ExtResource("5_ry61v")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdnqb"]
+atlas = ExtResource("5_ry61v")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfce7"]
+atlas = ExtResource("5_ry61v")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blebq"]
+atlas = ExtResource("5_ry61v")
+region = Rect2(400, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdjsq"]
+atlas = ExtResource("5_ry61v")
+region = Rect2(500, 100, 100, 100)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bqc8"]
 atlas = ExtResource("5_ry61v")
 region = Rect2(0, 0, 100, 100)
@@ -195,22 +219,6 @@ region = Rect2(0, 100, 100, 100)
 [sub_resource type="AtlasTexture" id="AtlasTexture_04j31"]
 atlas = ExtResource("5_ry61v")
 region = Rect2(100, 100, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ulob"]
-atlas = ExtResource("5_ry61v")
-region = Rect2(200, 100, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pvfea"]
-atlas = ExtResource("5_ry61v")
-region = Rect2(300, 100, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6dlkp"]
-atlas = ExtResource("5_ry61v")
-region = Rect2(400, 100, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3x3fb"]
-atlas = ExtResource("5_ry61v")
-region = Rect2(500, 100, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ef0k6"]
 atlas = ExtResource("6_kvofc")
@@ -373,6 +381,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_kvofc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdnqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfce7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blebq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdjsq")
+}],
+"loop": true,
+"name": &"return",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_6bqc8")
 }, {
 "duration": 1.0,
@@ -395,18 +423,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_04j31")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2ulob")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pvfea")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6dlkp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3x3fb")
 }],
 "loop": true,
 "name": &"skill",
@@ -439,8 +455,12 @@ height = 74.0
 
 [node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_o1i15")
+projectile_scene = ExtResource("2_ef0k6")
+minion_scene = ExtResource("3_ry61v")
 
 [node name="playercollision" type="CollisionShape2D" parent="."]
+position = Vector2(749.25, 333.5)
+shape = SubResource("RectangleShape2D_kvofc")
 
 [node name="Area2D" type="Area2D" parent="playercollision"]
 position = Vector2(43.04541, -30.863708)
@@ -449,7 +469,7 @@ position = Vector2(43.04541, -30.863708)
 position = Vector2(622.5, 346.5)
 scale = Vector2(2.03, 2.03)
 sprite_frames = SubResource("SpriteFrames_xcyd7")
-animation = &"summon"
+animation = &"normalattack_2"
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -459,5 +479,4 @@ shape = SubResource("CapsuleShape2D_x36vw")
 
 [node name="sfx_boss_death" type="AudioStreamPlayer" parent="."]
 
-[node name="bullets" type="Area2D" parent="."]
-script = ExtResource("6_we8h1")
+[node name="dangerzone" type="Area2D" parent="."]
