@@ -4,6 +4,7 @@ extends Area2D
 @onready var anim_player = $AnimationPlayer
 
 @onready var dice = $"../dice"
+@onready var audio = $AudioStreamPlayer2D
 
 var enabled : bool = false
 
@@ -34,6 +35,7 @@ func _on_card_effect_3() -> void:
 		anim_player.play("lazer")
 		enabled = true
 		DeckManager.add_card("card3", -1)
+		audio.play()
 
 #card effect off
 func _timeout() :

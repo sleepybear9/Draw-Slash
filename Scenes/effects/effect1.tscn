@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dl0kluomnqbb6"]
+[gd_scene load_steps=5 format=3 uid="uid://dl0kluomnqbb6"]
 
 [ext_resource type="Texture2D" uid="uid://db5kwlqdnorrw" path="res://img/effect/effect1.png" id="1_g3yps"]
 [ext_resource type="Script" uid="uid://crcbac2p53ngh" path="res://Scripts/effects/effect1.gd" id="1_sg5ol"]
+[ext_resource type="AudioStream" uid="uid://iwsouj1esbe8" path="res://audio/04_Fire_explosion_04_medium.wav" id="3_ljto1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sg5ol"]
 radius = 29.999996
@@ -38,3 +39,6 @@ shape = SubResource("CapsuleShape2D_sg5ol")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ljto1")

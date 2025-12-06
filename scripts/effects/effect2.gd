@@ -4,6 +4,8 @@ extends Area2D
 @export var damage: int = 10
 @export var max_distance: float = 1500.0
 
+@onready var audio = $AudioStreamPlayer2D
+
 var direction : Vector2 = Vector2(0, 0)
 var start_position : Vector2
 var dmg : int
@@ -13,6 +15,7 @@ func _ready():
 	look_at(global_position + direction)
 	
 	connect("body_entered", Callable(self, "_on_body_entered"))
+	audio.play()
 
 #bullet movement
 func _physics_process(delta: float):

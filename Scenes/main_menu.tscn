@@ -1,3 +1,31 @@
-[gd_scene format=3 uid="uid://dk1mhfnnigpka"]
+[gd_scene load_steps=5 format=3 uid="uid://dk1mhfnnigpka"]
+
+[ext_resource type="Texture2D" uid="uid://5yqovvwmjlnc" path="res://img/main.png" id="1_28flt"]
+[ext_resource type="Texture2D" uid="uid://brtm28tglm5q0" path="res://img/start.png" id="2_48xlc"]
+[ext_resource type="Script" uid="uid://d15rwd2n5aqjs" path="res://Scenes/mainStart.gd" id="3_1ehe0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ehe0"]
+size = Vector2(662, 224)
 
 [node name="MainMenu" type="Node2D"]
+
+[node name="Main" type="Sprite2D" parent="."]
+scale = Vector2(0.95238096, 0.9375)
+texture = ExtResource("1_28flt")
+centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(640, 550)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("3_1ehe0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("2_48xlc")
+region_enabled = true
+region_rect = Rect2(291, 208, 698, 331)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, 12)
+shape = SubResource("RectangleShape2D_1ehe0")
+
+[connection signal="input_event" from="Area2D" to="Area2D" method="_on_input_event"]
