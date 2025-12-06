@@ -17,6 +17,7 @@ var is_attacked = false
 var is_alive = true
 var direction
 var is_swamped = false
+var is_poisoned = false
 
 signal hp_changed (hp)
 
@@ -85,7 +86,7 @@ func _on_turn_finished() -> void:
 	is_turning = false
 	anim.flip_h = is_left
 	speed += 80.0
-
+	
 	#anim.play("Walk")
 	anim.play("Run")
 
@@ -126,6 +127,17 @@ func _on_dot_timeout() -> void:
 		anim.modulate = Color(0.3, 1.0, 0.3) 
 		await get_tree().create_timer(0.35).timeout
 		anim.modulate = Color(1,1,1)
+	elif is_poisoned:
+		print("dot")
+		hp -= 15
+		if hp <= 0:
+			hp = 0
+		#print(hp)
+		if hp == 0: return
+		
+		anim.modulate = Color(0.3, 0.0, 0.3)
+		await get_tree().create_timer(0.35).timeout
+		anim.modulate = Color(1,1,1)
 	hp_changed.emit(hp)
 	
 
@@ -142,6 +154,19 @@ func _on_trap_checker_body_entered(body: Node2D) -> void:
 		anim.modulate = Color(0.3, 1.0, 0.3)
 		await get_tree().create_timer(0.35).timeout
 		anim.modulate = Color(1,1,1)
+	elif body.name == "Pollution":
+		is_poisoned = true
+		if dot_delayer.is_stopped():
+			dot_delayer.start()
+		hp -= 15
+		if hp <= 0:
+			hp = 0
+		print("first", hp)
+		
+	
+		anim.modulate = Color(0.3, 0.0, 0.3)
+		await get_tree().create_timer(0.35).timeout
+		anim.modulate = Color(1,1,1)
 	hp_changed.emit(hp)
 
 
@@ -149,6 +174,10 @@ func _on_trap_checker_body_exited(body: Node2D) -> void:
 	if body.name == "Swamp":
 		is_swamped = false
 		dot_delayer.stop()
+	elif body.name == "Pollution":
+		is_poisoned = false
+		dot_delayer.stop()
+	
 
 
 func _on_button_pressed() -> void:
