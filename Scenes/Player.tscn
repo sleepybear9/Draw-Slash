@@ -1,18 +1,18 @@
 [gd_scene load_steps=87 format=3 uid="uid://cam0r4pj5wn2b"]
 
 [ext_resource type="Script" uid="uid://6yddb0kbakl2" path="res://Scripts/player.gd" id="1_rpqav"]
-[ext_resource type="Texture2D" uid="uid://ji71f3fndi1k" path="res://Sprites/Player/individual_sheets/male_hero-death.png" id="2_52ee3"]
-[ext_resource type="Texture2D" uid="uid://cohxl50d8j7oi" path="res://Sprites/Player/individual_sheets/male_hero-idle.png" id="2_gntrk"]
-[ext_resource type="Texture2D" uid="uid://dicynkkniq36j" path="res://Sprites/Player/individual_sheets/male_hero-hurt.png" id="3_bhhdu"]
-[ext_resource type="Texture2D" uid="uid://ubsvlb70gjk7" path="res://Sprites/Player/individual_sheets/male_hero-run.png" id="3_dewec"]
-[ext_resource type="Texture2D" uid="uid://bwyr77xl0qpnd" path="res://Sprites/Player/individual_sheets/male_hero-walk.png" id="4_dewec"]
-[ext_resource type="Texture2D" uid="uid://cp3bjtx8qutyr" path="res://Sprites/Player/individual_sheets/male_hero-walk_turn.png" id="5_5ixxa"]
-[ext_resource type="Texture2D" uid="uid://s1blxpvoykx3" path="res://Sprites/Player/individual_sheets/male_hero-run_turn.png" id="6_bhhdu"]
+[ext_resource type="Texture2D" uid="uid://ji71f3fndi1k" path="res://Sprites/player/individual_sheets/male_hero-death.png" id="2_52ee3"]
+[ext_resource type="Texture2D" uid="uid://cohxl50d8j7oi" path="res://Sprites/player/individual_sheets/male_hero-idle.png" id="2_gntrk"]
+[ext_resource type="Texture2D" uid="uid://dicynkkniq36j" path="res://Sprites/player/individual_sheets/male_hero-hurt.png" id="3_bhhdu"]
+[ext_resource type="Texture2D" uid="uid://ubsvlb70gjk7" path="res://Sprites/player/individual_sheets/male_hero-run.png" id="3_dewec"]
+[ext_resource type="Texture2D" uid="uid://bwyr77xl0qpnd" path="res://Sprites/player/individual_sheets/male_hero-walk.png" id="4_dewec"]
+[ext_resource type="Texture2D" uid="uid://cp3bjtx8qutyr" path="res://Sprites/player/individual_sheets/male_hero-walk_turn.png" id="5_5ixxa"]
+[ext_resource type="Texture2D" uid="uid://s1blxpvoykx3" path="res://Sprites/player/individual_sheets/male_hero-run_turn.png" id="6_bhhdu"]
 [ext_resource type="PackedScene" uid="uid://dl0kluomnqbb6" path="res://Scenes/effects/effect1.tscn" id="9_1e7my"]
 [ext_resource type="Script" uid="uid://ccq6jbmmjj0yn" path="res://Scripts/effects/effect2_node.gd" id="10_arntx"]
 [ext_resource type="PackedScene" uid="uid://b77qk7karqlff" path="res://Scenes/effects/effect3.tscn" id="11_lslt6"]
 [ext_resource type="PackedScene" uid="uid://cupndvkytjerr" path="res://Scenes/effects/effect4.tscn" id="12_ulo2v"]
-[ext_resource type="PackedScene" uid="uid://b1q1sr8bh43g7" path="res://Scenes/effects/effect5.tscn" id="13_1iu4k"]
+[ext_resource type="PackedScene" uid="uid://dbs5bkq7nhhr0" path="res://Scenes/effects/effect5.tscn" id="13_1e7my"]
 [ext_resource type="Script" uid="uid://dix13i1i8x421" path="res://Scripts/effects/effect6_node.gd" id="14_m0x7a"]
 [ext_resource type="PackedScene" uid="uid://1khr76k2gkl5" path="res://Scenes/dice.tscn" id="15_5v66d"]
 
@@ -598,7 +598,7 @@ position = Vector2(1.6666718, 0)
 
 [node name="card4_effect" parent="Effects" instance=ExtResource("12_ulo2v")]
 
-[node name="card5_effect" parent="Effects" instance=ExtResource("13_1iu4k")]
+[node name="card5_effect" parent="Effects" instance=ExtResource("13_1e7my")]
 
 [node name="card6_effect" type="Node2D" parent="Effects"]
 script = ExtResource("14_m0x7a")
