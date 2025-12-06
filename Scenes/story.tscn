@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgo65iyfnree2"]
+
+[ext_resource type="Script" uid="uid://b2opxxiypgqmr" path="res://Scripts/story.gd" id="1_lh3an"]
+[ext_resource type="Texture2D" uid="uid://bgrrichvllmaa" path="res://img/story/story2.png" id="1_pwpkg"]
+[ext_resource type="Texture2D" uid="uid://djg8ds6nd1soh" path="res://img/story/story1.png" id="2_y0hhn"]
+[ext_resource type="Texture2D" uid="uid://dso0j1hgtuw7n" path="res://img/story/story3.png" id="4_u5g7b"]
+
+[node name="Story" type="Node2D"]
+script = ExtResource("1_lh3an")
+
+[node name="background" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(1.3333333, 0.6617647)
+texture = ExtResource("1_pwpkg")
+centered = false
+
+[node name="scene1" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="scene1"]
+position = Vector2(640, 400)
+scale = Vector2(0.715, 0.802)
+texture = ExtResource("2_y0hhn")
+
+[node name="Label" type="Label" parent="scene1"]
+offset_top = 30.0
+offset_right = 1280.0
+offset_bottom = 130.0
+pivot_offset = Vector2(500, 50)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "Many adventurers fought to defeat the Demon King."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="scene2" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="scene2"]
+position = Vector2(640, 400)
+scale = Vector2(0.71458346, 0.8020682)
+texture = ExtResource("1_pwpkg")
+
+[node name="Label" type="Label" parent="scene2"]
+offset_top = 30.0
+offset_right = 1280.0
+offset_bottom = 143.0
+pivot_offset = Vector2(500, 50)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "But the Demon King was strong,
+and in the end they fell."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="scene3" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="scene3"]
+position = Vector2(640, 400)
+scale = Vector2(0.71458346, 0.8020682)
+texture = ExtResource("4_u5g7b")
+
+[node name="Label" type="Label" parent="scene3"]
+offset_top = 30.0
+offset_right = 1280.0
+offset_bottom = 143.0
+pivot_offset = Vector2(500, 50)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "Their powers died and turned into cards.
+Let's use the cards and defeat the Demon King!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

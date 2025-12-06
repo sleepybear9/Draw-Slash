@@ -1,6 +1,6 @@
 extends TextureButton
 
-const NEXT_SCENE_PATH = "res://Scenes/main.tscn"
+const NEXT_SCENE_PATH = "res://Scenes/story.tscn"
 
 #func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	#if event is InputEventMouseButton:

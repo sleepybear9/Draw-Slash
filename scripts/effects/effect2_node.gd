@@ -8,7 +8,7 @@ var max_count = 3
 var count = 1
 
 
-#card effect(make bullet)
+#card effect(determine the number of bullets)
 func _on_card_effect_2() :
 	var new_effect2 = effect2_TEMPLATE.instantiate()
 	max_count = dice.roulette()
@@ -21,6 +21,7 @@ func _on_card_effect_2() :
 	
 	DeckManager.add_card("card2", -1)
 
+#make bullets
 func _on_timer_timeout() -> void:
 	if count == max_count: 
 		timer.stop()
