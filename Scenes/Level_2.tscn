@@ -18,6 +18,7 @@ script = ExtResource("1_vgr4u")
 
 [node name="Swamp" type="TileMapLayer" parent="Chunk_1"]
 z_index = -1
+position = Vector2(-27.5, 0)
 tile_set = ExtResource("2_apq5t")
 
 [node name="Swamp_detail" type="TileMapLayer" parent="Chunk_1"]

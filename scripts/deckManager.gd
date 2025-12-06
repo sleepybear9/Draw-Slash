@@ -8,8 +8,14 @@ func add_card(card_id: String, amount: int = 1):
 		card_inventory[card_id] += amount
 	else:
 		card_inventory[card_id] = amount
+<<<<<<< HEAD
 
 	print(card_id, ": ", card_inventory[card_id], "개")
+=======
+		
+	print(card_id, ": ", card_inventory[card_id], "개")
+	print("카드 획득! ", card_id, ": ", card_inventory[card_id], "개")
+>>>>>>> 12f38fe7df26e347765ffafcddc6b559b3b56b41
 
 #amount of ids
 func count_id() -> int :
