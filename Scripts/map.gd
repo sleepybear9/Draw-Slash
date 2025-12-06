@@ -4,6 +4,7 @@ extends Node2D
 @onready var player = $"../../Player"
 
 func _on_map_checker_area_exited(area: Area2D) -> void:
+	
 	var chunk_center = global_position + chunk_size / 2
 	var diff = player.global_position - chunk_center
 
