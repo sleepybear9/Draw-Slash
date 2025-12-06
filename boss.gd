@@ -129,53 +129,56 @@ func _pattern_scythe():
 
 # --- [패턴 3: 필살기] ---
 func _pattern_ultimate():
-	#print("패턴 3: 필살기 준비")
-	is_invincible = true # 시전 중 무적 (선택사항)
-	anim.play("skill") # 사라지는 모션
+	is_invincible = true 
 	
-	# 1. 보스 숨기기
-	await anim.animation_finished
-	visible = false #숨겨도 collision 유효할수 있음
+	if anim.sprite_frames.has_animation("skill"):
+		anim.play("skill")
+		await anim.animation_finished
 	
-	#child1.monitorable = false
-	#child1.monitoring = false 이거쓰는거 권장
+	visible = false 
+	$CollisionShape2D.set_deferred("disabled", true) 
 	
+	print("!!! 필살기 경고 !!!")
+	
+	# [추가된 부분 1] 안전지대 활성화 및 위치 랜덤 설정
+	if safe_zone_indicator:
+		safe_zone_indicator.visible = true # 눈 켜기
+		
+		# 보스 주변 랜덤한 위치에 안전지대 생성 (너무 멀지 않게 -200 ~ 200 범위)
+		var random_pos = Vector2(randf_range(-200, 200), randf_range(-200, 200))
+		safe_zone_indicator.position = random_pos 
+		# 주의: safe_zone_indicator가 보스의 자식이면 position은 보스 기준 상대 좌표입니다.
+		# 만약 safe_zone_indicator가 보스 밖에 있다면 global_position을 써야 합니다.
+		# 지금 구조상 보스 자식이니 그냥 position 쓰시면 됩니다.
+
+	# 5초 카운트다운 (플레이어가 안전지대로 달리는 시간)
 	await get_tree().create_timer(5.0).timeout
 	
-	# 3. 광역 데미지 판정
-	# 안전지대(SafeZone) 안에 플레이어가 없으면 데미지
+	# 데미지 판정
 	if player:
-		var dist_to_safe = player.global_position.distance_to(safe_zone_indicator.global_position)
-		if dist_to_safe > 100: # 안전지대 반경 100 밖이라면
-			player.take_damage(9999) # 즉사급 데미지
-			print("DANGER!!!")
+		# 거리 계산
+		var dist = player.global_position.distance_to(safe_zone_indicator.global_position)
+		
+		# [중요] 스프라이트 크기에 맞춰서 이 숫자(150)를 조절하세요.
+		if dist > 150: 
+			if player.has_method("take_damage"):
+				player.take_damage(9999) # 즉사
+			print("DANGER!!! (사망)")
 		else:
-			print("SAFE")
-			
-	# 4. 보스 재등장
+			print("SAFE (생존)")
+	
+	# [추가된 부분 2] 안전지대 다시 숨기기
+	if safe_zone_indicator:
+		safe_zone_indicator.visible = false
+
+	# 보스 복귀 로직
 	visible = true
-	#monitorable = true
-	#monitoring = true 
+	$CollisionShape2D.set_deferred("disabled", false)
 	is_invincible = false
-	anim.play("return") # 등장 모션, skill 애니메이션 공유
-	await anim.animation_finished
-	is_doing_pattern = false
-
-# --- [데미지 처리] ---
-func take_damage(amount):
-	if is_invincible:
-		print("Immune")
-		return # 데미지 무효화
-		
-	hp -= amount
-	print("보스 HP: ", hp)
-	if hp <= 0:
-		#여기에 사망 애니메이션 명령, 애니메이션 끝나고 die 호출
-		is_invincible = true
-		$AnimationPlayer.play("death")
-		await $AnimationPlayer.animation_finished
-		die()
-		
-
-func die():
-	queue_free()
+	
+	if anim.sprite_frames.has_animation("return"):
+		anim.play("return")
+		await anim.animation_finished
+	elif anim.sprite_frames.has_animation("skill"):
+		anim.play("skill") 
+		await anim.animation_finished
