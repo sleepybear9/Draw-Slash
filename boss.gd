@@ -2,178 +2,154 @@ extends CharacterBody2D
 
 # [설정 변수]
 @export var max_hp: int = 5000
-@export var pattern_cooldown: float = 10.0 # 패턴 사이 간격 10초
+@export var pattern_cooldown: float = 3.0
 
 # [필요한 씬들 연결]
-@export var projectile_scene: PackedScene # 낫 투사체 씬(.tscn), 찾는중
-@export var minion_scene: PackedScene     # 소환할 몬스터 씬(.tscn), 기존 몬스터 소환
+@export var projectile_scene: PackedScene 
 @export_group("Summon Pattern")
-@export var enemy: PackedScene 
-@export var monster_range: PackedScene
+@export var enemy: PackedScene          
+@export var monster_range: PackedScene  
+
 # [노드 연결]
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-@onready var dangerzone: Area2D = $dangerzone # 필살기 전체 범위
-@onready var safe_zone_indicator: Node2D = $SafeZonePos # 안전지대 위치 표시용 노드
+@onready var safe_zone_indicator: Node2D = $SafeZonePos 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+# 붉은 화면 노드 (경로가 맞는지 꼭 확인하세요! CanvasLayer 밑에 RedScreen이 있어야 함)
+@onready var red_screen: ColorRect = $CanvasLayer/redscreen 
 
+# [상태 변수]
 var hp: int
 var player: Node2D
-var is_invincible: bool = false # 무적 상태 확인
-var active_minions: int = 0     # 현재 살아있는 소환수 수
-var is_doing_pattern: bool = false # 현재 패턴 사용 중인지
+var is_invincible: bool = false 
+var active_minions: int = 0      
+var is_doing_pattern: bool = false
+var is_dead: bool = false
 
 func _ready():
 	hp = max_hp
-	player = get_tree().get_root().find_child("Player", true, false)
-	dangerzone.monitoring = false # 필살기 범위 꺼두기
 	
-	# 게임 시작 후 3초 뒤 첫 패턴 시작
+	player = get_tree().get_first_node_in_group("player")
+	if not player:
+		player = get_tree().get_root().find_child("Player", true, false)
+	
+	if safe_zone_indicator: safe_zone_indicator.visible = false
+	if red_screen: red_screen.visible = false
+
+	print("보스 등장. 3초 후 패턴 시작.")
 	await get_tree().create_timer(3.0).timeout
 	start_pattern_loop()
 
 func _physics_process(_delta):
-	# 패턴 중이 아닐 때만 플레이어를 바라보거나 이동하는 로직 추가 가능
 	pass
 
 # --- [메인 패턴 로직] ---
 func start_pattern_loop():
-	while hp > 0:
+	# 죽지 않았고 HP가 남았을 때 계속 반복
+	while hp > 0 and not is_dead:
 		if not is_doing_pattern:
-			choose_random_pattern()
-		# 10초 쿨타임 대기 (패턴이 끝난 후가 아니라, 시작 주기라면 여기서 제어)
-		await get_tree().create_timer(pattern_cooldown).timeout
+			await choose_random_pattern()
+			
+			if not is_dead:
+				await get_tree().create_timer(pattern_cooldown).timeout
+		else:
+			await get_tree().process_frame
 
 func choose_random_pattern():
-	if is_doing_pattern or hp <= 0: return
+	if is_doing_pattern or is_dead: return
 	
 	is_doing_pattern = true
-	var random_pick = randi() % 3 + 1 # 1, 2, 3 중 하나 선택
+	var random_pick = randi() % 3 + 1 
+	print("선택된 패턴: ", random_pick)
 	
 	match random_pick:
-		1: _pattern_summon()
-		2: _pattern_scythe()
-		3: _pattern_ultimate()
-
-# --- [패턴 1: 몬스터 소환] ---, 소환물들은 모듈레이터값 따로
-func _pattern_summon():
-	#print("패턴 1: 쫄병 5마리 무작위 소환")
-	anim.play("summon") # 소환 모션 재생
-	
-	# 보스 무적 설정
-	is_invincible = true
-	modulate = Color(0.5, 0.5, 1, 0.8) # 무적 표시 (푸르스름하고 약간 투명하게)
-	
-	# 총 5마리 소환 루프
-	var total_spawn_count = 5
-	
-	for i in range(total_spawn_count):
-		# 1. 근거리 vs 원거리 랜덤 선택 (50% 확률)
-		var spawn_scene: PackedScene
-		if randi() % 2 == 0:
-			spawn_scene = enemy # 근거리
-		else:
-			spawn_scene = monster_range # 원거리
-			
-		# 2. 몬스터 생성
-		if spawn_scene:
-			var minion = spawn_scene.instantiate()
-			
-			# 3. 위치 설정
-			var random_offset = Vector2(randf_range(-150, 150), randf_range(-150, 150))
-			minion.global_position = global_position + random_offset
-			
-			# 4. 씬 트리에 추가 (보스의 자식이 아니라, 맵(부모)에 추가해야 보스가 움직여도 따라오지 않음)
-			get_parent().add_child(minion)
-			
-			
-			# 5. 사망 감지 연결
-			minion.tree_exited.connect(_on_minion_died)
-			
-			active_minions += 1
+		1: await _pattern_summon()
+		2: await _pattern_fire_projectile()
+		3: await _pattern_ultimate()
 	
 	is_doing_pattern = false 
 
+# --- [패턴 1] ---
+func _pattern_summon():
+	if anim.sprite_frames.has_animation("summon"):
+		anim.play("summon")
+		await anim.animation_finished 
+	
+	is_invincible = true
+	modulate = Color(0.5, 0.5, 1, 0.8) 
+	
+	var total_spawn_count = 5
+	for i in range(total_spawn_count):
+		var spawn_scene: PackedScene
+		if randi() % 2 == 0: spawn_scene = enemy 
+		else: spawn_scene = monster_range 
+			
+		if spawn_scene:
+			var minion = spawn_scene.instantiate()
+			var random_offset = Vector2(randf_range(-150, 150), randf_range(-150, 150))
+			minion.global_position = global_position + random_offset
+			get_parent().add_child(minion)
+			minion.tree_exited.connect(_on_minion_died)
+			active_minions += 1
 
-# 쫄병이 죽었을 때 호출되는 함수
 func _on_minion_died():
 	active_minions -= 1
-	print("남은 쫄병 수: ", active_minions)
-	
-	if active_minions <= 0:
-		# 모든 쫄병 사망 시 무적 해제 및 데미지
-		_break_invincibility()
+	if active_minions <= 0: _break_invincibility()
 
-# 무적 해제 처리 (코드가 길어져서 분리함)
 func _break_invincibility():
-	is_invincible = false
-	modulate = Color(1, 1, 1, 1) # 원래 색으로 복구
+	if is_invincible:
+		is_invincible = false
+		modulate = Color(1, 1, 1, 1)
+		take_damage(1000)
 
-	take_damage(1000)
-
-
-# --- [패턴 2: 낫 휘두르기] ---
-func _pattern_scythe():
-	#print("패턴 2: 낫 던지기")
-	anim.play("normalattack_2")
+# --- [패턴 2] ---
+func _pattern_fire_projectile():
+	if anim.sprite_frames.has_animation("normalattack_2"):
+		anim.play("normalattack_2")
+		await get_tree().create_timer(0.3).timeout
 	
-	if player:
-		var scythe = projectile_scene.instantiate()
-		scythe.global_position = global_position
-		# 플레이어 방향 계산
+	if player and projectile_scene:
+		var projectile = projectile_scene.instantiate()
+		projectile.global_position = global_position
 		var dir = (player.global_position - global_position).normalized()
-		scythe.direction = dir
-		scythe.rotation = dir.angle() # 낫이 날아가는 방향 봄
-		get_parent().add_child(scythe)
+		
+		# 투사체 스크립트에 direction이 있는지 확인!
+		if "direction" in projectile: projectile.direction = dir 
+		# 혹은 setup 함수가 있다면: projectile.setup(dir, 10)
+		
+		projectile.rotation = dir.angle()
+		get_parent().add_child(projectile)
 	
-	await anim.animation_finished
-	is_doing_pattern = false
+	if anim.sprite_frames.has_animation("normalattack_2"):
+		await anim.animation_finished
 
-# --- [패턴 3: 필살기] ---
+# --- [패턴 3] ---
 func _pattern_ultimate():
 	is_invincible = true 
-	
 	if anim.sprite_frames.has_animation("skill"):
 		anim.play("skill")
 		await anim.animation_finished
 	
 	visible = false 
-	$CollisionShape2D.set_deferred("disabled", true) 
+	collision_shape.set_deferred("disabled", true) 
+	print("!!! 전멸기 준비 !!!")
 	
-	print("!!! 필살기 경고 !!!")
-	
-	# [추가된 부분 1] 안전지대 활성화 및 위치 랜덤 설정
+	if red_screen: red_screen.visible = true
 	if safe_zone_indicator:
-		safe_zone_indicator.visible = true # 눈 켜기
-		
-		# 보스 주변 랜덤한 위치에 안전지대 생성 (너무 멀지 않게 -200 ~ 200 범위)
-		var random_pos = Vector2(randf_range(-200, 200), randf_range(-200, 200))
-		safe_zone_indicator.position = random_pos 
-		# 주의: safe_zone_indicator가 보스의 자식이면 position은 보스 기준 상대 좌표입니다.
-		# 만약 safe_zone_indicator가 보스 밖에 있다면 global_position을 써야 합니다.
-		# 지금 구조상 보스 자식이니 그냥 position 쓰시면 됩니다.
+		safe_zone_indicator.visible = true
+		safe_zone_indicator.position = Vector2(randf_range(-200, 200), randf_range(-200, 200))
 
-	# 5초 카운트다운 (플레이어가 안전지대로 달리는 시간)
 	await get_tree().create_timer(5.0).timeout
 	
-	# 데미지 판정
-	if player:
-		# 거리 계산
+	if player and safe_zone_indicator:
 		var dist = player.global_position.distance_to(safe_zone_indicator.global_position)
-		
-		# [중요] 스프라이트 크기에 맞춰서 이 숫자(150)를 조절하세요.
 		if dist > 150: 
-			if player.has_method("take_damage"):
-				player.take_damage(9999) # 즉사
-			print("DANGER!!! (사망)")
-		else:
-			print("SAFE (생존)")
+			if player.has_method("take_damage"): player.take_damage(9999) 
 	
-	# [추가된 부분 2] 안전지대 다시 숨기기
-	if safe_zone_indicator:
-		safe_zone_indicator.visible = false
+	if safe_zone_indicator: safe_zone_indicator.visible = false
+	if red_screen: red_screen.visible = false 
 
-	# 보스 복귀 로직
 	visible = true
-	$CollisionShape2D.set_deferred("disabled", false)
+	collision_shape.set_deferred("disabled", false)
 	is_invincible = false
 	
 	if anim.sprite_frames.has_animation("return"):
@@ -182,3 +158,23 @@ func _pattern_ultimate():
 	elif anim.sprite_frames.has_animation("skill"):
 		anim.play("skill") 
 		await anim.animation_finished
+
+# --- [피격] ---
+func take_damage(amount):
+	if is_invincible or is_dead: return
+	hp -= amount
+	print("보스 HP: ", hp)
+	
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.RED, 0.1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+	
+	if hp <= 0: die()
+
+func die():
+	is_dead = true
+	is_doing_pattern = false
+	if anim.sprite_frames.has_animation("death"):
+		anim.play("death")
+		await anim.animation_finished
+	queue_free()

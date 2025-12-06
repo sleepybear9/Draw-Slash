@@ -4,11 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://buoc1w15rplms" path="res://projectile.tscn" id="2_ef0k6"]
 [ext_resource type="Texture2D" uid="uid://d17wfhxjyt7km" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/death.png" id="2_we8h1"]
 [ext_resource type="Texture2D" uid="uid://cnkceem4o2smh" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/idle2.png" id="3_kvofc"]
-[ext_resource type="PackedScene" uid="uid://ct4sl8psepaad" path="res://enemy.tscn" id="3_ry61v"]
 [ext_resource type="Texture2D" uid="uid://bsn11uq5hox3t" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/attacking.png" id="4_ef0k6"]
 [ext_resource type="Texture2D" uid="uid://bspbeflcwuobb" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/skill1.png" id="5_ry61v"]
 [ext_resource type="Texture2D" uid="uid://p43xrg0fqbvc" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/summon.png" id="6_kvofc"]
 [ext_resource type="Texture2D" uid="uid://ciwx4lyxupa1k" path="res://assets/sprites/safezone.png" id="9_ry61v"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ef0k6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvofc"]
 size = Vector2(56.5, 103)
@@ -456,10 +457,10 @@ height = 74.0
 
 [node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_o1i15")
-max_hp = null
-pattern_cooldown = null
 projectile_scene = ExtResource("2_ef0k6")
-minion_scene = ExtResource("3_ry61v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ef0k6")
 
 [node name="playercollision" type="CollisionShape2D" parent="."]
 position = Vector2(749.25, 333.5)
@@ -484,6 +485,19 @@ shape = SubResource("CapsuleShape2D_x36vw")
 
 [node name="SafeZonePos" type="Node2D" parent="."]
 visible = false
+z_index = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="SafeZonePos"]
 texture = ExtResource("9_ry61v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="redscreen" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.9647059, 0.2784314, 0.34509805, 0.39215687)
