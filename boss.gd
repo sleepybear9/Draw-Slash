@@ -5,8 +5,8 @@ extends CharacterBody2D
 @export var pattern_cooldown: float = 10.0 # 패턴 사이 간격 10초
 
 # [필요한 씬들 연결]
-@export var projectile_scene: PackedScene # 낫 투사체 씬(.tscn) 넣기
-@export var minion_scene: PackedScene     # 소환할 몬스터 씬(.tscn) 넣기
+@export var projectile_scene: PackedScene # 낫 투사체 씬(.tscn), 찾는중
+@export var minion_scene: PackedScene     # 소환할 몬스터 씬(.tscn), 기존 몬스터 소환
 @export_group("Summon Pattern")
 @export var minion_melee_scene: PackedScene 
 @export var minion_range_scene: PackedScene
@@ -30,7 +30,7 @@ func _ready():
 	await get_tree().create_timer(3.0).timeout
 	start_pattern_loop()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# 패턴 중이 아닐 때만 플레이어를 바라보거나 이동하는 로직 추가 가능
 	pass
 
@@ -53,10 +53,10 @@ func choose_random_pattern():
 		2: _pattern_scythe()
 		3: _pattern_ultimate()
 
-# --- [패턴 1: 몬스터 소환] ---
+# --- [패턴 1: 몬스터 소환] ---, 소환물들은 모듈레이터값 따로
 func _pattern_summon():
 	print("패턴 1: 쫄병 5마리 무작위 소환")
-	anim.play("summon_cast") # 소환 모션 재생
+	anim.play("summon") # 소환 모션 재생
 	
 	# 보스 무적 설정
 	is_invincible = true
@@ -77,17 +77,15 @@ func _pattern_summon():
 		if spawn_scene:
 			var minion = spawn_scene.instantiate()
 			
-			# 3. 위치 설정 (보스 주변 -100 ~ +100 범위 내 랜덤)
-			# 겹치지 않게 범위를 좀 넓게 잡으셔도 됩니다.
+			# 3. 위치 설정
 			var random_offset = Vector2(randf_range(-150, 150), randf_range(-150, 150))
 			minion.global_position = global_position + random_offset
 			
 			# 4. 씬 트리에 추가 (보스의 자식이 아니라, 맵(부모)에 추가해야 보스가 움직여도 따라오지 않음)
 			get_parent().add_child(minion)
-			# 혹은 get_tree().current_scene.add_child(minion)
+			
 			
 			# 5. 사망 감지 연결
-			# 쫄병이 사라질 때(queue_free) 발생하는 신호를 연결합니다.
 			minion.tree_exited.connect(_on_minion_died)
 			
 			active_minions += 1
@@ -108,7 +106,7 @@ func _on_minion_died():
 func _break_invincibility():
 	is_invincible = false
 	modulate = Color(1, 1, 1, 1) # 원래 색으로 복구
-	print("모든 쫄병 사망! 보스에게 1000 데미지!")
+	#print("모든 쫄병 사망! 보스에게 1000 데미지!")
 	
 	# 데미지 함수 호출 (무적이 풀린 상태에서 호출해야 함)
 	take_damage(1000)
@@ -117,7 +115,7 @@ func _break_invincibility():
 # --- [패턴 2: 낫 휘두르기] ---
 func _pattern_scythe():
 	#print("패턴 2: 낫 던지기")
-	anim.play("attack_scythe")
+	anim.play("normalattack_2")
 	
 	# 애니메이션의 특정 프레임(던지는 순간)에 맞추고 싶다면 await 사용
 	# await anim.frame_changed # 혹은 타이머 사용
@@ -138,11 +136,14 @@ func _pattern_scythe():
 func _pattern_ultimate():
 	#print("패턴 3: 필살기 준비")
 	is_invincible = true # 시전 중 무적 (선택사항)
-	anim.play("vanish") # 사라지는 모션
+	anim.play("skill") # 사라지는 모션
 	
 	# 1. 보스 숨기기
 	await anim.animation_finished
-	visible = false 
+	visible = false #숨겨도 collision 유효할수 있음
+	
+	#child1.monitorable = false
+	#child1.monitoring = false 이거쓰는거 권장
 	
 	# 2. 경고 표시 (5초간)
 	# 쉐이더나 빨간 장판(Sprite)을 맵 전체에 깔고, 안전지대만 비워두는 연출 필요
@@ -163,8 +164,10 @@ func _pattern_ultimate():
 			
 	# 4. 보스 재등장
 	visible = true
+	#monitorable = true
+	#monitoring = true 
 	is_invincible = false
-	anim.play("appear") # 등장 모션
+	anim.play("return") # 등장 모션, skill 애니메이션 공유
 	await anim.animation_finished
 	is_doing_pattern = false
 
@@ -177,7 +180,12 @@ func take_damage(amount):
 	hp -= amount
 	print("보스 HP: ", hp)
 	if hp <= 0:
+		#여기에 사망 애니메이션 명령, 애니메이션 끝나고 die 호출
+		is_invincible = true
+		$AnimationPlayer.play("death")
+		await $AnimationPlayer.animation_finished
 		die()
+		
 
 func die():
 	queue_free()
