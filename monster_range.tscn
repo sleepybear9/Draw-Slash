@@ -1,10 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://bdnolrdoc0rgt"]
+[gd_scene load_steps=34 format=3 uid="uid://bdnolrdoc0rgt"]
 
 [ext_resource type="Script" uid="uid://c8jnmmj8i7u7u" path="res://monster_range.gd" id="1_uuq1n"]
 [ext_resource type="Texture2D" uid="uid://dqbr4255512jk" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Small/Zombie_Small_Down_walk-Sheet6.png" id="1_y36fb"]
 [ext_resource type="Texture2D" uid="uid://bv73doiiy8f2f" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Small/Zombie_Small_Side-left_Walk-Sheet6.png" id="2_uuq1n"]
 [ext_resource type="Texture2D" uid="uid://6aa7n4gl4u53" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Small/Zombie_Small_Side_Walk-Sheet6.png" id="3_rafq8"]
 [ext_resource type="Texture2D" uid="uid://c7uqobwagjb4p" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Small/Zombie_Small_Up_Walk-Sheet6.png" id="4_uknbd"]
+[ext_resource type="PackedScene" uid="uid://bkaxq4chyf5ng" path="res://projectile_range.tscn" id="6_rafq8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xk1t"]
 radius = 14.0
@@ -201,7 +202,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cr0h2"]
-radius = 15.0
+radius = 37.215588
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_uuq1n")
@@ -213,7 +214,7 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(178, 104)
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_iemsn")
 animation = &"walk_right"
 metadata/_edit_group_ = true
@@ -228,3 +229,6 @@ metadata/_edit_group_ = true
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="projectile_range" parent="." instance=ExtResource("6_rafq8")]
+position = Vector2(-453, -213)

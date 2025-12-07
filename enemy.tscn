@@ -478,7 +478,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o707m")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down_1",
 "speed": 5.0
 }, {
@@ -510,7 +510,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8ehh3")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down_2",
 "speed": 5.0
 }, {
@@ -536,7 +536,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q6aid")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_left_1",
 "speed": 5.0
 }, {
@@ -568,7 +568,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bx15q")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_left_2",
 "speed": 5.0
 }, {
@@ -594,7 +594,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qftu3")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right_1",
 "speed": 5.0
 }, {
@@ -626,7 +626,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hojbl")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right_2",
 "speed": 5.0
 }, {
@@ -652,7 +652,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3d3oh")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_up_1",
 "speed": 5.0
 }, {
@@ -684,12 +684,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pf1hb")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_up_2",
 "speed": 5.0
 }, {
 "frames": [],
-"loop": true,
+"loop": false,
 "name": &"death_down",
 "speed": 5.0
 }, {
@@ -712,7 +712,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2jwx8")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_left",
 "speed": 5.0
 }, {
@@ -735,12 +735,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xtldk")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_right",
 "speed": 5.0
 }, {
 "frames": [],
-"loop": true,
+"loop": false,
 "name": &"death_up",
 "speed": 5.0
 }, {
@@ -865,8 +865,6 @@ animations = [{
 position = Vector2(473, 269)
 scale = Vector2(4, 4)
 script = ExtResource("1_7k104")
-speed = 71.0
-attack_cooldown = 0.9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4gyqm")
@@ -878,8 +876,7 @@ shape = SubResource("CircleShape2D_hgro5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bqrkw")
-animation = &"walk_down"
-frame = 2
+animation = &"walk_up"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
