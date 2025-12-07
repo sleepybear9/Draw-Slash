@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var attack_cooldown: float = 1.0
 @export var damage: int = 15
 @export var max_hp: int = 40
+@export var hitbox_offset: float = 30.0
 
 var hp: int
 var player: Node2D
@@ -134,6 +135,21 @@ func _update_direction(vec: Vector2):
 		current_dir = "right" if vec.x > 0 else "left"
 	else:
 		current_dir = "down" if vec.y > 0 else "up"
+		
+	if attack_area:
+		match current_dir:
+			"right":
+				attack_area.position = Vector2(hitbox_offset, 0)
+				attack_area.rotation_degrees = 0 # (선택) 모양이 길쭉하면 회전도 필요
+			"left":
+				attack_area.position = Vector2(-hitbox_offset, 0)
+				attack_area.rotation_degrees = 180
+			"down":
+				attack_area.position = Vector2(0, hitbox_offset)
+				attack_area.rotation_degrees = 90
+			"up":
+				attack_area.position = Vector2(0, -hitbox_offset)
+				attack_area.rotation_degrees = 270
 
 func take_damage(amount: int):
 	if is_dead: return

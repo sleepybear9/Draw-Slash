@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://8odpj3hedov4"]
+[gd_scene load_steps=10 format=3 uid="uid://8odpj3hedov4"]
 
 [ext_resource type="PackedScene" uid="uid://ogq3ay3a8xtl" path="res://Scenes/Level_1.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cam0r4pj5wn2b" path="res://Scenes/Player.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://4ejlh0qdaqm3" path="res://Scenes/HUD.tscn" id="3_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bmx1a0ds3uvvr" path="res://boss.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://ct4sl8psepaad" path="res://enemy.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://bw344r3xx6ssv" path="res://monster_big_melee.tscn" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://laj5rbycw870" path="res://monster_melee_scavenger.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://bdnolrdoc0rgt" path="res://monster_range.tscn" id="8_344ge"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kry3j"]
 vertices = PackedVector2Array(-1643.0703, -1373.5938, -1646.5938, -1375.1172, 1280.1797, -1270.3438, -1613.1094, 1316.8516, 1329.7969, 1273.1406)
@@ -57,6 +60,21 @@ position = Vector2(-62, -407)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_kry3j")
+
+[node name="monster_big_melee" parent="." instance=ExtResource("6_21xkr")]
+position = Vector2(196, -301)
+
+[node name="monster_melee_scavenger" parent="." instance=ExtResource("7_6bp64")]
+position = Vector2(-111, -452)
+speed = 80.0
+attack_distance = 80.0
+dash_speed = 300.0
+attack_cooldown = 2.0
+damage = 15
+max_hp = 45
+
+[node name="monster_range" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(-399, -502)
 
 [connection signal="hp_changed" from="Y_Sort/Player" to="CanvasLayer/Hud" method="hp_change"]
 [connection signal="pressed" from="CanvasLayer/Button" to="Y_Sort/Player" method="_on_button_pressed"]

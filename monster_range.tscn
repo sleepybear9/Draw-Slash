@@ -219,9 +219,9 @@ sprite_frames = SubResource("SpriteFrames_iemsn")
 animation = &"walk_right"
 metadata/_edit_group_ = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="attackrange" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackrange"]
 position = Vector2(177, 104)
 shape = SubResource("CircleShape2D_cr0h2")
 metadata/_edit_group_ = true

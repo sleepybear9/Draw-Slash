@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # [설정] 유저가 요청한 값 적용
 @export var speed: float = 70
-@export var attack_distance: float = 120   # 원거리니까 사거리를 좀 늘렸습니다 (80 -> 120)
+@export var attack_distance: float = 120   # 원거리
 @export var attack_cooldown: float = 1.4
 @export var damage: int = 15
 @export var max_hp: int = 40
@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var shoot_delay: float = 0.4 
 
 # [추가] 발사할 투사체 씬 (인스펙터에서 넣으세요)
-@export var projectile_scene: PackedScene 
+@export var projectile_range: PackedScene 
 
 var hp: int
 var player: Node2D
@@ -129,11 +129,11 @@ func _try_shoot():
 
 # 투사체 생성 로직
 func _spawn_projectile(direction: Vector2):
-	if not projectile_scene:
+	if not projectile_range:
 		print("오류: 인스펙터에 Projectile Scene이 비어있습니다!")
 		return
 
-	var bullet = projectile_scene.instantiate()
+	var bullet = projectile_range.instantiate()
 	bullet.global_position = global_position
 	
 	# 투사체 스크립트에 setup 함수가 있어야 합니다!

@@ -3,9 +3,10 @@ extends CharacterBody2D
 # [설정 변수]
 @export var max_hp: int = 5000
 @export var pattern_cooldown: float = 3.0
+@export var damage: int = 20 # 보스 공격력
 
 # [필요한 씬들 연결]
-@export var projectile_scene: PackedScene 
+@export var projectile_boss: PackedScene 
 @export_group("Summon Pattern")
 @export var enemy: PackedScene          
 @export var monster_range: PackedScene  
@@ -14,14 +15,17 @@ extends CharacterBody2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var safe_zone_indicator: Node2D = $SafeZonePos 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-# 붉은 화면 노드 (경로가 맞는지 꼭 확인하세요! CanvasLayer 밑에 RedScreen이 있어야 함)
 @onready var red_screen: ColorRect = $CanvasLayer/redscreen 
+
+# [추가] 공격 판정 노드 (이름 꼭 확인하세요!)
+@onready var hit_area: Area2D = $Area2D 
+@onready var hit_shape: CollisionShape2D = $Area2D/CollisionShape2D
 
 # [상태 변수]
 var hp: int
 var player: Node2D
 var is_invincible: bool = false 
-var active_minions: int = 0      
+var active_minions: int = 0       
 var is_doing_pattern: bool = false
 var is_dead: bool = false
 
@@ -35,21 +39,64 @@ func _ready():
 	if safe_zone_indicator: safe_zone_indicator.visible = false
 	if red_screen: red_screen.visible = false
 
+	# [추가] 시그널 연결 (공격 판정에 닿으면 실행)
+	if hit_area:
+		if not hit_area.body_entered.is_connected(_on_hitbox_entered):
+			hit_area.body_entered.connect(_on_hitbox_entered)
+		# 시작할 때 히트박스 끄기
+		hit_shape.disabled = true
+
 	print("보스 등장. 3초 후 패턴 시작.")
 	await get_tree().create_timer(3.0).timeout
 	start_pattern_loop()
+	
 
 func _physics_process(_delta):
-	pass
+	# [핵심] 매 프레임마다 히트박스 위치 업데이트
+	_update_hitbox_position()
+
+# --- [핵심 기능] 프레임에 따라 히트박스 이동 ---
+func _update_hitbox_position():
+	# 만약 지금 'normalattack_2' 애니메이션이 재생 중이라면?
+	if anim.animation == "normalattack_2" and anim.is_playing():
+		hit_shape.disabled = false # 공격 중이니 히트박스 켜기
+		
+		# 현재 몇 번째 프레임인지 확인 (0부터 시작)
+		var current_frame = anim.frame
+		
+		# === [여기 숫자를 에디터 보면서 수정하세요] ===
+		# 낫의 위치에 맞춰 좌표(Vector2)를 적어줍니다.
+		match current_frame:
+			0: hit_area.position = Vector2(20, -50)  # 낫을 들어올릴 때
+			1: hit_area.position = Vector2(50, -40)  # 휘두르기 시작
+			2: hit_area.position = Vector2(80, 0)    # 정면 타격
+			3: hit_area.position = Vector2(50, 40)   # 아래로 내려감
+			4: hit_area.position = Vector2(20, 50)   # 마무리
+			_: pass # 나머지 프레임은 유지
+			
+	else:
+		# 공격 모션이 아니면 히트박스 끄기
+		hit_shape.disabled = true
+
+
+# --- 히트박스 충돌 처리 ---
+func _on_hitbox_entered(body: Node2D):
+	if body.is_in_group("player") or body.name == "Player":
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+			print("플레이어 타격 성공!")
+
 
 # --- [메인 패턴 로직] ---
 func start_pattern_loop():
-	# 죽지 않았고 HP가 남았을 때 계속 반복
 	while hp > 0 and not is_dead:
 		if not is_doing_pattern:
 			await choose_random_pattern()
 			
 			if not is_dead:
+				# 패턴 끝나면 Idle 재생
+				if anim.sprite_frames.has_animation("idle"):
+					anim.play("idle")
 				await get_tree().create_timer(pattern_cooldown).timeout
 		else:
 			await get_tree().process_frame
@@ -68,7 +115,7 @@ func choose_random_pattern():
 	
 	is_doing_pattern = false 
 
-# --- [패턴 1] ---
+# --- [패턴 1] 소환 ---
 func _pattern_summon():
 	if anim.sprite_frames.has_animation("summon"):
 		anim.play("summon")
@@ -101,28 +148,27 @@ func _break_invincibility():
 		modulate = Color(1, 1, 1, 1)
 		take_damage(1000)
 
-# --- [패턴 2] ---
+# --- [패턴 2] 공격 ---
 func _pattern_fire_projectile():
 	if anim.sprite_frames.has_animation("normalattack_2"):
 		anim.play("normalattack_2")
-		await get_tree().create_timer(0.3).timeout
+		# 여기서는 딜레이를 주지 않고 애니메이션 끝날 때까지 기다립니다.
+		# (히트박스는 _physics_process에서 자동으로 처리됨)
+		await anim.animation_finished
 	
-	if player and projectile_scene:
-		var projectile = projectile_scene.instantiate()
+	# 투사체
+	if player and projectile_boss:
+		var projectile = projectile_boss.instantiate()
 		projectile.global_position = global_position
 		var dir = (player.global_position - global_position).normalized()
 		
-		# 투사체 스크립트에 direction이 있는지 확인!
 		if "direction" in projectile: projectile.direction = dir 
-		# 혹은 setup 함수가 있다면: projectile.setup(dir, 10)
+		elif projectile.has_method("setup"): projectile.setup(dir, damage)
 		
 		projectile.rotation = dir.angle()
 		get_parent().add_child(projectile)
-	
-	if anim.sprite_frames.has_animation("normalattack_2"):
-		await anim.animation_finished
 
-# --- [패턴 3] ---
+# --- [패턴 3] 전멸기 ---
 func _pattern_ultimate():
 	is_invincible = true 
 	if anim.sprite_frames.has_animation("skill"):
@@ -174,6 +220,10 @@ func take_damage(amount):
 func die():
 	is_dead = true
 	is_doing_pattern = false
+	
+	# 히트박스 끄기
+	hit_shape.set_deferred("disabled", true)
+	
 	if anim.sprite_frames.has_animation("death"):
 		anim.play("death")
 		await anim.animation_finished

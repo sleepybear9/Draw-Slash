@@ -2,8 +2,7 @@ extends Area2D
 
 # [설정 변수]
 @export var speed: float = 600.0  # 날아가는 속도
-@export var damage: int = 50      # 데미지 양
-@export var rotation_speed: float = 10.0 # 낫이 회전하는 속도 (빙글빙글)
+@export var damage: int = 30      # 데미지 양
 
 var direction: Vector2 = Vector2.RIGHT # 보스 스크립트에서 이 값을 덮어씌워줍니다.
 
@@ -15,11 +14,6 @@ func _ready():
 func _physics_process(delta):
 	# 1. 이동 로직
 	position += direction * speed * delta
-	
-	# 2. 회전 로직 (낫이니까 빙글빙글 돌면서 날아가게 연출)
-	# 보스가 방향을 잡아주긴 했지만, 자체적으로 회전도 추가하면 더 멋집니다.
-	# 회전이 필요 없으면 아래 줄은 지우세요.
-	$Sprite2D.rotation += rotation_speed * delta
 
 # --- [신호 연결 함수] ---
 # Area2D 노드의 'body_entered' 시그널을 연결하세요.
