@@ -18,6 +18,7 @@ var is_alive = true
 var direction
 var is_swamped = false
 var is_poisoned = false
+var is_setting = false
 
 signal hp_changed (hp)
 
@@ -96,6 +97,8 @@ func cure(heal: int) -> void:
 	
 
 func take_damage(dmg: int) -> void:
+	if GameManager.is_paused: return
+	
 	if !is_attacked:
 		is_attacked = true
 		dmg_delayer.start()
@@ -117,6 +120,7 @@ func _on_dmg_timeout() -> void:
 	is_attacked = false
 	
 func _on_dot_timeout() -> void:
+	if GameManager.is_paused: return
 	if is_swamped:
 		hp -= 10
 		if hp <= 0:
@@ -142,6 +146,7 @@ func _on_dot_timeout() -> void:
 	
 
 func _on_trap_checker_body_entered(body: Node2D) -> void:
+	if GameManager.is_paused: return
 	if body.name == "Swamp":
 		is_swamped = true
 		if dot_delayer.is_stopped():
@@ -171,6 +176,7 @@ func _on_trap_checker_body_entered(body: Node2D) -> void:
 
 
 func _on_trap_checker_body_exited(body: Node2D) -> void:
+	if GameManager.is_paused: return
 	if body.name == "Swamp":
 		is_swamped = false
 		dot_delayer.stop()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://cam0r4pj5wn2b"]
+[gd_scene load_steps=86 format=3 uid="uid://cam0r4pj5wn2b"]
 
 [ext_resource type="Script" uid="uid://6yddb0kbakl2" path="res://Scripts/player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://ji71f3fndi1k" path="res://Sprites/player/individual_sheets/male_hero-death.png" id="2_52ee3"]
@@ -532,9 +532,6 @@ size = Vector2(12.5, 3.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52ee3"]
 size = Vector2(20, 35)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhhdu"]
-size = Vector2(640, 640)
-
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 scale = Vector2(2, 2)
@@ -562,13 +559,6 @@ collision_mask = 12
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_52ee3")
-
-[node name="MapChecker" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 64
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MapChecker"]
-shape = SubResource("RectangleShape2D_bhhdu")
 
 [node name="TrapChecker" type="Area2D" parent="."]
 collision_layer = 128
