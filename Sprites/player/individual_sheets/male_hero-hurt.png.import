@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dicynkkniq36j"
-path="res://.godot/imported/male_hero-hurt.png-bcfdf0fbe8aa2d8e74981a489a131941.ctex"
+path="res://.godot/imported/male_hero-hurt.png-588c75448ef0150b9ad5f0e2ad537447.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/individual_sheets/male_hero-hurt.png"
-dest_files=["res://.godot/imported/male_hero-hurt.png-bcfdf0fbe8aa2d8e74981a489a131941.ctex"]
+source_file="res://Sprites/player/individual_sheets/male_hero-hurt.png"
+dest_files=["res://.godot/imported/male_hero-hurt.png-588c75448ef0150b9ad5f0e2ad537447.ctex"]
 
 [params]
 

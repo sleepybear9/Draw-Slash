@@ -65,6 +65,7 @@ tile_map_data = PackedByteArray("AAAhABIAAgARAC8AAAAhABMAAgARADAAAAAhABQAAgARADE
 tile_set = ExtResource("1_cvgc8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chunk_1"]
+y_sort_enabled = true
 rotation = -0.0005923448
 navigation_polygon = SubResource("NavigationPolygon_i63mn")
 
@@ -120,6 +121,7 @@ tile_map_data = PackedByteArray("AAAVAAkAAgAOAC8AAAAVAAoAAgAOADAAAAAVAAsAAgAOADE
 tile_set = ExtResource("1_cvgc8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chunk_2"]
+y_sort_enabled = true
 rotation = -0.0005923448
 navigation_polygon = SubResource("NavigationPolygon_vnunq")
 
@@ -177,6 +179,7 @@ tile_map_data = PackedByteArray("AAAAAAIAAQAVAAEAAAAAAAMAAQAVAAIAAAAAAAQAAQAVAAM
 tile_set = ExtResource("1_cvgc8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chunk_3"]
+y_sort_enabled = true
 rotation = -0.0005923448
 navigation_polygon = SubResource("NavigationPolygon_nw7js")
 
@@ -219,6 +222,7 @@ tile_map_data = PackedByteArray("AAAIAA8AAQATAAcAAAAIABAAAQATAAgAAAAJAA8AAQAUAAc
 tile_set = ExtResource("1_cvgc8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chunk_4"]
+y_sort_enabled = true
 rotation = -0.0005923448
 navigation_polygon = SubResource("NavigationPolygon_nh7xm")
 

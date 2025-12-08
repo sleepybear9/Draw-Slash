@@ -537,6 +537,7 @@ size = Vector2(640, 640)
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 16
 motion_mode = 1
@@ -555,8 +556,6 @@ shape = SubResource("RectangleShape2D_kyqiw")
 
 [node name="dotTimer" type="Timer" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 12
 
@@ -565,7 +564,6 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_52ee3")
 
 [node name="MapChecker" type="Area2D" parent="."]
-visible = false
 collision_layer = 64
 collision_mask = 64
 
