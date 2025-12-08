@@ -21,7 +21,11 @@ var is_attacking = false
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $attackrange
-@onready var timer: Timer = $Timer # 타이머 노드가 없다면 지우거나 추가하세요
+@onready var timer: Timer = $Timer
+
+# [추가됨] 오디오 노드 연결 (이름 유지: sfx_monster_attack_melee, sfx_monster_death)
+@onready var sfx_attack: AudioStreamPlayer = $sfx_monster_attack_melee
+@onready var sfx_death: AudioStreamPlayer = $sfx_monster_death
 
 func _ready():
 	hp = max_hp
@@ -69,7 +73,7 @@ func _chase_player(_delta):
 	velocity = direction * speed
 	move_and_slide()
 
-	# [핵심 수정] 움직일 때는 걷기, 멈췄을 때는 아이들 모션 재생
+	# 움직일 때는 걷기, 멈췄을 때는 아이들 모션 재생
 	if velocity.length() > 0:
 		var walk_name = "walk_" + current_dir
 		if anim.animation != walk_name:
@@ -80,11 +84,10 @@ func _chase_player(_delta):
 # 아이들 모션 재생 함수
 func _play_idle_anim():
 	var idle_name = "idle_" + current_dir
-	# idle 애니메이션이 있으면 재생, 없으면 walk의 0번 프레임으로 멈춤
 	if anim.sprite_frames.has_animation(idle_name):
 		anim.play(idle_name)
 	else:
-		anim.stop() # 애니메이션이 없으면 그냥 멈춤
+		anim.stop()
 
 func _do_attack():
 	if can_attack:
@@ -97,6 +100,10 @@ func _do_attack():
 		_play_idle_anim()
 
 func _perform_attack():
+	# [추가됨] 공격 사운드 재생
+	if sfx_attack:
+		sfx_attack.play()
+
 	# 낫 몬스터용 근접 공격
 	var base = "attack_" + current_dir + "_"
 
@@ -140,7 +147,7 @@ func _update_direction(vec: Vector2):
 		match current_dir:
 			"right":
 				attack_area.position = Vector2(hitbox_offset, 0)
-				attack_area.rotation_degrees = 0 # (선택) 모양이 길쭉하면 회전도 필요
+				attack_area.rotation_degrees = 0
 			"left":
 				attack_area.position = Vector2(-hitbox_offset, 0)
 				attack_area.rotation_degrees = 180
@@ -169,5 +176,12 @@ func _die():
 	var death_anim = "death_" + current_dir
 	if anim.sprite_frames.has_animation(death_anim):
 		anim.play(death_anim)
-		await anim.animation_finished
+
+	# [추가됨] 사망 사운드 재생
+	if sfx_death:
+		sfx_death.play()
+		# 소리가 애니메이션보다 길 경우 끊기는 것을 방지하려면 아래 주석 해제
+		# await sfx_death.finished 
+	
+	await anim.animation_finished
 	queue_free()

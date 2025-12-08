@@ -2,8 +2,9 @@ extends CharacterBody2D
 
 # [설정 변수]
 @export var max_hp: int = 5000
-@export var pattern_cooldown: float = 3.0
-@export var damage: int = 20 # 보스 공격력
+# [수정] 패턴 종료 후 쿨타임을 10초로 변경
+@export var pattern_cooldown: float = 10.0 
+@export var damage: int = 20
 
 # [필요한 씬들 연결]
 @export var projectile_boss: PackedScene 
@@ -13,11 +14,11 @@ extends CharacterBody2D
 
 # [노드 연결]
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-@onready var safe_zone_indicator: Node2D = $SafeZonePos 
+@onready var SafeZonePos: Node2D = $SafeZonePos 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var red_screen: ColorRect = $CanvasLayer/redscreen 
 
-# [추가] 공격 판정 노드 (이름 꼭 확인하세요!)
+# [공격 판정 노드]
 @onready var hit_area: Area2D = $Area2D 
 @onready var hit_shape: CollisionShape2D = $Area2D/CollisionShape2D
 
@@ -29,6 +30,9 @@ var active_minions: int = 0
 var is_doing_pattern: bool = false
 var is_dead: bool = false
 
+# [추가] 첫 번째 패턴인지 확인하는 플래그
+var is_first_pattern: bool = true
+
 func _ready():
 	hp = max_hp
 	
@@ -36,46 +40,62 @@ func _ready():
 	if not player:
 		player = get_tree().get_root().find_child("Player", true, false)
 	
-	if safe_zone_indicator: safe_zone_indicator.visible = false
+	if SafeZonePos: SafeZonePos.visible = false
 	if red_screen: red_screen.visible = false
 
-	# [추가] 시그널 연결 (공격 판정에 닿으면 실행)
 	if hit_area:
 		if not hit_area.body_entered.is_connected(_on_hitbox_entered):
 			hit_area.body_entered.connect(_on_hitbox_entered)
-		# 시작할 때 히트박스 끄기
 		hit_shape.disabled = true
 
-	print("보스 등장. 3초 후 패턴 시작.")
-	await get_tree().create_timer(3.0).timeout
-	start_pattern_loop()
+	# [수정] 시작하자마자 Idle 모션 재생
+	if anim.sprite_frames.has_animation("idle"):
+		anim.play("idle")
+
+	print("보스 등장. 5초 대기 중...")
+	
+	# [수정] 첫 패턴 시작 전 5초 대기
+	await get_tree().create_timer(5.0).timeout
+	
+	# 죽지 않았으면 패턴 루프 시작
+	if not is_dead:
+		start_pattern_loop()
 	
 
 func _physics_process(_delta):
-	# [핵심] 매 프레임마다 히트박스 위치 업데이트
+	if is_dead: return
+	# [추가됨] 플레이어 바라보기 (Flip) 로직
+	# 보스가 보이고(전멸기 중 아님), 플레이어가 있다면 방향 전환
+	if player and anim.visible:
+		# 플레이어가 보스보다 왼쪽에 있으면 -> 왼쪽 보기 (flip_h = true)
+		if player.global_position.x < global_position.x:
+			anim.flip_h = true
+		# 플레이어가 오른쪽에 있으면 -> 오른쪽 보기 (flip_h = false)
+		else:
+			anim.flip_h = false
+			
+	# 히트박스 업데이트
 	_update_hitbox_position()
 
-# --- [핵심 기능] 프레임에 따라 히트박스 이동 ---
+# --- [핵심 기능] 프레임에 따라 히트박스 이동 (좌우 반전 적용) ---
 func _update_hitbox_position():
-	# 만약 지금 'normalattack_2' 애니메이션이 재생 중이라면?
 	if anim.animation == "normalattack_2" and anim.is_playing():
-		hit_shape.disabled = false # 공격 중이니 히트박스 켜기
-		
-		# 현재 몇 번째 프레임인지 확인 (0부터 시작)
+		hit_shape.disabled = false 
 		var current_frame = anim.frame
 		
-		# === [여기 숫자를 에디터 보면서 수정하세요] ===
-		# 낫의 위치에 맞춰 좌표(Vector2)를 적어줍니다.
+		# [수정] 바라보는 방향에 따라 X축 좌표를 반전시킴
+		# flip_h가 켜져있으면(왼쪽) -1, 꺼져있으면(오른쪽) 1
+		var dir_mult = -1 if anim.flip_h else 1
+		
 		match current_frame:
-			0: hit_area.position = Vector2(20, -50)  # 낫을 들어올릴 때
-			1: hit_area.position = Vector2(50, -40)  # 휘두르기 시작
-			2: hit_area.position = Vector2(80, 0)    # 정면 타격
-			3: hit_area.position = Vector2(50, 40)   # 아래로 내려감
-			4: hit_area.position = Vector2(20, 50)   # 마무리
-			_: pass # 나머지 프레임은 유지
-			
+			# 기존 좌표의 x값에 dir_mult를 곱해줍니다.
+			0: hit_area.position = Vector2(20 * dir_mult, -50) 
+			1: hit_area.position = Vector2(50 * dir_mult, -40) 
+			2: hit_area.position = Vector2(80 * dir_mult, 0)   
+			3: hit_area.position = Vector2(50 * dir_mult, 40)  
+			4: hit_area.position = Vector2(20 * dir_mult, 50)  
+			_: pass
 	else:
-		# 공격 모션이 아니면 히트박스 끄기
 		hit_shape.disabled = true
 
 
@@ -84,30 +104,43 @@ func _on_hitbox_entered(body: Node2D):
 	if body.is_in_group("player") or body.name == "Player":
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
-			print("플레이어 타격 성공!")
 
 
-# --- [메인 패턴 로직] ---
+# --- [메인 패턴 로직: 수정됨] ---
 func start_pattern_loop():
+	# 보스가 살아있는 동안 무한 반복
 	while hp > 0 and not is_dead:
-		if not is_doing_pattern:
-			await choose_random_pattern()
-			
-			if not is_dead:
-				# 패턴 끝나면 Idle 재생
-				if anim.sprite_frames.has_animation("idle"):
-					anim.play("idle")
-				await get_tree().create_timer(pattern_cooldown).timeout
-		else:
-			await get_tree().process_frame
+		
+		# 1. 패턴 시전 (여기서 await으로 패턴이 끝날 때까지 기다림)
+		await choose_random_pattern()
+		
+		if is_dead: break
+
+		# 2. 패턴이 끝났으므로 Idle 모션 재생
+		print("패턴 종료. 쿨타임 시작 (10초)")
+		if anim.sprite_frames.has_animation("idle"):
+			anim.play("idle")
+		
+		# 3. 쿨타임 대기 (패턴 종료 후 10초)
+		await get_tree().create_timer(pattern_cooldown).timeout
+
 
 func choose_random_pattern():
 	if is_doing_pattern or is_dead: return
 	
 	is_doing_pattern = true
-	var random_pick = randi() % 3 + 1 
-	print("선택된 패턴: ", random_pick)
+	var random_pick: int
 	
+	# [수정] 첫 패턴일 경우 필살기(3번) 제외하고 1, 2번 중에서만 선택
+	if is_first_pattern:
+		random_pick = randi() % 2 + 1 # 1 ~ 2
+		is_first_pattern = false # 플래그 해제
+		print("첫 패턴 실행 (필살기 제외됨): ", random_pick)
+	else:
+		random_pick = randi() % 3 + 1 # 1 ~ 3
+		print("선택된 패턴: ", random_pick)
+	
+	# 패턴 실행 및 종료 대기
 	match random_pick:
 		1: await _pattern_summon()
 		2: await _pattern_fire_projectile()
@@ -117,6 +150,7 @@ func choose_random_pattern():
 
 # --- [패턴 1] 소환 ---
 func _pattern_summon():
+	print("패턴: 소환 시작")
 	if anim.sprite_frames.has_animation("summon"):
 		anim.play("summon")
 		await anim.animation_finished 
@@ -134,7 +168,7 @@ func _pattern_summon():
 			var minion = spawn_scene.instantiate()
 			var random_offset = Vector2(randf_range(-150, 150), randf_range(-150, 150))
 			minion.global_position = global_position + random_offset
-			get_parent().add_child(minion)
+			get_parent().call_deferred("add_child", minion) # 안전하게 추가
 			minion.tree_exited.connect(_on_minion_died)
 			active_minions += 1
 
@@ -149,14 +183,13 @@ func _break_invincibility():
 		take_damage(1000)
 
 # --- [패턴 2] 공격 ---
+# 투명해진 상태로 이 공격을 시전할수도 있음. 해결법: 소환몹 빨리좀 잡지
 func _pattern_fire_projectile():
+	print("패턴: 근접/투사체 공격 시작")
 	if anim.sprite_frames.has_animation("normalattack_2"):
 		anim.play("normalattack_2")
-		# 여기서는 딜레이를 주지 않고 애니메이션 끝날 때까지 기다립니다.
-		# (히트박스는 _physics_process에서 자동으로 처리됨)
 		await anim.animation_finished
 	
-	# 투사체
 	if player and projectile_boss:
 		var projectile = projectile_boss.instantiate()
 		projectile.global_position = global_position
@@ -166,38 +199,78 @@ func _pattern_fire_projectile():
 		elif projectile.has_method("setup"): projectile.setup(dir, damage)
 		
 		projectile.rotation = dir.angle()
-		get_parent().add_child(projectile)
+		get_parent().call_deferred("add_child", projectile)
 
 # --- [패턴 3] 전멸기 ---
 func _pattern_ultimate():
+	print("패턴: 필살기 시작")
 	is_invincible = true 
+	
+	# 1. 스킬 시전 모션
 	if anim.sprite_frames.has_animation("skill"):
 		anim.play("skill")
 		await anim.animation_finished
 	
-	visible = false 
+	# [중요 수정 1] 보스 전체(self)가 아니라 '스프라이트'만 숨깁니다.
+	# visible = false  <-- 이걸 쓰면 SafeZone도 같이 안 보입니다!
+	anim.visible = false 
+	
+	# 히트박스 끄기
 	collision_shape.set_deferred("disabled", true) 
+	
 	print("!!! 전멸기 준비 !!!")
 	
 	if red_screen: red_screen.visible = true
-	if safe_zone_indicator:
-		safe_zone_indicator.visible = true
-		safe_zone_indicator.position = Vector2(randf_range(-200, 200), randf_range(-200, 200))
-
+	
+	# [중요 수정 2] SafeZone 소환 및 위치 설정
+	if SafeZonePos:
+		SafeZonePos.visible = true
+		
+		# (선택) SafeZone이 보스의 움직임에 딸려가지 않게 독립적으로 만듭니다.
+		if SafeZonePos.is_inside_tree():
+			SafeZonePos.top_level = true 
+		
+		# --- 위치 계산 (화면 범위 내 랜덤) ---
+		var camera = get_viewport().get_camera_2d()
+		if camera:
+			var center = camera.get_screen_center_position()
+			var size = get_viewport_rect().size / camera.zoom
+			var margin = 100.0
+			
+			var min_x = center.x - (size.x / 2) + margin
+			var max_x = center.x + (size.x / 2) - margin
+			var min_y = center.y - (size.y / 2) + margin
+			var max_y = center.y + (size.y / 2) - margin
+			
+			SafeZonePos.global_position = Vector2(randf_range(min_x, max_x), randf_range(min_y, max_y))
+		else:
+			# 카메라가 없으면 플레이어 근처에
+			if player:
+				SafeZonePos.global_position = player.global_position + Vector2(randf_range(-200, 200), randf_range(-200, 200))
+	
+	# 5초 대기 (패턴 지속 시간)
 	await get_tree().create_timer(5.0).timeout
 	
-	if player and safe_zone_indicator:
-		var dist = player.global_position.distance_to(safe_zone_indicator.global_position)
+	# --- 생존 판정 및 정리 ---
+	if player and SafeZonePos:
+		# [주의] global_position으로 거리 계산
+		var dist = player.global_position.distance_to(SafeZonePos.global_position)
+		# SafeZone 반지름이 150이라고 가정 (스프라이트 크기에 맞춰 조절 필요)
 		if dist > 150: 
-			if player.has_method("take_damage"): player.take_damage(9999) 
+			if player.has_method("take_damage"): 
+				player.take_damage(9999) 
+				print("즉사기 적중!")
 	
-	if safe_zone_indicator: safe_zone_indicator.visible = false
+	# SafeZone 숨기기
+	if SafeZonePos: SafeZonePos.visible = false
 	if red_screen: red_screen.visible = false 
 
-	visible = true
+	# [중요 수정 3] 보스 스프라이트 다시 켜기
+	anim.visible = true
 	collision_shape.set_deferred("disabled", false)
 	is_invincible = false
 	
+	# 복귀 모션
 	if anim.sprite_frames.has_animation("return"):
 		anim.play("return")
 		await anim.animation_finished
@@ -221,7 +294,6 @@ func die():
 	is_dead = true
 	is_doing_pattern = false
 	
-	# 히트박스 끄기
 	hit_shape.set_deferred("disabled", true)
 	
 	if anim.sprite_frames.has_animation("death"):

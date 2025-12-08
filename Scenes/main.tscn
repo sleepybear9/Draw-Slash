@@ -66,12 +66,6 @@ position = Vector2(196, -301)
 
 [node name="monster_melee_scavenger" parent="." instance=ExtResource("7_6bp64")]
 position = Vector2(-111, -452)
-speed = 80.0
-attack_distance = 80.0
-dash_speed = 300.0
-attack_cooldown = 2.0
-damage = 15
-max_hp = 45
 
 [node name="monster_range" parent="." instance=ExtResource("8_344ge")]
 position = Vector2(-399, -502)
