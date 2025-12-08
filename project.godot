@@ -60,7 +60,7 @@ Right={
 
 [navigation]
 
-2d/default_edge_connection_margin=15.0
+2d/default_edge_connection_margin=40.0
 2d/default_link_connection_radius=5.0
 
 [rendering]

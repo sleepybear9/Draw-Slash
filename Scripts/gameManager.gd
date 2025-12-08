@@ -23,7 +23,7 @@ func _ready():
 
 func start(stage: int):
 	is_main = false
-	map = levels[stage].instantiate()
+	map = levels[stage-1].instantiate()
 	Game.get_node("Y_Sort").add_child(map)
 	
 	timer.start()
