@@ -4,6 +4,8 @@ extends Area2D
 @export var damage: int = 10
 @export var max_distance: float = 1500.0
 
+@onready var audio = $AudioStreamPlayer2D
+
 var direction : Vector2 = Vector2(0, 0)
 var start_position : Vector2
 var dmg : int
@@ -11,7 +13,9 @@ var dmg : int
 func _ready():
 	start_position = global_position
 	look_at(global_position + direction)
-
+	
+	connect("body_entered", Callable(self, "_on_body_entered"))
+	audio.play()
 
 #bullet movement
 func _physics_process(delta: float):
@@ -20,7 +24,7 @@ func _physics_process(delta: float):
 		queue_free()
 
 #bullet collision
-func _on_body_entered(body: Node2D):
+func _on_body_entered(body: PhysicsBody2D):
 	print("총알이 ", body.name, "과 충돌했습니다!")
 	
 	#몬스터 충돌시 사라짐

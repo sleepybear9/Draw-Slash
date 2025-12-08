@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var timer = $Timer
+@onready var audio = $AudioStreamPlayer2D
 
 var time : int
 
@@ -13,6 +14,7 @@ func _ready():
 	timer.wait_time = time
 	timer.connect("timeout", Callable(self, "_timeout"))
 	timer.start()
+	audio.play()
 	
 	
 func _timeout() :

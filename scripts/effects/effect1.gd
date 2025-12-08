@@ -3,6 +3,7 @@ extends Node2D
 @onready var child1 = $sword1
 @onready var child2 = $sword2
 @onready var timer = $Timer
+@onready var audio = $AudioStreamPlayer2D
 
 @onready var dice = $"../dice"
 
