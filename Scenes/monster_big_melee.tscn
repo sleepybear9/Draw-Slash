@@ -1,6 +1,6 @@
 [gd_scene load_steps=161 format=3 uid="uid://bw344r3xx6ssv"]
 
-[ext_resource type="Script" uid="uid://dvnuef8apkskd" path="res://monster_big_melee.gd" id="1_asqwu"]
+[ext_resource type="Script" uid="uid://dvnuef8apkskd" path="res://Scripts/monster_big_melee.gd" id="1_asqwu"]
 [ext_resource type="Texture2D" uid="uid://kere0u03sfiy" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Big/Zombie_Big_Down_First-Attack-Sheet8.png" id="1_cf0do"]
 [ext_resource type="Texture2D" uid="uid://cwsop4ijrd41a" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Big/Zombie_Big_Down_Walk-Sheet8.png" id="1_yi6fo"]
 [ext_resource type="Texture2D" uid="uid://rc67sr0ghjna" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Big/Zombie_Big_Side-left_Walk-Sheet8.png" id="2_4qmjy"]

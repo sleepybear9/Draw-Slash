@@ -1,11 +1,11 @@
 [gd_scene load_steps=34 format=3 uid="uid://bdnolrdoc0rgt"]
 
-[ext_resource type="Script" uid="uid://c8jnmmj8i7u7u" path="res://monster_range.gd" id="1_uuq1n"]
+[ext_resource type="Script" uid="uid://c8jnmmj8i7u7u" path="res://Scripts/monster_range.gd" id="1_uuq1n"]
 [ext_resource type="Texture2D" uid="uid://dqbr4255512jk" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Small/Zombie_Small_Down_walk-Sheet6.png" id="1_y36fb"]
 [ext_resource type="Texture2D" uid="uid://bv73doiiy8f2f" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Small/Zombie_Small_Side-left_Walk-Sheet6.png" id="2_uuq1n"]
 [ext_resource type="Texture2D" uid="uid://6aa7n4gl4u53" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Small/Zombie_Small_Side_Walk-Sheet6.png" id="3_rafq8"]
 [ext_resource type="Texture2D" uid="uid://c7uqobwagjb4p" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Small/Zombie_Small_Up_Walk-Sheet6.png" id="4_uknbd"]
-[ext_resource type="PackedScene" uid="uid://bkaxq4chyf5ng" path="res://projectile_range.tscn" id="6_rafq8"]
+[ext_resource type="PackedScene" uid="uid://bkaxq4chyf5ng" path="res://Scenes/projectile_range.tscn" id="6_rafq8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xk1t"]
 radius = 14.0

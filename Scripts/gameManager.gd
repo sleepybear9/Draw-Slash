@@ -36,7 +36,7 @@ func _ready():
 
 func start():
 	menus[0].hide()
-	set_game(2)
+	set_game(1)
 	is_main = false
 	is_paused = false
 	hud.show()

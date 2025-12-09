@@ -1,7 +1,7 @@
 [gd_scene load_steps=72 format=3 uid="uid://bmx1a0ds3uvvr"]
 
-[ext_resource type="Script" uid="uid://cuqmbv75ss1ei" path="res://boss.gd" id="1_o1i15"]
-[ext_resource type="PackedScene" uid="uid://buoc1w15rplms" path="res://projectile.tscn" id="2_ef0k6"]
+[ext_resource type="Script" uid="uid://cuqmbv75ss1ei" path="res://Scripts/boss.gd" id="1_o1i15"]
+[ext_resource type="PackedScene" uid="uid://buoc1w15rplms" path="res://Scenes/projectile.tscn" id="2_ef0k6"]
 [ext_resource type="Texture2D" uid="uid://d17wfhxjyt7km" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/death.png" id="2_we8h1"]
 [ext_resource type="Texture2D" uid="uid://cnkceem4o2smh" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/idle2.png" id="3_kvofc"]
 [ext_resource type="Texture2D" uid="uid://bsn11uq5hox3t" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/attacking.png" id="4_ef0k6"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://p43xrg0fqbvc" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/summon.png" id="6_kvofc"]
 [ext_resource type="PackedScene" uid="uid://ct4sl8psepaad" path="res://Scenes/enemy.tscn" id="9_kles1"]
 [ext_resource type="Texture2D" uid="uid://ciwx4lyxupa1k" path="res://assets/sprites/safezone.png" id="9_ry61v"]
-[ext_resource type="PackedScene" uid="uid://bw344r3xx6ssv" path="res://monster_big_melee.tscn" id="10_etj48"]
+[ext_resource type="PackedScene" uid="uid://bw344r3xx6ssv" path="res://Scenes/monster_big_melee.tscn" id="10_etj48"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ef0k6"]
 
