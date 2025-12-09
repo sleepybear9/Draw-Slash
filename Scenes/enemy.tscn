@@ -877,7 +877,7 @@ shape = SubResource("CircleShape2D_hgro5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bqrkw")
-animation = &"walk_up"
+animation = &"attack_down_1"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true

@@ -1,15 +1,15 @@
 [gd_resource type="TileSet" load_steps=13 format=3 uid="uid://bnhxq2malrj4o"]
 
-[ext_resource type="Texture2D" uid="uid://c4lw8wfj1nsye" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/water_coasts.png" id="1_q8eh7"]
-[ext_resource type="Texture2D" uid="uid://crxskupvj42dq" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/water_detilazation_v2.png" id="2_fe1av"]
-[ext_resource type="Texture2D" uid="uid://sokoc1uktf7n" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/Ground_rocks.png" id="3_i3l3f"]
-[ext_resource type="Texture2D" uid="uid://35puc6ayptbw" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/Objects.png" id="4_vcwob"]
-[ext_resource type="Texture2D" uid="uid://bc2yh5hpancxc" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/Objects_animated2.png" id="5_kjf0c"]
-[ext_resource type="Texture2D" uid="uid://ba51hdetkbajh" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/details.png" id="6_cgvqy"]
+[ext_resource type="Texture2D" uid="uid://c4lw8wfj1nsye" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/water_coasts.png" id="1_320ka"]
+[ext_resource type="Texture2D" uid="uid://crxskupvj42dq" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/water_detilazation_v2.png" id="2_4ix6q"]
+[ext_resource type="Texture2D" uid="uid://sokoc1uktf7n" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/Ground_rocks.png" id="3_ai8bh"]
+[ext_resource type="Texture2D" uid="uid://35puc6ayptbw" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/Objects.png" id="4_fnqfh"]
+[ext_resource type="Texture2D" uid="uid://bc2yh5hpancxc" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/Objects_animated2.png" id="5_gn65m"]
+[ext_resource type="Texture2D" uid="uid://ba51hdetkbajh" path="res://Sprites/Free-Undead-Tileset-Top-Down-Pixel-Art/Tiled_files/details.png" id="6_hrfcb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yi2un"]
 resource_name = "Ground"
-texture = ExtResource("1_q8eh7")
+texture = ExtResource("1_320ka")
 1:1/animation_columns = 1
 1:1/animation_separation = Vector2i(0, 4)
 1:1/animation_frame_0/duration = 1.0
@@ -704,7 +704,7 @@ texture = ExtResource("1_q8eh7")
 17:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dtr0u"]
-texture = ExtResource("2_fe1av")
+texture = ExtResource("2_4ix6q")
 0:1/size_in_atlas = Vector2i(17, 3)
 0:1/animation_columns = 1
 0:1/animation_separation = Vector2i(0, 10)
@@ -829,7 +829,7 @@ texture = ExtResource("2_fe1av")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4m1r"]
 resource_name = "Rock"
-texture = ExtResource("3_i3l3f")
+texture = ExtResource("3_ai8bh")
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.5180206, 3.7770348, 8, 4.856186, 8, 8, -0.53957367, 8)
 2:0/0 = 0
@@ -1943,7 +1943,7 @@ texture = ExtResource("3_i3l3f")
 25:59/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0c60h"]
-texture = ExtResource("4_vcwob")
+texture = ExtResource("4_fnqfh")
 48:11/0 = 0
 48:11/0/y_sort_origin = -6
 38:15/0 = 0
@@ -2335,7 +2335,7 @@ texture = ExtResource("4_vcwob")
 43:24/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dwxou"]
-texture = ExtResource("5_kjf0c")
+texture = ExtResource("5_gn65m")
 1:15/size_in_atlas = Vector2i(4, 4)
 1:15/animation_columns = 6
 1:15/animation_separation = Vector2i(3, 0)
@@ -2413,7 +2413,7 @@ texture = ExtResource("5_kjf0c")
 1:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-19.755112, 16.887432, -21.6669, 23.578678, -22.941422, 25.809093, -18.161957, 26.764988, -15.294281, 40.78474, -9.240295, 44.60831, 18.161942, 44.289677, 23.26004, 36.32391, 22.941406, 24.534573, 29.314026, 26.446354, 28.039505, 17.843327, 25.490448, 11.789341, -16.887436, 10.196186)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0w8u8"]
-texture = ExtResource("6_cgvqy")
+texture = ExtResource("6_hrfcb")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0

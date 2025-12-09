@@ -1,15 +1,15 @@
 [gd_resource type="TileSet" load_steps=15 format=3 uid="uid://bl5ng2p3uuu2y"]
 
-[ext_resource type="Texture2D" uid="uid://ci6fmammbfxpu" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/Ground.png" id="1_ox3pi"]
-[ext_resource type="Texture2D" uid="uid://dnb61t0ohyes7" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/Objects.png" id="2_tand5"]
-[ext_resource type="Texture2D" uid="uid://b2u16jim2u5v6" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/water_coasts.png" id="3_g8ngy"]
-[ext_resource type="Texture2D" uid="uid://dghpl3ohx2xtl" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/water_detilazation.png" id="4_haoqr"]
-[ext_resource type="Texture2D" uid="uid://b7intylsa6u35" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/Bridges.png" id="5_wrwbj"]
-[ext_resource type="Texture2D" uid="uid://dbenf0o35weeo" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/details.png" id="6_ch8we"]
-[ext_resource type="Texture2D" uid="uid://cij66vmfwin6" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/spots.png" id="7_eiaj2"]
+[ext_resource type="Texture2D" uid="uid://ci6fmammbfxpu" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/Ground.png" id="1_4svpq"]
+[ext_resource type="Texture2D" uid="uid://dnb61t0ohyes7" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/Objects.png" id="2_d4ugr"]
+[ext_resource type="Texture2D" uid="uid://b2u16jim2u5v6" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/water_coasts.png" id="3_4ln4u"]
+[ext_resource type="Texture2D" uid="uid://dghpl3ohx2xtl" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/water_detilazation.png" id="4_qti6s"]
+[ext_resource type="Texture2D" uid="uid://b7intylsa6u35" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/Bridges.png" id="5_h8860"]
+[ext_resource type="Texture2D" uid="uid://dbenf0o35weeo" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/details.png" id="6_ah1jy"]
+[ext_resource type="Texture2D" uid="uid://cij66vmfwin6" path="res://Sprites/Free-Cursed-Land-Top-Down-Pixel-Art-Tileset/Tiled_files/spots.png" id="7_0ytlm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tm7ih"]
-texture = ExtResource("1_ox3pi")
+texture = ExtResource("1_4svpq")
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 5.215904, 5.2159023, 8, 8, 8)
 3:0/0 = 0
@@ -810,7 +810,7 @@ texture = ExtResource("1_ox3pi")
 24:54/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_25io1"]
-texture = ExtResource("2_tand5")
+texture = ExtResource("2_d4ugr")
 1:1/size_in_atlas = Vector2i(7, 7)
 1:1/0 = 0
 1:1/0/y_sort_origin = -40
@@ -1038,7 +1038,7 @@ texture = ExtResource("2_tand5")
 1:55/0/physics_layer_0/polygon_0/points = PackedVector2Array(79.677414, -105.39722, 80.03713, -55.93606, 43.345955, -56.47564, 56.295784, -68.34631, 57.554794, -80.93643, 58.274227, -88.31064, 63.130413, -100.90074)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8gp1p"]
-texture = ExtResource("3_g8ngy")
+texture = ExtResource("3_4ln4u")
 1:1/animation_columns = 1
 1:1/animation_separation = Vector2i(0, 5)
 1:1/animation_frame_0/duration = 1.0
@@ -3319,7 +3319,7 @@ texture = ExtResource("3_g8ngy")
 30:6/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -1.978445, 8, -0.71943474, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yybfe"]
-texture = ExtResource("4_haoqr")
+texture = ExtResource("4_qti6s")
 36:0/next_alternative_id = 2
 36:0/0 = 0
 36:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -3436,7 +3436,7 @@ texture = ExtResource("4_haoqr")
 28:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vq2h6"]
-texture = ExtResource("5_wrwbj")
+texture = ExtResource("5_h8860")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -3702,7 +3702,7 @@ texture = ExtResource("5_wrwbj")
 17:17/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6u1m"]
-texture = ExtResource("6_ch8we")
+texture = ExtResource("6_ah1jy")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -3799,7 +3799,7 @@ texture = ExtResource("6_ch8we")
 7:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_efh70"]
-texture = ExtResource("7_eiaj2")
+texture = ExtResource("7_0ytlm")
 6:0/0 = 0
 7:0/0 = 0
 8:0/0 = 0
