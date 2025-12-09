@@ -21,16 +21,30 @@ var player_in_attack_area = false
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $attackrange
 
+# [오디오 노드 연결]
+# 에디터의 씬 안에 이 이름의 노드가 있어야 합니다.
+@onready var sfx_dash: AudioStreamPlayer = $scavenger_dash
+@onready var sfx_death: AudioStreamPlayer = $sfx_monster_death
+
 func _ready():
 	hp = max_hp
+	
 	player = get_tree().get_first_node_in_group("player")
+	if not player:
+		player = get_tree().get_first_node_in_group("Player")
+	if not player:
+		player = get_tree().root.find_child("Player", true, false)
+
+	if player:
+		print("추적 대상 발견: ", player.name)
 
 	attack_area.body_entered.connect(_on_attack_area_entered)
 	attack_area.body_exited.connect(_on_attack_area_exited)
 
 	await get_tree().physics_frame
-	timer.timeout.connect(_update_navigation_target)
-	timer.start(0.2)
+	if timer:
+		timer.timeout.connect(_update_navigation_target)
+		timer.start(0.2)
 
 	_play_idle()
 
@@ -39,13 +53,10 @@ func _update_navigation_target():
 		nav_agent.target_position = player.global_position
 
 func _physics_process(delta):
-	if is_dead or not player: 
-		return
-	
+	if is_dead or not player: return
 	if is_dashing:
 		move_and_slide()
 		return
-	
 	if is_attacking:
 		return
 
@@ -56,8 +67,7 @@ func _physics_process(delta):
 	else:
 		_chase_player(delta)
 
-
-# --- 이동 처리 (좌/우만 표현) ---
+# --- 이동 ---
 func _chase_player(_delta):
 	if nav_agent.is_navigation_finished():
 		velocity = Vector2.ZERO
@@ -68,7 +78,6 @@ func _chase_player(_delta):
 	var direction = global_position.direction_to(next_path_pos)
 
 	_update_sprite_direction(direction)
-
 	velocity = direction * speed
 	move_and_slide()
 
@@ -78,16 +87,16 @@ func _chase_player(_delta):
 	else:
 		_play_idle()
 
-
-# --- Idle 처리 ---
+# --- Idle ---
 func _play_idle():
-	# run 프레임 0에서 정지 (idle 대체)
-	anim.play("run")
-	anim.frame = 0
-	anim.stop()
+	if anim.sprite_frames.has_animation("idle"):
+		anim.play("idle")
+	else:
+		anim.play("run")
+		anim.frame = 0
+		anim.stop()
 
-
-# --- 대시 공격 ---
+# --- [핵심] 공격 및 사운드 재생 ---
 func _start_dash_attack():
 	if not can_attack or is_dead:
 		_play_idle()
@@ -100,11 +109,18 @@ func _start_dash_attack():
 	var dir_to_player = global_position.direction_to(player.global_position)
 	_update_sprite_direction(dir_to_player)
 
+	# 1. 공격 애니메이션 시작
 	anim.play("attack")
+	
+	# 2. [여기서 사운드 재생] 공격 시작하자마자 소리 남
+	if sfx_dash:
+		sfx_dash.play()
 
+	# 0.2초 딜레이 (선딜)
 	await get_tree().create_timer(0.2).timeout
 	if is_dead: return
 
+	# 대시 돌진
 	is_dashing = true
 	velocity = dir_to_player * dash_speed
 
@@ -113,6 +129,7 @@ func _start_dash_attack():
 	is_dashing = false
 	velocity = Vector2.ZERO
 
+	# 데미지 판정
 	if player_in_attack_area and player.has_method("take_damage"):
 		player.take_damage(damage)
 
@@ -121,39 +138,33 @@ func _start_dash_attack():
 	is_attacking = false
 	_play_idle()
 
+	# 쿨타임 대기
 	await get_tree().create_timer(attack_cooldown).timeout
 	if not is_dead:
 		can_attack = true
 
-
-# --- 방향 처리(좌우만) ---
 func _update_sprite_direction(vec: Vector2):
 	if is_attacking or is_dashing: return
-
 	if vec.x != 0:
 		anim.flip_h = vec.x < 0
 
-
 func _on_attack_area_entered(body):
-	if body.is_in_group("player"): 
+	if body.is_in_group("player") or body.is_in_group("Player"):
 		player_in_attack_area = true
 
 func _on_attack_area_exited(body):
-	if body.is_in_group("player"): 
+	if body.is_in_group("player") or body.is_in_group("Player"):
 		player_in_attack_area = false
 
-
-# --- 피격 / 죽음 ---
+# --- 사망 처리 ---
 func take_damage(amount: int):
 	if is_dead: return
-
 	hp -= amount
 	modulate = Color.RED
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 
-	if hp <= 0:
-		_die()
+	if hp <= 0: _die()
 
 func _die():
 	is_dead = true
@@ -161,13 +172,19 @@ func _die():
 	is_attacking = false
 	is_dashing = false
 	can_attack = false
-
+	
 	set_physics_process(false)
 	attack_area.monitoring = false
 	timer.stop()
-	$CollisionShape2D.disabled = true
+	$CollisionShape2D.set_deferred("disabled", true)
 
 	anim.play("death")
-	await anim.animation_finished
+	
+	# 사망 사운드 재생
+	if sfx_death:
+		sfx_death.play()
+		await sfx_death.finished
+	else:
+		await anim.animation_finished
 
 	queue_free()

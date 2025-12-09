@@ -1,9 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://laj5rbycw870"]
+[gd_scene load_steps=30 format=3 uid="uid://laj5rbycw870"]
 
 [ext_resource type="Texture2D" uid="uid://bmjmdcoycdhay" path="res://assets/sprites/Monsters_Creatures_Fantasy/Monsters_Creatures_Fantasy/Goblin/Run.png" id="1_7lgiy"]
 [ext_resource type="Script" uid="uid://de0vfnhftbbuq" path="res://Scripts/monster_melee_scavenger.gd" id="1_ykm3d"]
 [ext_resource type="Texture2D" uid="uid://d2p7g3yffyfck" path="res://assets/sprites/Monsters_Creatures_Fantasy/Monsters_Creatures_Fantasy/Goblin/Attack.png" id="2_fw7k4"]
 [ext_resource type="Texture2D" uid="uid://cej0kacnolwyr" path="res://assets/sprites/Monsters_Creatures_Fantasy/Monsters_Creatures_Fantasy/Goblin/Death.png" id="3_fw7k4"]
+[ext_resource type="AudioStream" uid="uid://buxut00vxbixq" path="res://assets/sounds/ジャンプ(scavenger dash).mp3" id="5_8namr"]
+[ext_resource type="AudioStream" uid="uid://bauxpjk3v8eum" path="res://assets/sounds/555425__tonsil5__zombie-pain-6.wav" id="6_i4jhg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_unf6c"]
 radius = 22.0
@@ -169,15 +171,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4uum"]
 radius = 22.135944
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="monster_melee_scavenger" type="CharacterBody2D"]
 script = ExtResource("1_ykm3d")
-speed = null
-attack_distance = null
-dash_distance = null
-dash_speed = null
-attack_cooldown = null
-damage = null
-max_hp = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(500, 275)
@@ -203,4 +198,8 @@ metadata/_edit_group_ = true
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="scavenger_dash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8namr")
+
+[node name="sfx_monster_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_i4jhg")

@@ -1078,27 +1078,26 @@ animations = [{
 }]
 
 [node name="monster_big_melee" type="CharacterBody2D"]
-position = Vector2(248, 212)
 script = ExtResource("1_asqwu")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(321, 139)
 shape = SubResource("CircleShape2D_0p5uv")
 
 [node name="attackrange" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackrange"]
-position = Vector2(321, 131)
 shape = SubResource("CircleShape2D_e3bl0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(321, 134)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_3wadg")
 animation = &"walk_up"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0, 1, 0, 1)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4

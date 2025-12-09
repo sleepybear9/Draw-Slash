@@ -862,7 +862,6 @@ animations = [{
 }]
 
 [node name="enemy" type="CharacterBody2D"]
-position = Vector2(473, 269)
 scale = Vector2(4, 4)
 collision_layer = 4
 script = ExtResource("1_7k104")
