@@ -74,8 +74,3 @@ text = "Their powers died and turned into cards.
 Let's use the cards and defeat the Demon King!"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

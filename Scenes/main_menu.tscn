@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dk1mhfnnigpka"]
+[gd_scene load_steps=6 format=3 uid="uid://dk1mhfnnigpka"]
 
 [ext_resource type="Script" uid="uid://d15rwd2n5aqjs" path="res://Scripts/mainStart.gd" id="1_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://5yqovvwmjlnc" path="res://img/main.png" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://brtm28tglm5q0" path="res://img/start.png" id="2_48xlc"]
+[ext_resource type="PackedScene" uid="uid://dgo65iyfnree2" path="res://Scenes/story.tscn" id="4_ce3w2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48xlc"]
 atlas = ExtResource("2_48xlc")
@@ -15,11 +16,11 @@ scale = Vector2(0.95238096, 0.9375)
 texture = ExtResource("1_28flt")
 centered = false
 
-[node name="TextureButton" type="TextureButton" parent="."]
-offset_left = 291.0
-offset_top = 409.0
-offset_right = 989.0
-offset_bottom = 740.0
+[node name="TextureButton" type="TextureButton" parent="Main"]
+offset_left = 310.78497
+offset_top = 439.5767
+offset_right = 1008.785
+offset_bottom = 770.57666
 scale = Vector2(0.7, 0.7)
 pivot_offset = Vector2(349, 165.5)
 texture_normal = SubResource("AtlasTexture_48xlc")
@@ -27,4 +28,7 @@ ignore_texture_size = true
 script = ExtResource("1_1ehe0")
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
+[node name="Story" parent="." instance=ExtResource("4_ce3w2")]
+visible = false
+
+[connection signal="pressed" from="Main/TextureButton" to="Main/TextureButton" method="_on_pressed"]

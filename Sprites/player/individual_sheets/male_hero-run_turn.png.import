@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://s1blxpvoykx3"
-path="res://.godot/imported/male_hero-run_turn.png-53eed1b0f2ec171f609dd3b2ac5510e6.ctex"
+path="res://.godot/imported/male_hero-run_turn.png-2423cd208c1d59ac35ba207d677725dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/player/individual_sheets/male_hero-run_turn.png"
-dest_files=["res://.godot/imported/male_hero-run_turn.png-53eed1b0f2ec171f609dd3b2ac5510e6.ctex"]
+source_file="res://Sprites/Player/individual_sheets/male_hero-run_turn.png"
+dest_files=["res://.godot/imported/male_hero-run_turn.png-2423cd208c1d59ac35ba207d677725dc.ctex"]
 
 [params]
 

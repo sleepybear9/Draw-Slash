@@ -1,6 +1,6 @@
 [gd_scene load_steps=129 format=3 uid="uid://ct4sl8psepaad"]
 
-[ext_resource type="Script" uid="uid://wky6govcrvym" path="res://enemy.gd" id="1_7k104"]
+[ext_resource type="Script" uid="uid://wky6govcrvym" path="res://Scripts/enemy.gd" id="1_7k104"]
 [ext_resource type="Texture2D" uid="uid://87en040s0c2r" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Axe/Zombie_Axe_Down_First-Attack-Sheet7.png" id="2_5hcft"]
 [ext_resource type="Texture2D" uid="uid://dswen4q1ej72v" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Axe/Zombie_Axe_Down_Second-Attack-Sheet9.png" id="3_nnovl"]
 [ext_resource type="Texture2D" uid="uid://xw2u4x7w70kt" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Zombie_Axe/Zombie_Axe_Side-left_First-Attack-Sheet7.png" id="4_jmwgi"]
@@ -864,6 +864,7 @@ animations = [{
 [node name="enemy" type="CharacterBody2D"]
 position = Vector2(473, 269)
 scale = Vector2(4, 4)
+collision_layer = 4
 script = ExtResource("1_7k104")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -879,6 +880,9 @@ sprite_frames = SubResource("SpriteFrames_bqrkw")
 animation = &"walk_up"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+debug_use_custom = true
 
 [node name="Timer" type="Timer" parent="."]
 

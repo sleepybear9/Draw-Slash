@@ -22,6 +22,13 @@ func _process(delta: float) -> void:
 	else:
 		time.text = "Boss appeared!"
 
+func start():
+	timer.start()
+	timer.timeout.connect(_on_timer_timeout)
+	giveCard.start()
+	giveCard.timeout.connect(_on_give_card_timeout)
+	hp_bar.show()
+
 func _on_timer_timeout() -> void:
 	is_boss = true
 
@@ -31,6 +38,7 @@ func hp_change(hp: int):
 
 func end():
 	timer.paused = true
+	giveCard.paused = true
 	hp_bar.visible = false
 	
 func _on_give_card_timeout() -> void:

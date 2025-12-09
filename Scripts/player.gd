@@ -97,6 +97,7 @@ func cure(heal: int) -> void:
 	
 
 func take_damage(dmg: int) -> void:
+	print(GameManager.is_paused)
 	if GameManager.is_paused: return
 	
 	if !is_attacked:
