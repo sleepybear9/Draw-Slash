@@ -51,7 +51,6 @@ metadata/_edit_use_anchors_ = true
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("3_j5yw3")]
 
 [node name="Spawning" type="Timer" parent="."]
-wait_time = 0.3
 
 [connection signal="hp_changed" from="Y_Sort/Player" to="CanvasLayer/Hud" method="hp_change"]
 [connection signal="pressed" from="CanvasLayer/temp_dmg" to="Y_Sort/Player" method="take_damage" binds= [20]]

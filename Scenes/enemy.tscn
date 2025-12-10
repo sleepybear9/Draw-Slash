@@ -874,6 +874,11 @@ shape = SubResource("CircleShape2D_4gyqm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackrange"]
 shape = SubResource("CircleShape2D_hgro5")
 
+[node name="hitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitArea"]
+shape = SubResource("CircleShape2D_hgro5")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bqrkw")
 animation = &"attack_down_1"
@@ -891,3 +896,5 @@ volume_db = -21.468
 
 [node name="sfx_monster_death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_g2u8i")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

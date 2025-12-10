@@ -13,19 +13,19 @@ var can_attack = true
 var player_in_attack_area = false
 var current_dir: String = "down"
 
-# [상태 변수]
 var is_dead = false
 var is_attacking = false 
 
-# --- 노드 연결 ---
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $attackrange
 @onready var timer: Timer = $Timer
+@onready var sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 # [추가됨] 오디오 노드 연결 (이름 유지: sfx_monster_attack_melee, sfx_monster_death)
-@onready var sfx_attack: AudioStreamPlayer = $sfx_monster_attack_melee
-@onready var sfx_death: AudioStreamPlayer = $sfx_monster_death
+#@onready var sfx_attack: AudioStreamPlayer = $sfx_monster_attack_melee
+#@onready var sfx_death: AudioStreamPlayer = $sfx_monster_death
+var sfx = []
 
 func _ready():
 	hp = max_hp
@@ -35,6 +35,7 @@ func _ready():
 	
 	attack_area.body_entered.connect(_on_attack_area_entered)
 	attack_area.body_exited.connect(_on_attack_area_exited)
+	#sfx.append(preload())
 	
 	# 길찾기 초기화
 	await get_tree().physics_frame
@@ -101,8 +102,6 @@ func _do_attack():
 
 func _perform_attack():
 	# [추가됨] 공격 사운드 재생
-	if sfx_attack:
-		sfx_attack.play()
 
 	# 낫 몬스터용 근접 공격
 	var base = "attack_" + current_dir + "_"
@@ -178,8 +177,6 @@ func _die():
 		anim.play(death_anim)
 
 	# [추가됨] 사망 사운드 재생
-	if sfx_death:
-		sfx_death.play()
 		# 소리가 애니메이션보다 길 경우 끊기는 것을 방지하려면 아래 주석 해제
 		# await sfx_death.finished 
 	

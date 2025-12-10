@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 		time.text = "%02d:%02d" % [minutes, seconds]
 	else:
 		time.text = "Boss appeared!"
+		
 
 func start():
 	timer.start()

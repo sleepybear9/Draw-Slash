@@ -8,11 +8,12 @@ var menus =[]
 var player_dir: Vector2 = Vector2(0,0)
 var player
 var cam
+var stage = 1
 # level scenes
 @onready var levels = [preload("res://Scenes/Level_1.tscn"),preload("res://Scenes/Level_2.tscn")]
 @onready var monster = preload("res://Scenes/enemy.tscn")
-var max = 100
-@onready var bosses = [] #bose scenes
+var max = 20
+@onready var bosses = [preload("res://Scenes/boss.tscn")] #bose scenes
 var map
 var timer
 var hud
@@ -31,21 +32,23 @@ func _ready():
 	player = Game.get_node("Y_Sort/Player")
 	cam = player.get_node("Camera2D")
 	hud = Game.get_node("CanvasLayer/Hud")
-	
-
 
 func start():
 	menus[0].hide()
-	set_game(1)
+	set_game(stage)
 	is_main = false
 	is_paused = false
 	hud.show()
 	hud.start()
 	timer.start()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	for e in enemies:
+		if e.visible and e.global_position.distance_to(player.global_position) > d+100:
+			e.global_position = player.global_position + (d+50)*Input.get_vector("Left","Right","Up","Down")
+			d
 	if Input.is_action_just_pressed("test"):
-		spawn_boss(0)
+		spawn(1)
 
 func pause_toggle():
 	get_tree().paused = !get_tree().paused
@@ -77,9 +80,9 @@ func spawn(type: int):
 		if enemies.size() <= max:
 			var enemy = spawn_monster()
 			enemy.global_position = spawn_point
-		#test_spawn_visual(spawn_point)
+
 	else:
-		var boss = spawn_boss(type)
+		var boss = spawn_boss(type-1)
 		Game.get_node("Y_Sort").add_child(boss)
 	
 func spawn_monster():
@@ -101,9 +104,10 @@ func spawn_monster():
 	return enemy
 
 func spawn_boss(type: int):
-	#var bose = bosses[type].instantiate()
-	#Game.get_node("Y_Sort").add_child(bose)
+	var bose = bosses[type].instantiate()
+	Game.get_node("Y_Sort").add_child(bose)
 	var pos : Vector2= Vector2(0,0)
+	bose.global_position = pos
 	
 	show_boss_spawn(pos)
 	
@@ -131,17 +135,7 @@ func show_boss_spawn(spawn_pos: Vector2):
 	hud.show()
 	is_paused = false
 
-func test_spawn_visual(pos: Vector2):
-	var rect := ColorRect.new()
-	rect.color = Color(1, 0, 0, 0.7)  # 빨간색 + 반투명
-	rect.size = Vector2(30, 30)      # 보이는 크기
-	rect.pivot_offset = rect.size / 2
-	rect.global_position = pos
 
-	# 화면에 보이게 Game의 Y_Sort 아래에 추가
-	Game.get_node("Y_Sort").add_child(rect)
-
-	
 
 
 	
