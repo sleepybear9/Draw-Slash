@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://ccq6jbmmjj0yn" path="res://Scripts/effects/effect2_node.gd" id="10_arntx"]
 [ext_resource type="PackedScene" uid="uid://b77qk7karqlff" path="res://Scenes/effects/effect3.tscn" id="11_lslt6"]
 [ext_resource type="PackedScene" uid="uid://cupndvkytjerr" path="res://Scenes/effects/effect4.tscn" id="12_ulo2v"]
-[ext_resource type="PackedScene" uid="uid://dbs5bkq7nhhr0" path="res://Scenes/effects/effect5.tscn" id="13_1e7my"]
+[ext_resource type="PackedScene" uid="uid://b1q1sr8bh43g7" path="res://Scenes/effects/effect5.tscn" id="13_1e7my"]
 [ext_resource type="Script" uid="uid://dix13i1i8x421" path="res://Scripts/effects/effect6_node.gd" id="14_m0x7a"]
 [ext_resource type="PackedScene" uid="uid://1khr76k2gkl5" path="res://Scenes/dice.tscn" id="15_5v66d"]
 
@@ -536,7 +536,7 @@ size = Vector2(20, 35)
 y_sort_enabled = true
 scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 16
+collision_mask = 20
 motion_mode = 1
 script = ExtResource("1_rpqav")
 
