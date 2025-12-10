@@ -459,6 +459,7 @@ height = 74.0
 
 [node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_o1i15")
+projectile = ExtResource("2_ef0k6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ef0k6")
@@ -502,7 +503,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.9647059, 0.2784314, 0.34509805, 0.39215687)
 
-[node name="projectile_boss" parent="." instance=ExtResource("2_ef0k6")]
+[node name="projectile" parent="." instance=ExtResource("2_ef0k6")]
 
 [node name="enemy" parent="." instance=ExtResource("9_kles1")]
 

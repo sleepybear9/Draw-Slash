@@ -7,19 +7,19 @@
 radius = 25.0
 height = 50.0
 
-[node name="projectile_boss" type="Area2D"]
+[node name="projectile" type="Area2D"]
 position = Vector2(49, -51)
 script = ExtResource("1_a85iw")
 metadata/_edit_group_ = true
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(671, 391)
-rotation = 3.822271
+rotation = -2.4609141
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_qxf0c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(716, 406)
 shape = SubResource("CapsuleShape2D_qxf0c")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

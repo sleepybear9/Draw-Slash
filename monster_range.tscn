@@ -475,6 +475,7 @@ metadata/_edit_group_ = true
 [node name="Timer" type="Timer" parent="."]
 
 [node name="projectile_range" parent="." instance=ExtResource("6_rafq8")]
+visible = false
 position = Vector2(-453, -213)
 
 [node name="sfx_monster_attack_range" type="AudioStreamPlayer" parent="."]

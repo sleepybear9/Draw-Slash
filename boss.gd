@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var damage: int = 20
 
 # [필요한 씬들 연결]
-@export var projectile_boss: PackedScene 
+@export var projectile: PackedScene 
 @export_group("Summon Pattern")
 @export var enemy: PackedScene          
 @export var monster_range: PackedScene  
@@ -134,10 +134,12 @@ func choose_random_pattern():
 	# [수정] 첫 패턴일 경우 필살기(3번) 제외하고 1, 2번 중에서만 선택
 	if is_first_pattern:
 		random_pick = randi() % 2 + 1 # 1 ~ 2
+		#random_pick = 2
 		is_first_pattern = false # 플래그 해제
 		print("첫 패턴 실행 (필살기 제외됨): ", random_pick)
 	else:
 		random_pick = randi() % 3 + 1 # 1 ~ 3
+		#random_pick = 2
 		print("선택된 패턴: ", random_pick)
 	
 	# 패턴 실행 및 종료 대기
@@ -188,18 +190,35 @@ func _pattern_fire_projectile():
 	print("패턴: 근접/투사체 공격 시작")
 	if anim.sprite_frames.has_animation("normalattack_2"):
 		anim.play("normalattack_2")
-		await anim.animation_finished
+		#await anim.animation_finished
 	
-	if player and projectile_boss:
-		var projectile = projectile_boss.instantiate()
-		projectile.global_position = global_position
+	# 안전 장치: 변수가 연결되었는지 확인
+	if not projectile:
+		print("오류: 인스펙터에서 투사체 씬(PackedScene)을 연결해주세요!")
+		return
+
+	if player:
+		# 1. 인스턴스 생성 (변수명 겹침 방지: proj)
+		var proj = projectile.instantiate()
+		
+		# 2. 위치 설정 (보스 위치에서 시작)
+		proj.global_position = global_position
+		
+		# 3. 방향 계산
 		var dir = (player.global_position - global_position).normalized()
 		
-		if "direction" in projectile: projectile.direction = dir 
-		elif projectile.has_method("setup"): projectile.setup(dir, damage)
+		# 4. 방향/속성 주입
+		if "direction" in proj: 
+			proj.direction = dir 
+		elif proj.has_method("setup"): 
+			proj.setup(dir, damage)
 		
-		projectile.rotation = dir.angle()
-		get_parent().call_deferred("add_child", projectile)
+		# 5. 회전 (투사체가 날아가는 방향을 보게 함)
+		proj.rotation = dir.angle()
+		
+		# 6. 씬 트리에 추가 (이게 없으면 화면에 안 보임)
+		get_parent().call_deferred("add_child", proj)
+		print("투사체 발사됨!") # 디버깅 메시지
 
 # --- [패턴 3] 전멸기 ---
 func _pattern_ultimate():
@@ -218,7 +237,7 @@ func _pattern_ultimate():
 	# 히트박스 끄기
 	collision_shape.set_deferred("disabled", true) 
 	
-	print("!!! 전멸기 준비 !!!")
+	print("!!! CAUTION !!!")
 	
 	if red_screen: red_screen.visible = true
 	
@@ -259,7 +278,7 @@ func _pattern_ultimate():
 		if dist > 150: 
 			if player.has_method("take_damage"): 
 				player.take_damage(9999) 
-				print("즉사기 적중!")
+				print("9999")
 	
 	# SafeZone 숨기기
 	if SafeZonePos: SafeZonePos.visible = false
@@ -282,7 +301,7 @@ func _pattern_ultimate():
 func take_damage(amount):
 	if is_invincible or is_dead: return
 	hp -= amount
-	print("보스 HP: ", hp)
+	#print("보스 HP: ", hp)
 	
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.RED, 0.1)
