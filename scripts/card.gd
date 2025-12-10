@@ -19,6 +19,7 @@ func _on_pressed() -> void:
 	DeckManager.cleanup_inventory()
 	card_ui._update_ui()
 	
+#update ui (the number of cards)
 func edit_count_label() :
 	var card_id : String = "card" + str(type)
 	count_label.text = str(DeckManager.card_inventory[card_id])

@@ -34,5 +34,5 @@ func end():
 	hp_bar.visible = false
 	
 func _on_give_card_timeout() -> void:
-	DeckManager.add_card("card1", 1)
+	DeckManager.add_card("card1", randi_range(1, 6))
 	cardUI._update_ui()

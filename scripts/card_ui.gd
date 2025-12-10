@@ -44,7 +44,7 @@ func _update_ui():
 		child.queue_free()
 	#--------------/ui reset----------------
 	
-	
+	#---------------make ui-----------------
 	for card_id in DeckManager.card_inventory.keys():
 		var count = DeckManager.card_inventory[card_id]
 		
@@ -91,7 +91,8 @@ func _update_ui():
 			init_card(6, newCard, card_position_x, card_position_y, deg_to_rad(card_rotation))
 			
 			change_degree()
-		
+	#--------------/make ui-----------------
+	
 #make card in UI
 func init_card(id, newCard, x, y, r) :
 	newCard.position.x += x
@@ -107,6 +108,8 @@ func change_degree() :
 	card_position_x = cos(deg_to_rad(90 - card_rotation)) * length
 	card_position_y = sin(deg_to_rad(90 - card_rotation)) * length
 
+
+#------------test--------------
 func _on_button_pressed() -> void:
 	DeckManager.add_card("card1", 1)
 	_update_ui()
@@ -130,3 +133,4 @@ func _on_button_5_pressed() -> void:
 func _on_button_6_pressed() -> void:
 	DeckManager.add_card("card6", 1)
 	_update_ui()
+#-----------/test--------------
