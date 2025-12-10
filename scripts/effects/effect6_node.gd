@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var dice = $"../dice"
 
-
+#make ice region in map
 func _on_card_effect_6() :
 	var new_effect6 = effect6_TEMPLATE.instantiate()
 	new_effect6.time = dice.roulette()

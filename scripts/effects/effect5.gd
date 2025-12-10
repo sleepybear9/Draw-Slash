@@ -7,7 +7,7 @@ extends Node2D
 
 var heal : int
 
-#card effect on
+#start healing
 func _on_card_effect_5() -> void:
 	heal = dice.roulette()
 	anim_player.stop(true)

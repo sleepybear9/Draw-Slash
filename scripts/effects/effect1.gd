@@ -19,6 +19,7 @@ func _ready() -> void:
 	child2.monitoring = false
 	timer.connect("timeout", Callable(self, "_timeout"))
 
+#rotation
 func _physics_process(delta):
 	if enabled == true :
 		effect1.rotation_degrees += deg_to_rad(180)

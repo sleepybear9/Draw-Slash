@@ -18,18 +18,18 @@ func _ready() :
 	self.monitoring = false
 	timer.connect("timeout", Callable(self, "_timeout"))
 
-#card effect on
+#shoot lazer
 func _physics_process(delta: float) -> void:
 	if is_shoot:
 		look_at(self.global_position + GameManager.player_dir)
 		
 func _on_card_effect_3() -> void: 
+	#only use when it's not exist
 	if enabled == false :
 		dmg = dice.roulette()
 		self.visible = true
 		self.monitorable = true
 		self.monitoring = true
-		#여기 direction 수정 필요
 		is_shoot = true
 		timer.start()
 		anim_player.play("lazer")

@@ -9,6 +9,7 @@ var is_boss = false
 
 func _enter_tree() -> void:
 	hp_bar = $HpProgressBar
+	randomize()
 
 func _process(delta: float) -> void:
 	if GameManager.is_end:
@@ -43,5 +44,5 @@ func end():
 	hp_bar.visible = false
 	
 func _on_give_card_timeout() -> void:
-	DeckManager.add_card("card1", 1)
+	DeckManager.add_card("card" + str(randi_range(1, 6)), 1)
 	cardUI._update_ui()
