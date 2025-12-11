@@ -8,7 +8,7 @@ var menus =[]
 var player_dir: Vector2 = Vector2(0,0)
 var player
 var cam
-var stage = 2
+var stage = 1
 # level scenes
 @onready var levels = [preload("res://Scenes/Level_1.tscn"),preload("res://Scenes/Level_2.tscn")]
 @onready var monster = preload("res://Scenes/enemy.tscn")
