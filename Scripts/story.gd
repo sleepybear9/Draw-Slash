@@ -3,8 +3,12 @@ extends Node2D
 @onready var scene1 = $scene1
 @onready var scene2 = $scene2
 @onready var scene3 = $scene3
+var tween
 
 var now : int = 0
+
+func _ready() -> void:
+	tween = create_tween()
 
 func _process(delta: float) -> void:
 	if visible and Input.is_action_just_pressed("click"):
