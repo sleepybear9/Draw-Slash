@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sg5ol"]
 radius = 29.999996
-height = 939.99994
+height = 1579.9998
 
 [node name="card1_effect" type="Node2D"]
 script = ExtResource("1_sg5ol")

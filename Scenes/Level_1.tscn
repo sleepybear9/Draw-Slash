@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bnhxq2malrj4o" path="res://SavedData/Level_1.tres" id="1_cvgc8"]
 [ext_resource type="Script" uid="uid://c0dslciyckrwv" path="res://Scripts/map.gd" id="1_i63mn"]
-[ext_resource type="NavigationPolygon" uid="uid://c8m41t22d8xmn" path="res://Scenes/level1_1.tres" id="3_vnunq"]
+[ext_resource type="NavigationPolygon" uid="uid://c8m41t22d8xmn" path="res://SavedData/level1_1.tres" id="3_vnunq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i63mn"]
 size = Vector2(640, 640)
@@ -67,6 +67,7 @@ tile_map_data = PackedByteArray("AAAMABMAAwAuACsAAAAkABwAAwAqACsAAAAgAB4AAwAiACs
 tile_set = ExtResource("1_cvgc8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chunk_1"]
+visible = false
 y_sort_enabled = true
 rotation = -0.0005923448
 navigation_polygon = ExtResource("3_vnunq")
@@ -124,6 +125,7 @@ tile_map_data = PackedByteArray("AAAWAAkAAgACAAMAAgAWAAoAAgACAAQAAgAWAAsAAgACAAU
 tile_set = ExtResource("1_cvgc8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chunk_2"]
+visible = false
 y_sort_enabled = true
 rotation = -0.0005923448
 navigation_polygon = SubResource("NavigationPolygon_vnunq")
@@ -183,6 +185,7 @@ tile_map_data = PackedByteArray("AAAFAA8AAgACACAAAAAFABAAAgAAABcAAAAFABEAAgAAABc
 tile_set = ExtResource("1_cvgc8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chunk_3"]
+visible = false
 y_sort_enabled = true
 rotation = -0.0005923448
 navigation_polygon = SubResource("NavigationPolygon_nw7js")
@@ -227,6 +230,7 @@ tile_map_data = PackedByteArray("AAALACEAAwArAA4AAAAXABsAAwArABoAAAAhAAsAAwAaABE
 tile_set = ExtResource("1_cvgc8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chunk_4"]
+visible = false
 y_sort_enabled = true
 rotation = -0.0005923448
 navigation_polygon = SubResource("NavigationPolygon_nh7xm")

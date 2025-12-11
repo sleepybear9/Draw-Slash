@@ -8,11 +8,11 @@ var menus =[]
 var player_dir: Vector2 = Vector2(0,0)
 var player
 var cam
-var stage = 1
+var stage = 2
 # level scenes
 @onready var levels = [preload("res://Scenes/Level_1.tscn"),preload("res://Scenes/Level_2.tscn")]
 @onready var monster = preload("res://Scenes/enemy.tscn")
-var max = 20
+var max_enemy = 20
 @onready var bosses = [preload("res://Scenes/boss.tscn")] #bose scenes
 var map
 var timer
@@ -45,8 +45,7 @@ func start():
 func _physics_process(delta: float) -> void:
 	for e in enemies:
 		if e.visible and e.global_position.distance_to(player.global_position) > d+100:
-			e.global_position = player.global_position + (d+50)*Input.get_vector("Left","Right","Up","Down")
-			d
+			e.global_position = player.global_position + (d+50) * e.global_position.direction_to(player.global_position)
 	if Input.is_action_just_pressed("test"):
 		spawn(1)
 
@@ -77,20 +76,21 @@ func spawn(type: int):
 			center + Vector2(d, d),    # right-bottom
 		]
 		var spawn_point = points.pick_random()
-		if enemies.size() <= max:
-			var enemy = spawn_monster()
-			enemy.global_position = spawn_point
+		if enemies.size() <= max_enemy:
+			var enemy = spawn_monster(spawn_point) 
+			print(spawn_point)
 
 	else:
 		var boss = spawn_boss(type-1)
 		Game.get_node("Y_Sort").add_child(boss)
 	
-func spawn_monster():
+func spawn_monster(pos: Vector2):
 	var enemy
 	for e in enemies:
 		if e.visible == false:
 			print("reuse")
 			enemy = e
+			enemy.global_position = pos
 			enemy.set_process(true)
 			enemy.set_physics_process(true)
 			enemy.show()
@@ -99,6 +99,7 @@ func spawn_monster():
 	print("add")
 	enemy = monster.instantiate()
 	enemies.append(enemy)
+	enemy.global_position = pos
 	Game.get_node("Y_Sort").add_child(enemy)
 	print(enemies.size())
 	return enemy
