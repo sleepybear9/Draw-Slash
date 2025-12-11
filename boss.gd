@@ -166,6 +166,7 @@ func _pattern_summon():
 		if randi() % 2 == 0: spawn_scene = enemy 
 		else: spawn_scene = monster_range 
 			
+		#랜덤 위치에 소
 		if spawn_scene:
 			var minion = spawn_scene.instantiate()
 			var random_offset = Vector2(randf_range(-150, 150), randf_range(-150, 150))

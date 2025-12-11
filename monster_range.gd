@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var max_hp: int = 40
 @export var shoot_delay: float = 0.4 
 
+#투사체 씬 연동
 @export var projectile_range: PackedScene 
 
 var hp: int

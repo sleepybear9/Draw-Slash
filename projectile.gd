@@ -16,7 +16,6 @@ func _physics_process(delta):
 	position += direction * speed * delta
 
 # --- [신호 연결 함수] ---
-# Area2D 노드의 'body_entered' 시그널을 연결하세요.
 func _on_body_entered(body):
 	# 부딪힌 게 플레이어인지 확인 (그룹 또는 이름으로)
 	if body.is_in_group("player") or body.name == "Player":
@@ -29,7 +28,7 @@ func _on_body_entered(body):
 		# 투사체 삭제 (관통하게 하려면 이 줄을 지우세요)
 		queue_free()
 	
-	# 벽(TileMap)에 부딪히면 삭제되게 하려면?
+	# 벽(TileMap)에 부딪히면 삭제: 이거 투사체가 지형물에 안막히는거 원하면 냅두면돼
 	# if body is TileMapLayer or body.name == "Wall":
 	# 	queue_free()
 

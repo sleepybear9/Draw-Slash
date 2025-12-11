@@ -26,6 +26,7 @@ var player_in_attack_area = false
 @onready var sfx_dash: AudioStreamPlayer = $scavenger_dash
 @onready var sfx_death: AudioStreamPlayer = $sfx_monster_death
 
+#이동로직은 다른 몬스터와 동일
 func _ready():
 	hp = max_hp
 	
@@ -143,6 +144,7 @@ func _start_dash_attack():
 	if not is_dead:
 		can_attack = true
 
+# 스프라이트가 오른쪽을 바라보는 스프라이트밖에 없어서 방향 바뀌면 스프라이드 좌우반전, y=0축에서 직선으로 쫒아가도 어쩔수 없이 좌/우만 바라봄
 func _update_sprite_direction(vec: Vector2):
 	if is_attacking or is_dashing: return
 	if vec.x != 0:

@@ -137,6 +137,7 @@ func _on_attack_area_entered(body):
 func _on_attack_area_exited(body):
 	if body.is_in_group("player"): player_in_attack_area = false
 
+#몬스터가 공격할떄 플레이어를 보고 있는 방향으로 공격 히트박스 쏠림
 func _update_direction(vec: Vector2):
 	if abs(vec.x) > abs(vec.y):
 		current_dir = "right" if vec.x > 0 else "left"
@@ -158,6 +159,7 @@ func _update_direction(vec: Vector2):
 				attack_area.position = Vector2(0, -hitbox_offset)
 				attack_area.rotation_degrees = 270
 
+#몬스터가 데미지 받으면 잠깐 빨갛게 변함
 func take_damage(amount: int):
 	if is_dead: return
 	hp -= amount
@@ -166,6 +168,7 @@ func take_damage(amount: int):
 	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 	if hp <= 0: _die()
 
+#몬스터 죽으면 모든걸 멈추고 사아 애니메이션 재생
 func _die():
 	is_dead = true
 	is_attacking = false
