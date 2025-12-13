@@ -15,6 +15,12 @@ var exp:float = 0
 # ==============================
 @onready var anim = $AnimatedSprite2D
 @onready var dot_delayer = $dotTimer     # Damage over time timer
+@onready var audio = $AudioStreamPlayer
+@onready var step = $walk
+var levelup = preload("res://audio/ラッパのファンファーレ.mp3")
+var hurt = preload("res://audio/hurt2.mp3")
+var ground = preload("res://audio/08_Step_rock_02.wav")
+var water = preload("res://audio/14_Step_water_02.wav")
 
 # ==============================
 # State Flags
@@ -38,7 +44,14 @@ func _ready() -> void:
 	# Notify UI with initial HP
 	hp_changed.emit(hp)
 	exp_changed.emit(exp, max_exp)
-	
+
+func reset():
+	hp = max_hp
+	exp = 0
+	max_exp = 10
+	global_position = Vector2()
+	hp_changed.emit(hp)
+	exp_changed.emit(exp, max_exp)
 	
 func _physics_process(delta: float) -> void:
 	# Do nothing while the game is paused
@@ -57,12 +70,16 @@ func _physics_process(delta: float) -> void:
 			GameManager.player_dir = Vector2(1, 0)
 
 	velocity = direction * speed
+	
 
 	if hp > 0:
 		update_animation(direction)
 
 		# Disable movement while being attacked
 		if not is_attacked:
+			if velocity.length() ==0: step.stop()
+			elif !step.playing: step.play()
+			
 			move_and_slide()
 	elif is_alive:
 		# Death handling
@@ -132,7 +149,8 @@ func take_damage(dmg: int) -> void:
 	# Prevent damage stacking
 	if not is_attacked:
 		is_attacked = true
-
+		audio.stream = hurt
+		audio.play()
 		hp -= dmg * 10
 		if hp <= 0:
 			hp = 0
@@ -185,6 +203,7 @@ func _on_trap_checker_body_entered(body: Node2D) -> void:
 
 	if body.name == "Swamp":
 		is_swamped = true
+		step.stream = water
 		if dot_delayer.is_stopped():
 			dot_delayer.start()
 
@@ -197,6 +216,7 @@ func _on_trap_checker_body_entered(body: Node2D) -> void:
 
 	elif body.name == "Pollution":
 		is_poisoned = true
+		step.stream = water
 		if dot_delayer.is_stopped():
 			dot_delayer.start()
 
@@ -216,9 +236,11 @@ func _on_trap_checker_body_exited(body: Node2D) -> void:
 	if body.name == "Swamp":
 		is_swamped = false
 		dot_delayer.stop()
+		step.stream = ground
 	elif body.name == "Pollution":
 		is_poisoned = false
 		dot_delayer.stop()
+		step.stream = ground
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.name == "Boss":
@@ -230,6 +252,8 @@ func get_exp(val: float):
 	if max_exp <= exp:
 		exp = exp - max_exp
 		max_exp *= 1.5
+		audio.stream = levelup
+		audio.play()
 		
 		DeckManager.add_card("card" + str(randi_range(1, 6)), 1)
 		GameManager.hud.cardUI._update_ui()

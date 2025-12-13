@@ -7,6 +7,8 @@ extends Sprite2D
 @onready var start = $Start
 @onready var exit = $Exit
 
+@onready var bgm = $"../AudioStreamPlayer"
+
 # Enable or disable menu buttons
 func setup(how: bool):
 	start.disabled = how

@@ -62,10 +62,11 @@ func _physics_process(delta):
 	var wanted_velocity = direction * speed
 	nav_agent.velocity = wanted_velocity
 
-func take_damage(amount: int):
-	if is_dead: return
-	if !attackable: return
+func take_damage(amount: int) -> bool:
+	if is_dead: return false
+	if !attackable: return false
 	attackable = false
+	sound.play()
 	hp -= amount
 	
 	modulate = Color.RED
@@ -76,6 +77,7 @@ func take_damage(amount: int):
 		tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 	if hp <= 0: _die()
 	delayer.start()
+	return true
 
 func _die():
 	if is_dead: return
@@ -107,9 +109,7 @@ func _on_attackrange_area_entered(area: Area2D) -> void:
 		is_attacking = true
 		player.take_damage(damage)
 		attack.start()
-	elif area.is_in_group("attack"):
-		#print("attacked by ", area.name)
-		pass
+	elif area.is_in_group("attack"): pass
 		
 func _on_attackrange_area_exited(area: Area2D) -> void:
 	if area.name == "Hitbox":

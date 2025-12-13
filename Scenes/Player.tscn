@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://cam0r4pj5wn2b"]
+[gd_scene load_steps=89 format=3 uid="uid://cam0r4pj5wn2b"]
 
 [ext_resource type="Script" uid="uid://6yddb0kbakl2" path="res://Scripts/player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://ji71f3fndi1k" path="res://Sprites/player/individual_sheets/male_hero-death.png" id="2_52ee3"]
@@ -10,11 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://s1blxpvoykx3" path="res://Sprites/player/individual_sheets/male_hero-run_turn.png" id="6_bhhdu"]
 [ext_resource type="PackedScene" uid="uid://dl0kluomnqbb6" path="res://Scenes/effects/effect1.tscn" id="9_1e7my"]
 [ext_resource type="Script" uid="uid://ccq6jbmmjj0yn" path="res://Scripts/effects/effect2_node.gd" id="10_arntx"]
+[ext_resource type="AudioStream" uid="uid://80s6kfwjrmlw" path="res://audio/556 Single WAV.wav" id="11_arntx"]
 [ext_resource type="PackedScene" uid="uid://b77qk7karqlff" path="res://Scenes/effects/effect3.tscn" id="11_lslt6"]
 [ext_resource type="PackedScene" uid="uid://cupndvkytjerr" path="res://Scenes/effects/effect4.tscn" id="12_ulo2v"]
 [ext_resource type="PackedScene" uid="uid://b1q1sr8bh43g7" path="res://Scenes/effects/effect5.tscn" id="13_1e7my"]
 [ext_resource type="Script" uid="uid://dix13i1i8x421" path="res://Scripts/effects/effect6_node.gd" id="14_m0x7a"]
 [ext_resource type="PackedScene" uid="uid://1khr76k2gkl5" path="res://Scenes/dice.tscn" id="15_5v66d"]
+[ext_resource type="AudioStream" uid="uid://cci3tupnk25us" path="res://audio/ラッパのファンファーレ.mp3" id="17_lslt6"]
+[ext_resource type="AudioStream" uid="uid://18x00c6nxah2" path="res://audio/08_Step_rock_02.wav" id="18_ulo2v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqity"]
 atlas = ExtResource("2_52ee3")
@@ -579,6 +582,9 @@ script = ExtResource("10_arntx")
 [node name="Timer" type="Timer" parent="Effects/card2_effect"]
 wait_time = 0.15
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Effects/card2_effect"]
+stream = ExtResource("11_arntx")
+
 [node name="card3_effect" parent="Effects" instance=ExtResource("11_lslt6")]
 position = Vector2(1.6666718, 0)
 
@@ -591,6 +597,15 @@ script = ExtResource("14_m0x7a")
 
 [node name="dice" parent="Effects" instance=ExtResource("15_5v66d")]
 position = Vector2(0.99999994, -83.99999)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_lslt6")
+volume_db = 3.0
+
+[node name="walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_ulo2v")
+volume_db = 5.0
+pitch_scale = 1.5
 
 [connection signal="timeout" from="dotTimer" to="." method="_on_dot_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

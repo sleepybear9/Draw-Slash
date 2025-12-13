@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bmx1a0ds3uvvr"]
+[gd_scene load_steps=67 format=3 uid="uid://bmx1a0ds3uvvr"]
 
 [ext_resource type="Script" uid="uid://cuqmbv75ss1ei" path="res://Scripts/boss.gd" id="1_o1i15"]
 [ext_resource type="Texture2D" uid="uid://d17wfhxjyt7km" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/death.png" id="2_we8h1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bspbeflcwuobb" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/skill1.png" id="5_ry61v"]
 [ext_resource type="Texture2D" uid="uid://p43xrg0fqbvc" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/summon.png" id="6_kvofc"]
 [ext_resource type="Texture2D" uid="uid://cfktk4rg1tnlj" path="res://assets/sprites/safezone_nobg.png" id="7_kles1"]
+[ext_resource type="AudioStream" uid="uid://c6kscdyr7kq1s" path="res://audio/die.mp3" id="8_yq25j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yq25j"]
 radius = 30.0
@@ -480,6 +481,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_kles1")
 
 [node name="sfx_boss_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_yq25j")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

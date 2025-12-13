@@ -179,10 +179,14 @@ grow_vertical = 2
 pivot_offset = Vector2(640, 240)
 script = ExtResource("5_c3eba")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Button" type="Button" parent="."]
+z_index = 30
 layout_mode = 0
-offset_right = 1285.0
-offset_bottom = 717.0
+offset_left = 1125.0
+offset_top = 92.0
+offset_right = 1178.0
+offset_bottom = 123.0
+text = "sfdsfs"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GiveCard" to="." method="_on_give_card_timeout"]
@@ -192,3 +196,4 @@ offset_bottom = 717.0
 [connection signal="pressed" from="buttons/Button4" to="UI" method="_on_button_4_pressed"]
 [connection signal="pressed" from="buttons/Button5" to="UI" method="_on_button_5_pressed"]
 [connection signal="pressed" from="buttons/Button6" to="UI" method="_on_button_6_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

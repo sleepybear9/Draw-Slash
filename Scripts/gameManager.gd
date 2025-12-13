@@ -1,11 +1,11 @@
 extends Node
 
+var is_main = true
 var is_paused = true
 var is_end = false
-var is_main = true
 var Game
+var main
 var sortable
-var menus =[]
 var player_dir: Vector2 = Vector2(0,0)
 var player
 var cam
@@ -33,8 +33,8 @@ func _ready():
 	await get_tree().process_frame
 	Game = get_node("/root/Game")
 
-	var main = Game.get_node("CanvasLayer/MainMenu")
-	menus.append(main)
+	main = Game.get_node("CanvasLayer/MainMenu")
+
 	timer = Game.get_node("Spawning")
 	timer.timeout.connect(spawn.bind(0))
 	sortable = Game.get_node("Y_Sort")
@@ -43,10 +43,20 @@ func _ready():
 	hud = Game.get_node("CanvasLayer/Hud")
 	arrow = player.get_node("arrow")
 
+func to_main():
+	for e in enemies:
+		e.queue_free()
+	enemies.clear()
+	player.reset()
+	main.show()
+	main.get_node("Main").setup(false)
+	is_main
+	
+
 func start():
-	menus[0].hide()
-	set_game()
 	is_main = false
+	main.hide()
+	set_game()
 	is_paused = false
 	hud.show()
 	hud.start()
@@ -76,7 +86,6 @@ func pause_toggle():
 	is_paused = get_tree().paused
 
 func set_game():
-	is_main = false
 	
 	if map: map.queue_free()
 	map = levels[stage].instantiate()
@@ -97,7 +106,7 @@ func clear():
 	arrow.show()
 	
 func end():
-	pass
+	is_end = true
 
 func get_point() -> Vector2:
 	var center = player.global_position

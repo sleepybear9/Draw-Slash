@@ -19,6 +19,7 @@ var projectile = preload("res://Scenes/projectile.tscn")
 @onready var attack2 = $attack2
 @onready var delayer = $Timer
 var attackable = true
+@onready var dead = $sfx_boss_death
 
 # [상태 변수]
 var hp: int
@@ -258,7 +259,8 @@ func take_damage(amount):
 func die():
 	is_dead = true
 	is_doing_pattern = false
-	
+	dead.play()
+	collision_shape.set_deferred("disabled", true) 
 	if anim.sprite_frames.has_animation("death"):
 		anim.play("death")
 		await anim.animation_finished

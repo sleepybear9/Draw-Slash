@@ -3,7 +3,7 @@ extends Node2D
 @onready var child1 = $sword1
 @onready var child2 = $sword2
 @onready var timer = $Timer
-@onready var audio = $AudioStreamPlayer2D
+@onready var audio = $AudioStreamPlayer
 
 @onready var dice = $"../dice"
 
@@ -42,11 +42,12 @@ func _on_card_effect_1() -> void:
 		child1.monitoring = true
 		child2.monitorable = true
 		child2.monitoring = true
+	
 		DeckManager.add_card("card1", -1)
 		timer.start()
 		enabled = true
-
+		
 func _on_sword_area_entered(area: Area2D) -> void:
 	var monster = area.get_parent()
-	monster.take_damage(dmg)
+	if monster.take_damage(dmg): audio.play()
 	print(monster.hp)

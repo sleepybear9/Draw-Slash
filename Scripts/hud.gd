@@ -7,6 +7,11 @@ var hp_bar
 var exp_bar
 @onready var giveCard = $GiveCard
 @onready var cardUI = $UI
+@onready var setting = $"../setting"
+@onready var back = $"../setting/VBoxContainer/Back"
+@onready var title = $"../setting/VBoxContainer/Title"
+@onready var exit = $"../setting/VBoxContainer/Exit"
+@onready var sound = $"../setting/HSlider"
 var is_stop = false
 
 func _enter_tree() -> void:
@@ -15,6 +20,10 @@ func _enter_tree() -> void:
 	randomize()
 
 func _process(delta: float) -> void:
+	if Input.is_action_pressed("setting"): 
+		setting.show()
+		setting_able(false)
+		GameManager.pause_toggle()
 	if GameManager.is_end:
 		end()
 	if (!timeover):
@@ -33,7 +42,6 @@ func _process(delta: float) -> void:
 		is_stop = true
 		GameManager.timer.stop()
 		
-
 func start():
 	is_stop = false
 	timeover = false
@@ -64,3 +72,33 @@ func end():
 func _on_give_card_timeout() -> void:
 	DeckManager.add_card("card" + str(randi_range(1, 6)), 1)
 	cardUI._update_ui()
+
+func setting_able(val: bool):
+	back.disabled = val
+	title.disabled = val
+	exit.disabled = val
+
+func _on_back_pressed() -> void:	
+	GameManager.pause_toggle()
+	if GameManager.is_main:
+		GameManager.main.get_node("Main").setup(false)
+	setting_able(true)
+	setting.hide()
+
+func _on_title_pressed() -> void:
+	GameManager.pause_toggle()
+	setting_able(true)
+	GameManager.to_main()
+	setting.hide()
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()
+
+func _on_button_pressed() -> void:
+	setting.show()
+	setting_able(false)
+	GameManager.main.get_node("Main").setup(true)
+	GameManager.pause_toggle()
+	
+func _on_h_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(pow(value,2)))

@@ -4,7 +4,7 @@ extends Area2D
 @export var dmg: int = 5
 @export var max_distance: float = 1500.0
 
-@onready var audio = $AudioStreamPlayer2D
+@onready var audio = GameManager.player.get_node("Effects/card2_effect/AudioStreamPlayer2D")
 
 var direction : Vector2 = Vector2(0, 0)
 var start_position : Vector2

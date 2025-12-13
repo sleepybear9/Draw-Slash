@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://k3f24suowbou"]
+[gd_scene load_steps=6 format=3 uid="uid://k3f24suowbou"]
 
 [ext_resource type="Script" uid="uid://wky6govcrvym" path="res://Scripts/enemy.gd" id="1_cpv6j"]
 [ext_resource type="SpriteFrames" uid="uid://chfa4wbwv161t" path="res://Resource/monster.tres" id="2_1f0kj"]
+[ext_resource type="AudioStream" uid="uid://bauxpjk3v8eum" path="res://assets/sounds/555425__tonsil5__zombie-pain-6.wav" id="3_afpow"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vt4ob"]
 radius = 1.4998727
@@ -49,6 +50,9 @@ wait_time = 1.5
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_afpow")
+volume_db = 5.0
+max_polyphony = 30
 
 [node name="delayer" type="Timer" parent="."]
 wait_time = 0.3
