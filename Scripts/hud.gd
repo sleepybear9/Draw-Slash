@@ -1,6 +1,6 @@
 extends Control
 
-var is_boss = false
+var timeover = false
 @onready var time = $Time
 @onready var timer = $Timer
 @onready var hp_bar
@@ -14,14 +14,17 @@ func _enter_tree() -> void:
 func _process(delta: float) -> void:
 	if GameManager.is_end:
 		end()
-	if (!is_boss):
+	if (!timeover):
 		var remaining = timer.time_left
 		var minutes = int(remaining / 60)
 		var seconds = int(remaining) % 60
 
 		time.text = "%02d:%02d" % [minutes, seconds]
 	else:
-		time.text = "Boss appeared!"
+		if GameManager.is_nonboss[GameManager.stage]:
+			time.text = "Survive!"
+		else:
+			time.text = "Boss appeared!"
 		
 
 func start():
@@ -32,7 +35,7 @@ func start():
 	hp_bar.show()
 
 func _on_timer_timeout() -> void:
-	is_boss = true
+	timeover = true
 
 func hp_change(hp: int):
 	print(hp)

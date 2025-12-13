@@ -183,8 +183,8 @@ metadata/_edit_group_ = true
 position = Vector2(500.00006, 267)
 scale = Vector2(1.1066667, 1.0733334)
 sprite_frames = SubResource("SpriteFrames_7q51o")
-animation = &"death"
-frame_progress = 0.3109068
+animation = &"attack"
+frame_progress = 0.76134616
 metadata/_edit_group_ = true
 
 [node name="attackrange" type="Area2D" parent="."]

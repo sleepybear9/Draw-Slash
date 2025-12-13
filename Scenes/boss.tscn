@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bspbeflcwuobb" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/skill1.png" id="5_ry61v"]
 [ext_resource type="Texture2D" uid="uid://p43xrg0fqbvc" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/summon.png" id="6_kvofc"]
 [ext_resource type="Texture2D" uid="uid://cfktk4rg1tnlj" path="res://assets/sprites/safezone_nobg.png" id="7_kles1"]
-[ext_resource type="PackedScene" uid="uid://ct4sl8psepaad" path="res://Scenes/enemy.tscn" id="9_kles1"]
+[ext_resource type="PackedScene" uid="uid://ct4sl8psepaad" path="res://Scenes/enemy1.tscn" id="9_kles1"]
 [ext_resource type="PackedScene" uid="uid://bw344r3xx6ssv" path="res://Scenes/monster_big_melee.tscn" id="10_etj48"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ef0k6"]

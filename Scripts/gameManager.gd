@@ -8,7 +8,8 @@ var menus =[]
 var player_dir: Vector2 = Vector2(0,0)
 var player
 var cam
-var stage = 1
+var stage = 0
+var is_nonboss = [true, false]
 # level scenes
 @onready var levels = [preload("res://Scenes/Level_1.tscn"),preload("res://Scenes/Level_2.tscn")]
 @onready var monster = preload("res://Scenes/enemy.tscn")
@@ -55,7 +56,7 @@ func pause_toggle():
 
 func set_game(stage: int):
 	is_main = false
-	map = levels[stage-1].instantiate()
+	map = levels[stage].instantiate()
 	Game.get_node("Y_Sort").add_child(map)
 	
 	timer.start()

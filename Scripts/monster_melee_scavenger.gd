@@ -28,12 +28,9 @@ var player_in_attack_area = false
 
 func _ready():
 	hp = max_hp
-	
 	player = get_tree().get_first_node_in_group("player")
 	if not player:
-		player = get_tree().get_first_node_in_group("Player")
-	if not player:
-		player = get_tree().root.find_child("Player", true, false)
+		player = get_tree().get_root().find_child("Player", true, false)
 
 	if player:
 		print("추적 대상 발견: ", player.name)

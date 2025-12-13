@@ -1,14 +1,13 @@
 extends CharacterBody2D
 
-@export var speed: float = 70
-@export var attack_distance: float = 80
-@export var attack_cooldown: float = 1.0
-@export var damage: int = 15
-@export var max_hp: int = 40
-@export var hitbox_offset: float = 30.0
+var speed: float = 70
+var attack_distance: float = 100
+var attack_cooldown: float = 1.0
+var damage: int = 15
+var hp: int = 40
+var hitbox_offset: float = 30.0
 
-var hp: int
-var player: Node2D
+@onready var player = $"../Player"
 var can_attack = true
 var player_in_attack_area = false
 var current_dir: String = "down"
@@ -22,43 +21,19 @@ var is_attacking = false
 @onready var timer: Timer = $Timer
 @onready var sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
-# [추가됨] 오디오 노드 연결 (이름 유지: sfx_monster_attack_melee, sfx_monster_death)
-#@onready var sfx_attack: AudioStreamPlayer = $sfx_monster_attack_melee
-#@onready var sfx_death: AudioStreamPlayer = $sfx_monster_death
-var sfx = []
-
-func _ready():
-	hp = max_hp
-	player = get_tree().get_first_node_in_group("player")
-	if not player:
-		player = get_tree().get_root().find_child("Player", true, false)
-	
-	attack_area.body_entered.connect(_on_attack_area_entered)
-	attack_area.body_exited.connect(_on_attack_area_exited)
-	#sfx.append(preload())
-	
-	# 길찾기 초기화
-	await get_tree().physics_frame
-	if timer:
-		timer.timeout.connect(_update_navigation_target)
-		timer.start(0.2)
+func setup(id: int):
+	pass
 
 func _update_navigation_target():
 	if player and not is_dead:
 		nav_agent.target_position = player.global_position
 
 func _physics_process(delta):
-	# 죽었거나 공격 중이면 이동 금지
 	if is_dead or not player: return
-	if is_attacking: return 
-	
 	var dist = global_position.distance_to(player.global_position)
 	
-	if dist <= attack_distance:
-		velocity = Vector2.ZERO # 공격 사거리 안이면 멈춤
-		_do_attack()
-	else:
-		_chase_player(delta)
+	_chase_player(delta)
+	
 
 func _chase_player(_delta):
 	if nav_agent.is_navigation_finished():
@@ -71,8 +46,8 @@ func _chase_player(_delta):
 	var direction = global_position.direction_to(next_path_pos)
 	
 	_update_direction(direction)
-	velocity = direction * speed
-	move_and_slide()
+	var wanted_velocity = direction * speed
+	nav_agent.velocity = wanted_velocity
 
 	# 움직일 때는 걷기, 멈췄을 때는 아이들 모션 재생
 	if velocity.length() > 0:
@@ -182,3 +157,7 @@ func _die():
 	
 	await anim.animation_finished
 	queue_free()
+
+func _velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
+	move_and_slide()

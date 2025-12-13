@@ -1,13 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk1mhfnnigpka"]
+[gd_scene load_steps=9 format=3 uid="uid://dk1mhfnnigpka"]
 
 [ext_resource type="Script" uid="uid://d15rwd2n5aqjs" path="res://Scripts/mainStart.gd" id="1_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://5yqovvwmjlnc" path="res://img/main.png" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://brtm28tglm5q0" path="res://img/start.png" id="2_48xlc"]
+[ext_resource type="Script" uid="uid://cnc57gyls8ibl" path="res://Scripts/main.gd" id="2_opfnp"]
 [ext_resource type="PackedScene" uid="uid://dgo65iyfnree2" path="res://Scenes/story.tscn" id="4_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://ujdama6c3u4p" path="res://img/end.png" id="5_cp0ys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48xlc"]
 atlas = ExtResource("2_48xlc")
 region = Rect2(291, 208, 698, 331)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhxw7"]
+atlas = ExtResource("5_cp0ys")
+region = Rect2(288, 200, 688, 336)
 
 [node name="MainMenu" type="Node2D"]
 
@@ -15,15 +21,28 @@ region = Rect2(291, 208, 698, 331)
 scale = Vector2(0.95238096, 0.9375)
 texture = ExtResource("1_28flt")
 centered = false
+script = ExtResource("2_opfnp")
 
-[node name="TextureButton" type="TextureButton" parent="Main"]
-offset_left = 310.78497
-offset_top = 439.5767
-offset_right = 1008.785
-offset_bottom = 770.57666
-scale = Vector2(0.7, 0.7)
+[node name="Start" type="TextureButton" parent="Main"]
+offset_left = 312.54996
+offset_top = 255.67502
+offset_right = 1010.5499
+offset_bottom = 586.6749
+scale = Vector2(0.65, 0.65)
 pivot_offset = Vector2(349, 165.5)
 texture_normal = SubResource("AtlasTexture_48xlc")
+ignore_texture_size = true
+script = ExtResource("1_1ehe0")
+metadata/_edit_use_anchors_ = true
+
+[node name="Exit" type="TextureButton" parent="Main"]
+offset_left = 312.54996
+offset_top = 483.3584
+offset_right = 1010.5499
+offset_bottom = 814.3583
+scale = Vector2(0.65, 0.65)
+pivot_offset = Vector2(349, 165.5)
+texture_normal = SubResource("AtlasTexture_yhxw7")
 ignore_texture_size = true
 script = ExtResource("1_1ehe0")
 metadata/_edit_use_anchors_ = true
@@ -31,4 +50,5 @@ metadata/_edit_use_anchors_ = true
 [node name="Story" parent="." instance=ExtResource("4_ce3w2")]
 visible = false
 
-[connection signal="pressed" from="Main/TextureButton" to="Main/TextureButton" method="_on_pressed"]
+[connection signal="pressed" from="Main/Start" to="Main" method="_on_start_pressed"]
+[connection signal="pressed" from="Main/Exit" to="Main" method="_on_exit_pressed"]
