@@ -29,6 +29,7 @@ window/size/viewport_height=720
 
 attack=""
 monster=""
+boss=""
 
 [input]
 
@@ -74,6 +75,7 @@ click={
 2d_physics/layer_6="trap"
 2d_physics/layer_7="map_check"
 2d_physics/layer_8="trap_check"
+2d_physics/layer_9="boss"
 
 [navigation]
 

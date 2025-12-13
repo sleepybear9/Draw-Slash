@@ -28,16 +28,6 @@ shape = SubResource("RectangleShape2D_j5yw3")
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("3_b2bpf")]
 
-[node name="temp_dmg" type="Button" parent="CanvasLayer"]
-z_index = 30
-offset_left = 388.0
-offset_top = 74.0
-offset_right = 481.0
-offset_bottom = 126.0
-text = "damage
-"
-metadata/_edit_use_anchors_ = true
-
 [node name="Button" type="Button" parent="CanvasLayer"]
 process_mode = 3
 z_index = 30
@@ -50,8 +40,17 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("3_j5yw3")]
 
+[node name="Button2" type="Button" parent="CanvasLayer"]
+z_index = 30
+offset_left = 75.0
+offset_top = 183.0
+offset_right = 111.0
+offset_bottom = 214.0
+text = "exp"
+
 [node name="Spawning" type="Timer" parent="."]
 
+[connection signal="exp_changed" from="Y_Sort/Player" to="CanvasLayer/Hud" method="exp_changed"]
 [connection signal="hp_changed" from="Y_Sort/Player" to="CanvasLayer/Hud" method="hp_change"]
-[connection signal="pressed" from="CanvasLayer/temp_dmg" to="Y_Sort/Player" method="take_damage" binds= [20]]
 [connection signal="pressed" from="CanvasLayer/Button" to="Y_Sort/Player" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="Y_Sort/Player" method="get_exp" binds= [7.0]]

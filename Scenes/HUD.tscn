@@ -1,14 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://4ejlh0qdaqm3"]
+[gd_scene load_steps=16 format=3 uid="uid://4ejlh0qdaqm3"]
 
 [ext_resource type="Script" uid="uid://1lth67ytfr38" path="res://Scripts/hud.gd" id="1_sd512"]
+[ext_resource type="Texture2D" uid="uid://bnsav67toymbh" path="res://Sprites/Health&Stamina/Silver/BorderBG.png" id="2_nfm57"]
 [ext_resource type="Texture2D" uid="uid://cc55sk1urbfpm" path="res://Sprites/Health&Stamina/Red/BorderBG.png" id="2_s3jbq"]
+[ext_resource type="Texture2D" uid="uid://dadco5h6f4d24" path="res://Sprites/Health&Stamina/Silver/Border.png" id="3_b5b84"]
 [ext_resource type="Texture2D" uid="uid://by5i53d8hfj2e" path="res://Sprites/Health&Stamina/Red/Border.png" id="3_c3eba"]
+[ext_resource type="Texture2D" uid="uid://bb2rvwyti0tbs" path="res://Sprites/Health&Stamina/Silver/Colors.png" id="4_fbb48"]
 [ext_resource type="Texture2D" uid="uid://desqtv6rqfwoc" path="res://Sprites/Health&Stamina/Red/Colors.png" id="4_g8s2e"]
 [ext_resource type="Script" uid="uid://bh6tgukx7x7t1" path="res://Scripts/card_ui.gd" id="5_c3eba"]
 
 [sub_resource type="SystemFont" id="SystemFont_sd512"]
 subpixel_positioning = 0
 oversampling = 128.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2vyp"]
+atlas = ExtResource("2_nfm57")
+region = Rect2(95, 20, 50, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhtw7"]
+atlas = ExtResource("3_b5b84")
+region = Rect2(95, 20, 50, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5mne"]
+atlas = ExtResource("4_fbb48")
+region = Rect2(95, 20, 50, 9)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t385i"]
 atlas = ExtResource("2_s3jbq")
@@ -37,9 +52,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -207.0
-offset_top = 24.0
+offset_top = 68.0
 offset_right = 641.0
-offset_bottom = 112.0
+offset_bottom = 156.0
 grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = SubResource("SystemFont_sd512")
@@ -52,9 +67,16 @@ autowrap_mode = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 33.0
-offset_bottom = 34.0
+offset_left = 137.0
+offset_top = 13.0
+offset_right = -137.0
+offset_bottom = 56.0
 grow_horizontal = 2
+value = 1.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_o2vyp")
+texture_over = SubResource("AtlasTexture_hhtw7")
+texture_progress = SubResource("AtlasTexture_w5mne")
 
 [node name="HpProgressBar" type="TextureProgressBar" parent="."]
 layout_mode = 1

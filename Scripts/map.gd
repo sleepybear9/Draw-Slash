@@ -18,5 +18,3 @@ func _on_map_checker_area_exited(area: Area2D) -> void:
 			global_position.y += chunk_size.y * 2
 		elif diff.y < -chunk_size.y / 2:
 			global_position.y -= chunk_size.y * 2
-
-	print(self.name, global_position)

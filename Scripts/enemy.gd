@@ -14,6 +14,7 @@ var player_in_attack_area = false
 var is_dead = false
 var is_attacking = false
 var is_damaging = false
+var by_boss = false
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -27,14 +28,15 @@ var types = [preload("res://Resource/monster/MutilatedStumbler.tres"), preload("
 func setup(mon_id: int):
 	id = mon_id
 	var select = types[id]
-	print(select.anim)
 	anim.play(select.anim)
 	hp = select.hp
 	speed = select.speed
 	damage = select.dmg
 	is_dead = false
+	by_boss = false
 	attack_area.monitorable = true
 	attack_area.monitoring = true
+	modulate = Color(1, 1, 1) 
 
 func _update_navigation_target():
 	if player and not is_dead:
@@ -60,12 +62,21 @@ func _physics_process(delta):
 func take_damage(amount: int):
 	if is_dead: return
 	hp -= amount
+	
 	modulate = Color.RED
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
+	if by_boss:
+		tween.tween_property(self, "modulate", Color(0.5, 0.5, 1, 0.8), 0.2)
+	else: 
+		tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 	if hp <= 0: _die()
 
 func _die():
+	if is_dead: return
+	
+	if by_boss: 
+		$"../Boss"._on_minion_died()
+		
 	is_attacking = false
 	velocity = Vector2.ZERO
 	set_physics_process(false)
@@ -91,7 +102,8 @@ func _on_attackrange_area_entered(area: Area2D) -> void:
 		player.take_damage(damage)
 		attack.start()
 	elif area.is_in_group("attack"):
-		print("attacked by ", area.name)
+		#print("attacked by ", area.name)
+		pass
 		
 func _on_attackrange_area_exited(area: Area2D) -> void:
 	if area.name == "Hitbox":

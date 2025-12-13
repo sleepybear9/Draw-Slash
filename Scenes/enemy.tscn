@@ -32,7 +32,7 @@ shape = SubResource("RectangleShape2D_1f0kj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_1f0kj")
 animation = &"DecrepitBones"
-frame_progress = 0.23815723
+frame_progress = 0.8682461
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true

@@ -1,7 +1,6 @@
-[gd_scene load_steps=68 format=3 uid="uid://bmx1a0ds3uvvr"]
+[gd_scene load_steps=66 format=3 uid="uid://bmx1a0ds3uvvr"]
 
 [ext_resource type="Script" uid="uid://cuqmbv75ss1ei" path="res://Scripts/boss.gd" id="1_o1i15"]
-[ext_resource type="PackedScene" uid="uid://buoc1w15rplms" path="res://Scenes/projectile.tscn" id="2_ef0k6"]
 [ext_resource type="Texture2D" uid="uid://d17wfhxjyt7km" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/death.png" id="2_we8h1"]
 [ext_resource type="Texture2D" uid="uid://cnkceem4o2smh" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/idle2.png" id="3_kvofc"]
 [ext_resource type="Texture2D" uid="uid://bsn11uq5hox3t" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/attacking.png" id="4_ef0k6"]
@@ -9,10 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://p43xrg0fqbvc" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/summon.png" id="6_kvofc"]
 [ext_resource type="Texture2D" uid="uid://cfktk4rg1tnlj" path="res://assets/sprites/safezone_nobg.png" id="7_kles1"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ef0k6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvofc"]
-size = Vector2(145, 62)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yq25j"]
+radius = 30.0
+height = 112.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kles1"]
 atlas = ExtResource("2_we8h1")
@@ -165,10 +163,6 @@ region = Rect2(400, 100, 100, 100)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ubnwj"]
 atlas = ExtResource("4_ef0k6")
 region = Rect2(500, 100, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bjadb"]
-atlas = ExtResource("4_ef0k6")
-region = Rect2(0, 200, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvofc"]
 atlas = ExtResource("5_ry61v")
@@ -345,7 +339,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"normalattack_1",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -365,9 +359,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ubnwj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bjadb")
 }],
 "loop": false,
 "name": &"normalattack_2",
@@ -438,54 +429,54 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x36vw"]
-radius = 37.0
-height = 74.0
+radius = 80.0
+height = 160.0
 
-[node name="Boss" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq25j"]
+size = Vector2(50.630775, 77.470825)
+
+[node name="Boss" type="CharacterBody2D" groups=["boss"]]
+collision_layer = 4
+collision_mask = 24
 script = ExtResource("1_o1i15")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_ef0k6")
-
-[node name="attackrange" type="Area2D" parent="."]
-
-[node name="playercollision" type="CollisionShape2D" parent="attackrange"]
-shape = SubResource("RectangleShape2D_kvofc")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["monster"]]
+position = Vector2(-15, 14)
+shape = SubResource("CapsuleShape2D_yq25j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.03, 2.03)
 sprite_frames = SubResource("SpriteFrames_xcyd7")
-animation = &"return"
-frame = 3
+animation = &"normalattack_2"
+frame = 5
 frame_progress = 1.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="attackrange" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(612, 375)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackrange" groups=["monster"]]
+position = Vector2(-15, 14)
+shape = SubResource("CapsuleShape2D_yq25j")
+
+[node name="attack1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack1"]
+position = Vector2(21, -10)
 shape = SubResource("CapsuleShape2D_x36vw")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="attack2" type="Area2D" parent="."]
 
-[node name="redscreen" type="ColorRect" parent="CanvasLayer"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack2"]
+position = Vector2(17.999998, 11)
+scale = Vector2(3.0811298, 1.1100953)
+shape = SubResource("RectangleShape2D_yq25j")
+
+[node name="SafeZonePos" type="Node2D" parent="."]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.9647059, 0.2784314, 0.34509805, 0.39215687)
 
-[node name="SafeZonePos" type="Node2D" parent="CanvasLayer"]
-visible = false
-z_index = 100
-
-[node name="SafeZonePos" type="Sprite2D" parent="CanvasLayer/SafeZonePos"]
+[node name="SafeZonePos" type="Sprite2D" parent="SafeZonePos"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_kles1")
-
-[node name="projectile_boss" parent="." instance=ExtResource("2_ef0k6")]
-position = Vector2(-582, -398)
 
 [node name="sfx_boss_death" type="AudioStreamPlayer" parent="."]

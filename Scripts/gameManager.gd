@@ -17,6 +17,7 @@ var levels = [preload("res://Scenes/Level_1.tscn"),preload("res://Scenes/Level_2
 var monster = preload("res://Scenes/enemy.tscn")
 var max_enemy = 30
 var bosses = [preload("res://Scenes/boss.tscn")] #bose scenes
+var bose
 var map
 var gate = preload("res://Scenes/Gate.tscn")
 var timer
@@ -24,7 +25,7 @@ var hud
 var d = 680 # +-680 or 0, +-680 or 0 = 8 locations of spawning
 var enemies = []
 
-var test = true #temp variable
+var test = false #temp variable
 
 func _ready():
 	await get_tree().process_frame
@@ -48,15 +49,18 @@ func start():
 	hud.start()
 	
 func upstair():
+	player.global_position = Vector2()
 	stage += 1
 	set_game()
 	hud.start()
 	
 func _physics_process(delta: float) -> void:
 	if !is_clear:
-		for e in enemies:
-			if e.visible and e.global_position.distance_to(player.global_position) > d+100:
-				e.global_position = player.global_position + (d+50) * e.global_position.direction_to(player.global_position)
+		if !test:
+			for e in enemies:
+				if e.visible and e.global_position.distance_to(player.global_position) > d+100:
+					e.global_position = player.global_position + (d+50) * e.global_position.direction_to(player.global_position)
+		
 		if Input.is_action_just_pressed("test"):
 			print("try")
 			spawn(1)
@@ -99,44 +103,40 @@ func get_point() -> Vector2:
 			center + Vector2(d, d),    # right-bottom
 		]
 	var point = points.pick_random()
-	print(point)	
 	return point
 	
-
 func spawn(type: int):
 	if (type == 0):
-		if enemies.size() < max_enemy:
-			var spawn_point = get_point()
-			var enemy = spawn_monster(spawn_point) 
+		var spawn_point = get_point()
+		var id = randi_range(0, 1)
+		spawn_monster(spawn_point, id) 
 	else:
-		print(1)
 		var boss = spawn_boss(type-1)
 		sortable.add_child(boss)
 	
-func spawn_monster(pos: Vector2):
+func spawn_monster(pos: Vector2, id: int):
 	var enemy
 	for e in enemies:
 		if e.is_dead:
-			print("reuse")
 			enemy = e
 			enemy.global_position = pos
 			enemy.set_process(true)
 			enemy.set_physics_process(true)
 			enemy.show()
-			enemy.setup(randi_range(0,1))
+			enemy.setup(id)
 			return enemy
-	
-	print("add")
-	enemy = monster.instantiate()
-	enemies.append(enemy)
-	enemy.global_position = pos
-	sortable.add_child(enemy)
-	enemy.setup(randi_range(0,1))
-	return enemy
+			
+	if enemies.size() < max_enemy:
+		enemy = monster.instantiate()
+		enemies.append(enemy)
+		enemy.global_position = pos
+		sortable.add_child(enemy)
+		enemy.setup(randi_range(0,1))
+		return enemy
 
 func spawn_boss(type: int):
 	type -= 1 # tempory in current condition
-	var bose = bosses[type].instantiate()
+	bose = bosses[type].instantiate()
 	sortable.add_child(bose)
 	var pos : Vector2= Vector2(0,0)
 	bose.global_position = pos
@@ -166,6 +166,13 @@ func show_boss_spawn(spawn_pos: Vector2):
 	await tween2.finished
 	hud.show()
 	is_paused = false
+
+func boss_warning(flag:bool):
+	if flag: 
+		map.modulate = Color(1, 0.5, 0.5) 
+		var tween = create_tween()
+		tween.tween_property(map, "modulate", Color.BLACK, 4.5)
+	else: map.modulate = Color(1, 1, 1)
 
 
 

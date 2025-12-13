@@ -3,13 +3,15 @@ extends Control
 var timeover = false
 @onready var time = $Time
 @onready var timer = $Timer
-@onready var hp_bar
+var hp_bar
+var exp_bar
 @onready var giveCard = $GiveCard
 @onready var cardUI = $UI
 var is_stop = false
 
 func _enter_tree() -> void:
 	hp_bar = $HpProgressBar
+	exp_bar = $ExpProgressBar
 	randomize()
 
 func _process(delta: float) -> void:
@@ -39,18 +41,24 @@ func start():
 	giveCard.start()
 	giveCard.timeout.connect(_on_give_card_timeout)
 	hp_bar.show()
+	exp_bar.show()
 
 func _on_timer_timeout() -> void:
 	timeover = true
 
 func hp_change(hp: int):
-	print(hp)
 	hp_bar.value = hp
+
+func exp_changed(exp:float, max_exp:float):
+	exp_bar.value = exp
+	exp_bar.max_value = max_exp
+	print(exp)
 
 func end():
 	timer.paused = true
 	giveCard.paused = true
-	hp_bar.visible = false
+	hp_bar.hide()
+	exp_bar.hide()
 	
 func _on_give_card_timeout() -> void:
 	DeckManager.add_card("card" + str(randi_range(1, 6)), 1)

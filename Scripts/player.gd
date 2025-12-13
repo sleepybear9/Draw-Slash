@@ -7,7 +7,8 @@ class_name Player
 @export var speed = 200.0
 @export var max_hp: int = 1000
 var hp: int = max_hp
-var exp = 10
+var max_exp: float = 10
+var exp:float = 0
 
 # ==============================
 # Node References
@@ -31,11 +32,14 @@ var direction: Vector2       # Player's direction for game manager
 # Signals
 # ==============================
 signal hp_changed(hp)
+signal exp_changed(exp, max_exp)
 
 func _ready() -> void:
 	# Notify UI with initial HP
 	hp_changed.emit(hp)
-
+	exp_changed.emit(exp, max_exp)
+	
+	
 func _physics_process(delta: float) -> void:
 	# Do nothing while the game is paused
 	if GameManager.is_paused:
@@ -216,7 +220,21 @@ func _on_trap_checker_body_exited(body: Node2D) -> void:
 		is_poisoned = false
 		dot_delayer.stop()
 
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.name == "Boss":
+		var touch_dmg = body.dmg*0.8
+		take_damage(touch_dmg)
 	
+func get_exp(val: float):
+	exp += val
+	if max_exp <= exp:
+		exp = exp - max_exp
+		max_exp *= 1.5
+		
+		DeckManager.add_card("card" + str(randi_range(1, 6)), 1)
+		GameManager.hud.cardUI._update_ui()
+	exp_changed.emit(exp, max_exp)
+
 #temp code
 func _on_button_pressed() -> void: 
 	GameManager.pause_toggle()

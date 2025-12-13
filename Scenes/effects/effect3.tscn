@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlwa1tmn806du" path="res://img/effect/effect3.png" id="1_mfllq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xwx0"]
-size = Vector2(698, 86)
+size = Vector2(696, 84)
 
 [sub_resource type="Animation" id="Animation_awpdc"]
 length = 0.001
@@ -59,7 +59,7 @@ region_enabled = true
 region_rect = Rect2(261, 469, 763, 89)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(358.5, -1)
+position = Vector2(356, -2)
 shape = SubResource("RectangleShape2D_7xwx0")
 
 [node name="CoverArea" type="Area2D" parent="." groups=["attack"]]
@@ -67,7 +67,7 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CoverArea"]
-polygon = PackedVector2Array(707, -1, 499, 497, 0, 0)
+polygon = PackedVector2Array(704, 40, 499, 497, 8, 40)
 
 [node name="Polygon2D" type="Polygon2D" parent="CoverArea"]
 visible = false
@@ -86,4 +86,3 @@ libraries = {
 stream = SubResource("AudioStreamMP3_7xwx0")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_entered" from="CoverArea" to="." method="_on_area_entered"]

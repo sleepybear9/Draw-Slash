@@ -593,6 +593,7 @@ script = ExtResource("14_m0x7a")
 position = Vector2(0.99999994, -83.99999)
 
 [connection signal="timeout" from="dotTimer" to="." method="_on_dot_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="TrapChecker" to="." method="_on_trap_checker_body_entered"]
 [connection signal="body_exited" from="TrapChecker" to="." method="_on_trap_checker_body_exited"]
 [connection signal="timeout" from="Effects/card2_effect/Timer" to="Effects/card2_effect" method="_on_timer_timeout"]
