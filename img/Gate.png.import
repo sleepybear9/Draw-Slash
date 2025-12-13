@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3p2wa7vsthxr"
-path="res://.godot/imported/Gemini_Generated_Image_49bsjh49bsjh49bs.png-7dcf7699549b3086b766ee0922b65d28.ctex"
+uid="uid://smjp88cvgd0u"
+path="res://.godot/imported/Gate.png-a4ec949f99148feb02282a9413f15a19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Gemini_Generated_Image_49bsjh49bsjh49bs.png"
-dest_files=["res://.godot/imported/Gemini_Generated_Image_49bsjh49bsjh49bs.png-7dcf7699549b3086b766ee0922b65d28.ctex"]
+source_file="res://img/Gate.png"
+dest_files=["res://.godot/imported/Gate.png-a4ec949f99148feb02282a9413f15a19.ctex"]
 
 [params]
 

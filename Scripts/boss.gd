@@ -14,7 +14,7 @@ extends CharacterBody2D
 
 # [노드 연결]
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-@onready var SafeZonePos: Node2D = $SafeZonePos 
+@onready var SafeZonePos = $CanvasLayer/SafeZonePos
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var red_screen: ColorRect = $CanvasLayer/redscreen 
 
@@ -24,7 +24,7 @@ extends CharacterBody2D
 
 # [상태 변수]
 var hp: int
-var player: Node2D
+var player
 var is_invincible: bool = false 
 var active_minions: int = 0       
 var is_doing_pattern: bool = false
@@ -36,12 +36,7 @@ var is_first_pattern: bool = true
 func _ready():
 	hp = max_hp
 	
-	player = get_tree().get_first_node_in_group("player")
-	if not player:
-		player = get_tree().get_root().find_child("Player", true, false)
-	
-	if SafeZonePos: SafeZonePos.visible = false
-	if red_screen: red_screen.visible = false
+	player = $"../Player"
 
 	if hit_area:
 		if not hit_area.body_entered.is_connected(_on_hitbox_entered):

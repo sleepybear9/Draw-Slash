@@ -6,6 +6,7 @@ var timeover = false
 @onready var hp_bar
 @onready var giveCard = $GiveCard
 @onready var cardUI = $UI
+var is_stop = false
 
 func _enter_tree() -> void:
 	hp_bar = $HpProgressBar
@@ -20,15 +21,19 @@ func _process(delta: float) -> void:
 		var seconds = int(remaining) % 60
 
 		time.text = "%02d:%02d" % [minutes, seconds]
-	else:
+	elif(!is_stop):
 		if GameManager.is_nonboss[GameManager.stage]:
 			time.text = "You are survive!"
 			GameManager.clear()
 		else:
 			time.text = "Boss appeared!"
+			GameManager.spawn(GameManager.stage+1)
+		is_stop = true
 		
 
 func start():
+	is_stop = false
+	timeover = false
 	timer.start()
 	timer.timeout.connect(_on_timer_timeout)
 	giveCard.start()

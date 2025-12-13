@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://bmx1a0ds3uvvr"]
+[gd_scene load_steps=68 format=3 uid="uid://bmx1a0ds3uvvr"]
 
 [ext_resource type="Script" uid="uid://cuqmbv75ss1ei" path="res://Scripts/boss.gd" id="1_o1i15"]
 [ext_resource type="PackedScene" uid="uid://buoc1w15rplms" path="res://Scenes/projectile.tscn" id="2_ef0k6"]
@@ -8,8 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bspbeflcwuobb" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/skill1.png" id="5_ry61v"]
 [ext_resource type="Texture2D" uid="uid://p43xrg0fqbvc" path="res://assets/sprites/PostApocalypse_AssetPack_v1.1.2/Enemies/Undead executioner/Undead executioner puppet/png/summon.png" id="6_kvofc"]
 [ext_resource type="Texture2D" uid="uid://cfktk4rg1tnlj" path="res://assets/sprites/safezone_nobg.png" id="7_kles1"]
-[ext_resource type="PackedScene" uid="uid://ct4sl8psepaad" path="res://Scenes/enemy1.tscn" id="9_kles1"]
-[ext_resource type="PackedScene" uid="uid://bw344r3xx6ssv" path="res://Scenes/monster_big_melee.tscn" id="10_etj48"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ef0k6"]
 
@@ -180,10 +178,6 @@ region = Rect2(100, 100, 100, 100)
 atlas = ExtResource("5_ry61v")
 region = Rect2(200, 100, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mfce7"]
-atlas = ExtResource("5_ry61v")
-region = Rect2(300, 100, 100, 100)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_blebq"]
 atlas = ExtResource("5_ry61v")
 region = Rect2(400, 100, 100, 100)
@@ -203,10 +197,6 @@ region = Rect2(100, 0, 100, 100)
 [sub_resource type="AtlasTexture" id="AtlasTexture_eqge2"]
 atlas = ExtResource("5_ry61v")
 region = Rect2(200, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_un1ew"]
-atlas = ExtResource("5_ry61v")
-region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6e5o"]
 atlas = ExtResource("5_ry61v")
@@ -303,7 +293,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -332,7 +322,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -390,33 +380,27 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rdnqb")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mfce7")
-}, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_blebq")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_wdjsq")
 }],
 "loop": false,
 "name": &"return",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_6bqc8")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_gr7pa")
 }, {
-"duration": 1.0,
+"duration": 1.2,
 "texture": SubResource("AtlasTexture_eqge2")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_un1ew")
-}, {
-"duration": 1.0,
+"duration": 1.2,
 "texture": SubResource("AtlasTexture_w6e5o")
 }, {
 "duration": 1.0,
@@ -430,7 +414,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"skill",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -471,21 +455,15 @@ shape = SubResource("RectangleShape2D_kvofc")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.03, 2.03)
 sprite_frames = SubResource("SpriteFrames_xcyd7")
-animation = &"death"
+animation = &"return"
+frame = 3
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(612, 375)
 shape = SubResource("CapsuleShape2D_x36vw")
-
-[node name="SafeZonePos" type="Node2D" parent="."]
-visible = false
-z_index = 100
-
-[node name="SafeZonePos" type="Sprite2D" parent="SafeZonePos"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("7_kles1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -499,13 +477,15 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.9647059, 0.2784314, 0.34509805, 0.39215687)
 
+[node name="SafeZonePos" type="Node2D" parent="CanvasLayer"]
+visible = false
+z_index = 100
+
+[node name="SafeZonePos" type="Sprite2D" parent="CanvasLayer/SafeZonePos"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_kles1")
+
 [node name="projectile_boss" parent="." instance=ExtResource("2_ef0k6")]
 position = Vector2(-582, -398)
-
-[node name="enemy" parent="." instance=ExtResource("9_kles1")]
-position = Vector2(-631, -347)
-
-[node name="monster_big_melee" parent="." instance=ExtResource("10_etj48")]
-position = Vector2(-631, -347)
 
 [node name="sfx_boss_death" type="AudioStreamPlayer" parent="."]

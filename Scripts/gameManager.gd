@@ -4,6 +4,7 @@ var is_paused = true
 var is_end = false
 var is_main = true
 var Game
+var sortable
 var menus =[]
 var player_dir: Vector2 = Vector2(0,0)
 var player
@@ -12,15 +13,18 @@ var stage = 0
 var is_nonboss = [true, false]
 var is_clear = false
 # level scenes
-@onready var levels = [preload("res://Scenes/Level_1.tscn"),preload("res://Scenes/Level_2.tscn")]
-@onready var monster = preload("res://Scenes/enemy.tscn")
+var levels = [preload("res://Scenes/Level_1.tscn"),preload("res://Scenes/Level_2.tscn")]
+var monster = preload("res://Scenes/enemy.tscn")
 var max_enemy = 30
-@onready var bosses = [preload("res://Scenes/boss.tscn")] #bose scenes
+var bosses = [preload("res://Scenes/boss.tscn")] #bose scenes
 var map
+var gate = preload("res://Scenes/Gate.tscn")
 var timer
 var hud
 var d = 680 # +-680 or 0, +-680 or 0 = 8 locations of spawning
 var enemies = []
+
+var test = true #temp variable
 
 func _ready():
 	await get_tree().process_frame
@@ -30,37 +34,46 @@ func _ready():
 	menus.append(main)
 	timer = Game.get_node("Spawning")
 	timer.timeout.connect(spawn.bind(0))
-	
-	player = Game.get_node("Y_Sort/Player")
+	sortable = Game.get_node("Y_Sort")
+	player = sortable.get_node("Player")
 	cam = player.get_node("Camera2D")
 	hud = Game.get_node("CanvasLayer/Hud")
 
 func start():
 	menus[0].hide()
-	set_game(stage)
+	set_game()
 	is_main = false
 	is_paused = false
 	hud.show()
 	hud.start()
 	
+func upstair():
+	stage += 1
+	set_game()
+	hud.start()
+	
 func _physics_process(delta: float) -> void:
-	if is_clear:
+	if !is_clear:
 		for e in enemies:
 			if e.visible and e.global_position.distance_to(player.global_position) > d+100:
 				e.global_position = player.global_position + (d+50) * e.global_position.direction_to(player.global_position)
 		if Input.is_action_just_pressed("test"):
+			print("try")
 			spawn(1)
 
 func pause_toggle():
 	get_tree().paused = !get_tree().paused
 	is_paused = get_tree().paused
 
-func set_game(stage: int):
+func set_game():
 	is_main = false
-	map = levels[stage].instantiate()
-	Game.get_node("Y_Sort").add_child(map)
 	
-	timer.start()
+	if map: map.queue_free()
+	map = levels[stage].instantiate()
+	sortable.add_child(map)
+	
+	if !test:
+		timer.start()
 	is_clear = false
 
 func clear():
@@ -69,31 +82,36 @@ func clear():
 	for e in enemies:
 		e.queue_free()
 	enemies.clear()
-	
+	var portal = gate.instantiate()
+	portal.global_position = get_point()
+	sortable.add_child(portal)
 
-func spawn(type: int):
-	if (type == 0):
-		var center = player.global_position
-
-		var points = [
+func get_point() -> Vector2:
+	var center = player.global_position
+	var points = [
 			center + Vector2(-d, 0),   # left
 			center + Vector2(d, 0),    # right
 			center + Vector2(0, -d),   # top
 			center + Vector2(0, d),    # bottom
-			
 			center + Vector2(-d, -d),  # left-top
 			center + Vector2(d, -d),   # right-top
 			center + Vector2(-d, d),   # left-bottom
 			center + Vector2(d, d),    # right-bottom
 		]
-		var spawn_point = points.pick_random()
-		if enemies.size() < max_enemy:
-			var enemy = spawn_monster(spawn_point) 
-			print(spawn_point)
+	var point = points.pick_random()
+	print(point)	
+	return point
+	
 
+func spawn(type: int):
+	if (type == 0):
+		if enemies.size() < max_enemy:
+			var spawn_point = get_point()
+			var enemy = spawn_monster(spawn_point) 
 	else:
+		print(1)
 		var boss = spawn_boss(type-1)
-		Game.get_node("Y_Sort").add_child(boss)
+		sortable.add_child(boss)
 	
 func spawn_monster(pos: Vector2):
 	var enemy
@@ -112,13 +130,14 @@ func spawn_monster(pos: Vector2):
 	enemy = monster.instantiate()
 	enemies.append(enemy)
 	enemy.global_position = pos
-	Game.get_node("Y_Sort").add_child(enemy)
+	sortable.add_child(enemy)
 	enemy.setup(randi_range(0,1))
 	return enemy
 
 func spawn_boss(type: int):
+	type -= 1 # tempory in current condition
 	var bose = bosses[type].instantiate()
-	Game.get_node("Y_Sort").add_child(bose)
+	sortable.add_child(bose)
 	var pos : Vector2= Vector2(0,0)
 	bose.global_position = pos
 	
