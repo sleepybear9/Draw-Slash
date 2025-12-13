@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # [설정 변수]
-@export var max_hp: int = 1000
+@export var max_hp: int = 500
 @export var pattern_cooldown: float = 10.0 
 @export var dmg: int = 20
 var offset = 219.0
@@ -17,6 +17,8 @@ var projectile = preload("res://Scenes/projectile.tscn")
 # [공격 판정 노드]
 @onready var attack1 = $attack1
 @onready var attack2 = $attack2
+@onready var delayer = $Timer
+var attackable = true
 
 # [상태 변수]
 var hp: int
@@ -103,7 +105,7 @@ func choose_random_pattern():
 	else:
 		random_pick = randi() % 3 + 1 # 1 ~ 3
 		print("선택된 패턴: ", random_pick)
-	
+
 	# 패턴 실행 및 종료 대기
 	match random_pick:
 		1: await _pattern_summon()
@@ -119,6 +121,7 @@ func _pattern_summon():
 		anim.play("summon")
 		await anim.animation_finished 
 	
+	attackable = false
 	is_invincible = true
 	modulate = Color(0.5, 0.5, 1, 0.8) 
 	
@@ -140,8 +143,9 @@ func _on_minion_died():
 func _break_invincibility():
 	if is_invincible:
 		is_invincible = false
+		attackable = true
 		modulate = Color(1, 1, 1, 1)
-		take_damage(1000)
+		take_damage(50)
 
 # --- [패턴 2] 공격 ---
 # 투명해진 상태로 이 공격을 시전할수도 있음. 해결법: 소환몹 빨리좀 잡지
@@ -164,6 +168,7 @@ func _pattern_fire_projectile():
 func _pattern_ultimate():
 	print("패턴: 필살기 시작")
 	is_invincible = true 
+	attackable = false
 	
 	# 1. 스킬 시전 모션
 	if anim.sprite_frames.has_animation("skill"):
@@ -224,6 +229,7 @@ func _pattern_ultimate():
 	anim.visible = true
 	collision_shape.set_deferred("disabled", false)
 	is_invincible = false
+	attackable = true
 	
 	# 복귀 모션
 	if anim.sprite_frames.has_animation("return"):
@@ -236,6 +242,9 @@ func _pattern_ultimate():
 # --- [피격] ---
 func take_damage(amount):
 	if is_invincible or is_dead: return
+	if !attackable: return
+	
+	attackable = false
 	hp -= amount
 	print("보스 HP: ", hp)
 	
@@ -244,6 +253,7 @@ func take_damage(amount):
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 	
 	if hp <= 0: die()
+	delayer.start()
 
 func die():
 	is_dead = true
@@ -252,4 +262,8 @@ func die():
 	if anim.sprite_frames.has_animation("death"):
 		anim.play("death")
 		await anim.animation_finished
+	GameManager.end()	
 	queue_free()
+	
+func _on_timer_timeout() -> void:
+	attackable = true

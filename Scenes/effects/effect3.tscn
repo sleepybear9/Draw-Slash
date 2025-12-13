@@ -67,7 +67,7 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CoverArea"]
-polygon = PackedVector2Array(704, 40, 499, 497, 8, 40)
+polygon = PackedVector2Array(707, -1, 499, 497, 0, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="CoverArea"]
 visible = false
@@ -86,3 +86,4 @@ libraries = {
 stream = SubResource("AudioStreamMP3_7xwx0")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_entered" from="CoverArea" to="." method="_on_area_entered"]

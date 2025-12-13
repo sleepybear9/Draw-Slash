@@ -27,7 +27,7 @@ func _on_timer_timeout() -> void:
 		timer.stop()
 		count = 1
 	else:	
-		count += 1
+		count = clamp(count, count + 1, max_count)
 		var new_effect2 = effect2_TEMPLATE.instantiate()
 		
 		new_effect2.position = global_position

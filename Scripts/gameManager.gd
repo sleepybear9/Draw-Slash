@@ -20,10 +20,12 @@ var bosses = [preload("res://Scenes/boss.tscn")] #bose scenes
 var bose
 var map
 var gate = preload("res://Scenes/Gate.tscn")
+var portal
 var timer
 var hud
 var d = 680 # +-680 or 0, +-680 or 0 = 8 locations of spawning
 var enemies = []
+var arrow
 
 var test = false #temp variable
 
@@ -39,6 +41,7 @@ func _ready():
 	player = sortable.get_node("Player")
 	cam = player.get_node("Camera2D")
 	hud = Game.get_node("CanvasLayer/Hud")
+	arrow = player.get_node("arrow")
 
 func start():
 	menus[0].hide()
@@ -53,6 +56,7 @@ func upstair():
 	stage += 1
 	set_game()
 	hud.start()
+	arrow.hide()
 	
 func _physics_process(delta: float) -> void:
 	if !is_clear:
@@ -64,6 +68,8 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("test"):
 			print("try")
 			spawn(1)
+	else: 
+		arrow.look_at(portal.global_position)
 
 func pause_toggle():
 	get_tree().paused = !get_tree().paused
@@ -82,13 +88,16 @@ func set_game():
 
 func clear():
 	is_clear = true
-	timer.stop()
 	for e in enemies:
 		e.queue_free()
 	enemies.clear()
-	var portal = gate.instantiate()
+	portal = gate.instantiate()
 	portal.global_position = get_point()
 	sortable.add_child(portal)
+	arrow.show()
+	
+func end():
+	pass
 
 func get_point() -> Vector2:
 	var center = player.global_position

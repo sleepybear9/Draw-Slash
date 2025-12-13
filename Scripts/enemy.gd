@@ -15,6 +15,8 @@ var is_dead = false
 var is_attacking = false
 var is_damaging = false
 var by_boss = false
+@onready var delayer = $delayer
+var attackable = true
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -34,6 +36,7 @@ func setup(mon_id: int):
 	damage = select.dmg
 	is_dead = false
 	by_boss = false
+	attackable = true
 	attack_area.monitorable = true
 	attack_area.monitoring = true
 	modulate = Color(1, 1, 1) 
@@ -61,6 +64,8 @@ func _physics_process(delta):
 
 func take_damage(amount: int):
 	if is_dead: return
+	if !attackable: return
+	attackable = false
 	hp -= amount
 	
 	modulate = Color.RED
@@ -70,6 +75,7 @@ func take_damage(amount: int):
 	else: 
 		tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 	if hp <= 0: _die()
+	delayer.start()
 
 func _die():
 	if is_dead: return
@@ -116,3 +122,6 @@ func try_attack() -> void:
 
 func _on_unstun():
 	speed = types[id].speed
+
+func _on_delayer_timeout() -> void:
+	attackable = true

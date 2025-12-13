@@ -84,4 +84,3 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.name == "attackrange": 
 		var monster = area.get_parent()
 		monster.take_damage(dmg)
-		print(monster.hp)

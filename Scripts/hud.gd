@@ -25,12 +25,13 @@ func _process(delta: float) -> void:
 		time.text = "%02d:%02d" % [minutes, seconds]
 	elif(!is_stop):
 		if GameManager.is_nonboss[GameManager.stage]:
-			time.text = "You are survive!"
+			time.text = "You are survived!"
 			GameManager.clear()
 		else:
 			time.text = "Boss appeared!"
 			GameManager.spawn(GameManager.stage+1)
 		is_stop = true
+		GameManager.timer.stop()
 		
 
 func start():

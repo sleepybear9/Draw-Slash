@@ -32,12 +32,13 @@ shape = SubResource("RectangleShape2D_1f0kj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_1f0kj")
 animation = &"DecrepitBones"
-frame_progress = 0.8682461
+frame_progress = 0.6656526
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
 radius = 13.0
 max_neighbors = 15
+debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
@@ -49,8 +50,12 @@ autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
+[node name="delayer" type="Timer" parent="."]
+wait_time = 0.3
+
 [connection signal="area_entered" from="attackrange" to="." method="_on_attackrange_area_entered"]
 [connection signal="area_exited" from="attackrange" to="." method="_on_attackrange_area_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_velocity_computed"]
 [connection signal="timeout" from="Timer" to="." method="_update_navigation_target"]
 [connection signal="timeout" from="attack_term" to="." method="try_attack"]
+[connection signal="timeout" from="delayer" to="." method="_on_delayer_timeout"]

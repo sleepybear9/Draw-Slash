@@ -480,3 +480,8 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_kles1")
 
 [node name="sfx_boss_death" type="AudioStreamPlayer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
