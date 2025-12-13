@@ -179,6 +179,11 @@ grow_vertical = 2
 pivot_offset = Vector2(640, 240)
 script = ExtResource("5_c3eba")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1285.0
+offset_bottom = 717.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GiveCard" to="." method="_on_give_card_timeout"]
 [connection signal="pressed" from="buttons/Button" to="UI" method="_on_button_pressed"]
