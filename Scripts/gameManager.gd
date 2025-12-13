@@ -10,10 +10,11 @@ var player
 var cam
 var stage = 0
 var is_nonboss = [true, false]
+var is_clear = false
 # level scenes
 @onready var levels = [preload("res://Scenes/Level_1.tscn"),preload("res://Scenes/Level_2.tscn")]
 @onready var monster = preload("res://Scenes/enemy.tscn")
-var max_enemy = 20
+var max_enemy = 30
 @onready var bosses = [preload("res://Scenes/boss.tscn")] #bose scenes
 var map
 var timer
@@ -41,14 +42,14 @@ func start():
 	is_paused = false
 	hud.show()
 	hud.start()
-	timer.start()
-
+	
 func _physics_process(delta: float) -> void:
-	for e in enemies:
-		if e.visible and e.global_position.distance_to(player.global_position) > d+100:
-			e.global_position = player.global_position + (d+50) * e.global_position.direction_to(player.global_position)
-	if Input.is_action_just_pressed("test"):
-		spawn(1)
+	if is_clear:
+		for e in enemies:
+			if e.visible and e.global_position.distance_to(player.global_position) > d+100:
+				e.global_position = player.global_position + (d+50) * e.global_position.direction_to(player.global_position)
+		if Input.is_action_just_pressed("test"):
+			spawn(1)
 
 func pause_toggle():
 	get_tree().paused = !get_tree().paused
@@ -60,6 +61,15 @@ func set_game(stage: int):
 	Game.get_node("Y_Sort").add_child(map)
 	
 	timer.start()
+	is_clear = false
+
+func clear():
+	is_clear = true
+	timer.stop()
+	for e in enemies:
+		e.queue_free()
+	enemies.clear()
+	
 
 func spawn(type: int):
 	if (type == 0):
@@ -77,7 +87,7 @@ func spawn(type: int):
 			center + Vector2(d, d),    # right-bottom
 		]
 		var spawn_point = points.pick_random()
-		if enemies.size() <= max_enemy:
+		if enemies.size() < max_enemy:
 			var enemy = spawn_monster(spawn_point) 
 			print(spawn_point)
 
@@ -88,13 +98,14 @@ func spawn(type: int):
 func spawn_monster(pos: Vector2):
 	var enemy
 	for e in enemies:
-		if e.visible == false:
+		if e.is_dead:
 			print("reuse")
 			enemy = e
 			enemy.global_position = pos
 			enemy.set_process(true)
 			enemy.set_physics_process(true)
 			enemy.show()
+			enemy.setup(randi_range(0,1))
 			return enemy
 	
 	print("add")
@@ -102,7 +113,7 @@ func spawn_monster(pos: Vector2):
 	enemies.append(enemy)
 	enemy.global_position = pos
 	Game.get_node("Y_Sort").add_child(enemy)
-	print(enemies.size())
+	enemy.setup(randi_range(0,1))
 	return enemy
 
 func spawn_boss(type: int):

@@ -36,9 +36,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -40.0
+offset_left = -207.0
 offset_top = 24.0
-offset_right = 140.0
+offset_right = 641.0
 offset_bottom = 112.0
 grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
@@ -46,6 +46,7 @@ theme_override_fonts/font = SubResource("SystemFont_sd512")
 theme_override_font_sizes/font_size = 60
 text = "Timer"
 horizontal_alignment = 1
+autowrap_mode = 1
 
 [node name="ExpProgressBar" type="TextureProgressBar" parent="."]
 layout_mode = 1

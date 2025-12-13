@@ -45,3 +45,8 @@ func _on_card_effect_1() -> void:
 		DeckManager.add_card("card1", -1)
 		timer.start()
 		enabled = true
+
+func _on_sword_area_entered(area: Area2D) -> void:
+	var monster = area.get_parent()
+	monster.take_damage(dmg)
+	print(monster.hp)

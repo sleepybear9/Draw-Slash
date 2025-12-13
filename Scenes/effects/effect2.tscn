@@ -5,10 +5,10 @@
 [ext_resource type="AudioStream" uid="uid://80s6kfwjrmlw" path="res://audio/556 Single WAV.wav" id="3_t28qp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kqiy"]
-radius = 5.0
+radius = 9.999999
 height = 46.0
 
-[node name="card2_effect" type="Area2D"]
+[node name="card2_effect" type="Area2D" groups=["attack"]]
 scale = Vector2(0.7, 0.7)
 collision_layer = 8
 collision_mask = 20
@@ -26,4 +26,5 @@ shape = SubResource("CapsuleShape2D_1kqiy")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_t28qp")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

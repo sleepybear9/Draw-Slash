@@ -530,7 +530,7 @@ animations = [{
 size = Vector2(12.5, 3.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52ee3"]
-size = Vector2(20, 35)
+size = Vector2(20, 30.5)
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -549,15 +549,13 @@ y_sort_enabled = true
 position = Vector2(1, 14)
 shape = SubResource("RectangleShape2D_kyqiw")
 
-[node name="dmgTimer" type="Timer" parent="."]
-
 [node name="dotTimer" type="Timer" parent="."]
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, -1.5)
+position = Vector2(0, 0.75)
 shape = SubResource("RectangleShape2D_52ee3")
 
 [node name="TrapChecker" type="Area2D" parent="."]
@@ -594,7 +592,6 @@ script = ExtResource("14_m0x7a")
 [node name="dice" parent="Effects" instance=ExtResource("15_5v66d")]
 position = Vector2(0.99999994, -83.99999)
 
-[connection signal="timeout" from="dmgTimer" to="." method="_on_dmg_timeout"]
 [connection signal="timeout" from="dotTimer" to="." method="_on_dot_timeout"]
 [connection signal="body_entered" from="TrapChecker" to="." method="_on_trap_checker_body_entered"]
 [connection signal="body_exited" from="TrapChecker" to="." method="_on_trap_checker_body_exited"]

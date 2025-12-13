@@ -13,7 +13,6 @@ var exp = 10
 # Node References
 # ==============================
 @onready var anim = $AnimatedSprite2D
-@onready var dmg_delayer = $dmgTimer     # Prevents instant repeated damage
 @onready var dot_delayer = $dotTimer     # Damage over time timer
 
 # ==============================
@@ -129,7 +128,6 @@ func take_damage(dmg: int) -> void:
 	# Prevent damage stacking
 	if not is_attacked:
 		is_attacked = true
-		dmg_delayer.start()
 
 		hp -= dmg * 10
 		if hp <= 0:
@@ -141,9 +139,6 @@ func take_damage(dmg: int) -> void:
 		hp_changed.emit(hp)
 
 func _on_hurt_finished() -> void:
-	is_attacked = false
-
-func _on_dmg_timeout() -> void:
 	is_attacked = false
 
 # ==============================

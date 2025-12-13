@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=4 uid="uid://ogq3ay3a8xtl"]
 
-[ext_resource type="TileSet" uid="uid://bnhxq2malrj4o" path="res://SavedData/Level_1.tres" id="1_cvgc8"]
+[ext_resource type="TileSet" uid="uid://bnhxq2malrj4o" path="res://Resource/Level_1.tres" id="1_cvgc8"]
 [ext_resource type="Script" uid="uid://c0dslciyckrwv" path="res://Scripts/map.gd" id="1_i63mn"]
-[ext_resource type="NavigationPolygon" uid="uid://c8m41t22d8xmn" path="res://SavedData/level1_1.tres" id="3_vnunq"]
+[ext_resource type="NavigationPolygon" uid="uid://c8m41t22d8xmn" path="res://Resource/level1_1.tres" id="3_vnunq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i63mn"]
 size = Vector2(640, 640)

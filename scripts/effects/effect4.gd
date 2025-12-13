@@ -49,3 +49,10 @@ func _on_card_effect_4() -> void:
 		DeckManager.add_card("card4", -1)
 		timer.start()
 		enabled = true
+
+
+func _on_boomerang_area_entered(area: Area2D) -> void:
+	if area.name == "attackrange": 
+		var monster = area.get_parent()
+		monster.take_damage(dmg)
+		print(monster.hp)

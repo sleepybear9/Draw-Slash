@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="monster_resource" load_steps=2 format=3 uid="uid://bvg4nawbh720s"]
+
+[ext_resource type="Script" uid="uid://cnv10aeig7e23" path="res://Scripts/monster_res.gd" id="1_e7cp2"]
+
+[resource]
+script = ExtResource("1_e7cp2")
+anim = "MutilatedStumbler"
+hp = 6
+speed = 30
+dmg = 10
+metadata/_custom_type_script = "uid://cnv10aeig7e23"

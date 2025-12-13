@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://duk22xk51gsra"]
 
-[ext_resource type="SpriteFrames" uid="uid://chfa4wbwv161t" path="res://SavedData/monster.tres" id="1_v4e57"]
+[ext_resource type="SpriteFrames" uid="uid://chfa4wbwv161t" path="res://Resource/monster.tres" id="1_v4e57"]
 
 [node name="animations" type="Node2D"]
 

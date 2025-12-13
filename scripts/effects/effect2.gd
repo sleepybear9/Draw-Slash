@@ -1,14 +1,13 @@
 extends Area2D
 
 @export var speed: float = 2000.0
-@export var damage: int = 10
+@export var dmg: int = 5
 @export var max_distance: float = 1500.0
 
 @onready var audio = $AudioStreamPlayer2D
 
 var direction : Vector2 = Vector2(0, 0)
 var start_position : Vector2
-var dmg : int
 
 func _ready():
 	start_position = global_position
@@ -29,6 +28,12 @@ func _on_body_entered(body: PhysicsBody2D):
 	
 	#몬스터 충돌시 사라짐
 	if body.has_method("take_damage"):
-		body.take_damage(damage)
+		body.take_damage(dmg)
 		
 	queue_free()
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.name == "attackrange": 
+		var monster = area.get_parent()
+		monster.take_damage(dmg)
+		print(monster.hp)

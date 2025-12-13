@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=4 uid="uid://baoiqi6x1mwww"]
 
 [ext_resource type="Script" uid="uid://c0dslciyckrwv" path="res://Scripts/map.gd" id="1_vgr4u"]
-[ext_resource type="TileSet" uid="uid://bl5ng2p3uuu2y" path="res://SavedData/Level_2.tres" id="2_apq5t"]
-[ext_resource type="NavigationPolygon" uid="uid://bw6f8wi20f3md" path="res://SavedData/level2_1.tres" id="3_2g134"]
-[ext_resource type="NavigationPolygon" uid="uid://d2ktjehq85kmh" path="res://SavedData/level2_2.tres" id="4_cleky"]
-[ext_resource type="NavigationPolygon" uid="uid://dfutujbcprp5g" path="res://SavedData/level2_3.tres" id="5_4ge3q"]
-[ext_resource type="NavigationPolygon" uid="uid://bc0hcnjjhr13j" path="res://SavedData/level2_4.tres" id="6_8npbe"]
+[ext_resource type="TileSet" uid="uid://bl5ng2p3uuu2y" path="res://Resource/Level_2.tres" id="2_apq5t"]
+[ext_resource type="NavigationPolygon" uid="uid://bw6f8wi20f3md" path="res://Resource/level2_1.tres" id="3_2g134"]
+[ext_resource type="NavigationPolygon" uid="uid://d2ktjehq85kmh" path="res://Resource/level2_2.tres" id="4_cleky"]
+[ext_resource type="NavigationPolygon" uid="uid://dfutujbcprp5g" path="res://Resource/level2_3.tres" id="5_4ge3q"]
+[ext_resource type="NavigationPolygon" uid="uid://bc0hcnjjhr13j" path="res://Resource/level2_4.tres" id="6_8npbe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i63mn"]
 size = Vector2(640, 640)

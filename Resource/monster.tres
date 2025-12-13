@@ -1,11 +1,13 @@
-[gd_resource type="SpriteFrames" load_steps=41 format=3 uid="uid://chfa4wbwv161t"]
+[gd_resource type="SpriteFrames" load_steps=51 format=3 uid="uid://chfa4wbwv161t"]
 
 [ext_resource type="Texture2D" uid="uid://b6ta510lwpyj" path="res://img/enemy/crimson imp/CrimsonImp.png" id="1_p4qy7"]
 [ext_resource type="Texture2D" uid="uid://dl776jdtj668q" path="res://img/enemy/Death Slime/DeathSlime.png" id="2_3u1rk"]
+[ext_resource type="Texture2D" uid="uid://drx2hawucye3l" path="res://Sprites/basic asset pack/Basic Undead Animations/Decrepit Bones/DecrepitBones.png" id="3_6h8pe"]
 [ext_resource type="Texture2D" uid="uid://dtuuittc22s3f" path="res://img/enemy/fledgling demon/FledglingDemon.png" id="3_ywd0c"]
 [ext_resource type="Texture2D" uid="uid://dwn3nns7nkpm6" path="res://img/enemy/foul gouger/FoulGouger.png" id="4_4yfoc"]
 [ext_resource type="Texture2D" uid="uid://ci0h7gk74e2kv" path="res://img/enemy/Humongous Ettin/HumongousEttin.png" id="5_x1c26"]
 [ext_resource type="Texture2D" uid="uid://c7bwi2kgrqjgi" path="res://img/enemy/Murky Slaad/MurkySlaad.png" id="6_rsf7c"]
+[ext_resource type="Texture2D" uid="uid://f1eo8us5ni8g" path="res://Sprites/basic asset pack/Basic Undead Animations/Mutilated Stumbler/MutilatedStumbler.png" id="7_0ieaw"]
 [ext_resource type="Texture2D" uid="uid://liol1amgbysu" path="res://img/enemy/Swamp Troll/SwampTroll.png" id="7_816jg"]
 [ext_resource type="Texture2D" uid="uid://cjacguedobcdq" path="res://img/enemy/warp skull/WarpSkull.png" id="8_ovp2v"]
 
@@ -39,6 +41,22 @@ region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fl0yi"]
 atlas = ExtResource("2_3u1rk")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccon1"]
+atlas = ExtResource("3_6h8pe")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trrtw"]
+atlas = ExtResource("3_6h8pe")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iba8"]
+atlas = ExtResource("3_6h8pe")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j06jg"]
+atlas = ExtResource("3_6h8pe")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jy58w"]
@@ -103,6 +121,22 @@ region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ucc2l"]
 atlas = ExtResource("6_rsf7c")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h8pe"]
+atlas = ExtResource("7_0ieaw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogfql"]
+atlas = ExtResource("7_0ieaw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nu2b"]
+atlas = ExtResource("7_0ieaw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smuy3"]
+atlas = ExtResource("7_0ieaw")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbo6i"]
@@ -175,6 +209,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ccon1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trrtw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5iba8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j06jg")
+}],
+"loop": true,
+"name": &"DecrepitBones",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_jy58w")
 }, {
 "duration": 1.0,
@@ -240,6 +291,23 @@ animations = [{
 "loop": true,
 "name": &"MurkySlaad",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h8pe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogfql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nu2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smuy3")
+}],
+"loop": true,
+"name": &"MutilatedStumbler",
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
